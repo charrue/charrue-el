@@ -1,0 +1,51 @@
+{
+  "name": "pro-components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "曹康文",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "node ./build/build.js",
+    "build:component": "node ./build/build.component.js",
+    "build:style": "gulp --gulpfile ./build/build.style.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "@vue/compiler-sfc": "^3.1.4",
+    "@vue/component-compiler-utils": "^3.2.2",
+    "@vue/composition-api": "^1.0.0-rc.13",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-prettier-vue": "^3.1.0",
+    "eslint-plugin-vue": "^7.12.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-rename": "^2.0.0",
+    "lerna": "^4.0.0",
+    "rollup": "^2.52.7",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-esbuild": "^4.5.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-vue": "5.0.0",
+    "typescript": "^4.3.5",
+    "vue": "^2.6.14",
+    "vue-demi": "latest",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
