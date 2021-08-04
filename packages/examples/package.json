@@ -1,8 +1,7 @@
 {
-  "name": "@charrue/example",
+  "name": "@charrue/examples",
   "version": "0.1.0",
   "author": "ckangwen <2437037469@qq.com>",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

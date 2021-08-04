@@ -1,6 +1,7 @@
 {
-  "name": "myblog_vuepress",
-  "version": "1.0.0",
+  "name": "@charrue/pro-components-docs",
+  "version": "0.0.0",
+  "private" :true,
   "main": "index.js",
   "scripts": {
     "start": "vuepress dev docs",
