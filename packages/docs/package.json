@@ -1,7 +1,7 @@
 {
   "name": "@charrue/pro-components-docs",
-  "version": "0.0.0",
-  "private" :true,
+  "version": "0.0.1",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "vuepress dev docs",
