@@ -11,6 +11,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "start:examples": "cd packages/examples && npm run serve",
+    "start:docs": "cd packages/docs && npm run start",
     "build": "node ./build/build.js",
     "build:component": "node ./build/build.component.js",
     "build:style": "gulp --gulpfile ./build/build.style.js"
