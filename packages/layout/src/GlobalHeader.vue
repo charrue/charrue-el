@@ -1,16 +1,23 @@
 <template>
   <div :class="className">
-    <Hamburger
-      :is-active="opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
-    <div class="header-right">
-      <slot></slot>
+    <slot name="header-trigger">
+      <Hamburger
+        :is-active="opened"
+        class="hamburger-container"
+        @toggleClick="toggleSideBar"
+      />
+    </slot>
+    <div class="global-header-content">
+      <div class="global-header-content__left">
+        <slot name="header-left"></slot>
+      </div>
+      <div class="global-header-content__right">
+        <slot name="header-right"></slot>
+      </div>
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import Hamburger from "./Hamburger.vue";
 export default {
   name: "GlobalHeader",
@@ -26,8 +33,8 @@ export default {
   computed: {
     style() {
       return {
-        width: `calc(100% - ${this.opened ? '54px' : '200px'})`,
-      }
+        width: `calc(100% - ${this.opened ? "54px" : "200px"})`,
+      };
     },
     className() {
       return {
@@ -38,8 +45,8 @@ export default {
   },
   methods: {
     toggleSideBar() {
-      this.$emit("update:opened", !this.opened)
+      this.$emit("update:opened", !this.opened);
     },
   },
-}
+};
 </script>

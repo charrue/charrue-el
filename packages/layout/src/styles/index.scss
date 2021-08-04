@@ -98,7 +98,7 @@
     }
   }
 
-  .router-menu {
+  .menu-router-link {
     text-decoration: none;
     height: 100%;
     width: 100%;
@@ -109,7 +109,7 @@
     white-space: nowrap;
   }
 
-  .logo {
+  .logo-container {
     height: 64px;
     position: relative;
     line-height: 64px;
@@ -121,19 +121,24 @@
       display: inline-block;
       vertical-align: middle;
       height: 32px;
+      width: 32px;
+      line-height: 32px;
     }
     h1 {
       color: var(--layout-aside-normal-text-color, #ffffff);
       display: inline-block;
       vertical-align: middle;
       font-size: 18px;
-      margin: 0 0 0 10px;
+      margin: 0 0 0 16px;
       font-weight: 600;
     }
   }
 }
 
 .layout-global-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 50px;
   overflow: hidden;
   position: relative;
@@ -142,8 +147,6 @@
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
-    line-height: 50px;
-    height: 100%;
     float: left;
     cursor: pointer;
     transition: background 0.3s;
@@ -165,22 +168,42 @@
     }
   }
 
-  .global-header__extra {
-    height: 50px;
+  .global-header-content {
+    flex: 1;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    float: right;
-    padding-right: 25px;
+    height: 100%;
+
+    .global-header-content__left {
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+    }
+    .global-header-content__right {
+      display: flex;
+      align-items: center;
+      padding-right: 25px;
+    }
   }
+
 }
 
-.layout-main-content {
+.layout-main-container {
   min-height: calc(100vh - 50px);
   width: 100%;
-  padding: 20px;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+
+  .layout-main__header {
+    flex: 0 0 auto;
+    background: var(--layout-main-header-bg-color);
+  }
+
+  .layout-main__content {
+    flex: 1;
+  }
 }
 .fixed-header + .layout-main-content {
   margin-top: 50px;

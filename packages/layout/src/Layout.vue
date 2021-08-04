@@ -8,16 +8,34 @@
       :data="data"
       :logo="logo"
       :title="title"
+      :route-params="routeParams"
+      :title-render="titleRender"
+      v-bind="$attrs"
     />
     <div class="layout__main">
-      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader" />
-      <ContentView>
-        <slot></slot>
+      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader">
+        <template slot="header-trigger">
+          <slot name="header-trigger"></slot>
+        </template>
+        <template slot="header-left">
+          <slot name="header-left"></slot>
+        </template>
+        <template slot="header-right">
+          <slot name="header-right"></slot>
+        </template>
+      </GlobalHeader>
+      <ContentView :content-style="contentStyle">
+        <template slot="header">
+          <slot name="content-header"></slot>
+        </template>
+        <template slot="content">
+          <slot></slot>
+        </template>
       </ContentView>
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import GlobalAside from "./GlobalAside.vue";
 import GlobalHeader from "./GlobalHeader.vue";
 import ContentView from "./ContentView.vue";
@@ -46,6 +64,19 @@ export default {
     },
     logo: String,
     title: String,
+    routeParams: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    titleRender: Function,
+    contentStyle: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
   },
   data() {
     return {

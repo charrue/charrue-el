@@ -1,41 +1,78 @@
-<script lang="ts">
+<script>
 import { isUrl, urlToList, menuDataFormatter } from "./utils";
-import { RegisterMenuData } from "./types";
 export default {
   name: "GlobalAside",
   props: {
+    /**
+     * 导航菜单是否处于折叠状态
+     */
     collapsed: {
       type: Boolean,
       default: false,
     },
+    /**
+     * 导航菜单数据
+     */
     data: {
       type: Array,
       default() {
         return [];
       },
     },
+    /**
+     * 导航菜单标题区域的logo
+     */
     logo: String,
+    /**
+     * 导航菜单标题区域的标题文字
+     */
     title: String,
+    /**
+     * 控制导航菜单的展示
+     */
     Authorized: Function,
+    /**
+     * 导航菜单图标的图标前缀
+     */
     prefixIconClass: {
       type: String,
       default: "",
     },
+    /**
+     * 菜单文字的类名
+     */
     menuTextClass: {
-      type: String,
+      type: [String, Array, Object],
       default: "",
     },
+    /**
+     * 控制菜单是否可用
+     */
     checkMenuDisabled: Function,
-    routerParams: {
+    /**
+     * 菜单进行路由跳转时，携带的参数
+     */
+    routeParams: {
       type: Object,
       default() {
         return {};
       },
     },
-    siderWidths: {
+    /**
+     * 自定义导航菜单文字渲染
+     */
+    menuTitleRender: Function,
+    /**
+     * 导航菜单顶部标题下面的区域
+     */
+    menuHeaderExtraRender: Function,
+    /**
+     * 导航菜单折叠，展开时的宽度
+     */
+    asideWidths: {
       type: Array,
       default() {
-        return ["64px", "200px"];
+        return ["54px", "200px"];
       },
     },
   },
@@ -49,8 +86,8 @@ export default {
   computed: {
     _siderWidths() {
       return [
-        this.siderWidths ? this.siderWidths[0] : "54px",
-        this.siderWidths ? this.siderWidths[1] : "200px",
+        this.asideWidths ? this.asideWidths[0] : "54px",
+        this.asideWidths ? this.asideWidths[1] : "200px",
       ]
     },
     width() {
@@ -84,28 +121,29 @@ export default {
     },
   },
   render(h) {
-    const renderIcon = (menuItem: RegisterMenuData) => {
+    const renderIcon = menuItem => {
       return h("i", {
         class: `${this.prefixIconClass} ${menuItem.icon || ""}`,
         slot: "title",
       });
     };
-    const renderTitle = (menuItem: RegisterMenuData) => {
+    const _renderTitle = menuItem => {
       return h(
         "span",
         { class: this.menuTextClass, slot: "title" },
         menuItem.title,
       );
     };
+    const renderTitle = menuItem => this.menuTitleRender.call(this, h, menuItem) || _renderTitle.call(this, menuItem);
 
-    const renderMenu = (menuData: RegisterMenuData[]) => {
+    const renderMenu = menuData => {
       return menuData.map(t => {
         if (t.children && t.children.length > 0) return renderSubMenu(t);
         return renderMenuItem(t);
       });
     };
 
-    const renderMenuItem = (menuItem: RegisterMenuData) => {
+    const renderMenuItem = menuItem => {
       const { path, icon } = menuItem;
       const Icon = renderIcon(menuItem);
       const Title = renderTitle(menuItem);
@@ -128,20 +166,20 @@ export default {
           },
         });
       } else {
-        const routerLinkProps = Object.assign(
-          {
-            to: path,
+        const routerLinkProps = {
+          to: {
+            path: path,
             query: menuItem.query,
             params: menuItem.params,
             redirect: menuItem.redirect,
+            ...this.routeParams,
           },
-          this.routerParams,
-        );
+        }
 
         return h(
           "router-link",
           {
-            class: "router-menu",
+            class: "menu-router-link",
             props: routerLinkProps,
           },
           [ElMenuItem],
@@ -149,7 +187,7 @@ export default {
       }
     };
 
-    const renderSubMenu = (menuItem: RegisterMenuData) => {
+    const renderSubMenu = menuItem => {
       if (menuItem.children && menuItem.children.length > 0) {
         return h(
           "el-submenu",
@@ -168,6 +206,13 @@ export default {
         );
       }
     };
+
+    const renderMenuHeaderExtraRender = () => {
+      if (this.menuHeaderExtraRender) {
+        return this.menuHeaderExtraRender.call(this, h)
+      }
+      return null
+    }
 
     const {
       logo,
@@ -215,6 +260,7 @@ export default {
                 ),
               ],
             ),
+          renderMenuHeaderExtraRender(),
           h(
             "el-menu",
             {

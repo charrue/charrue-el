@@ -6,7 +6,7 @@
   "homepage": "",
   "license": "ISC",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "typings": "types/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -19,10 +19,9 @@
   },
   "peerDependencies": {
     "element-ui": "^2.15.1",
-    "@vue/composition-api": "^1.0.0-rc.8"
+    "vue": "^2.6.11"
   },
   "dependencies": {
-    "vue-demi": "latest",
     "path-to-regexp": "^6.2.0"
   }
 }

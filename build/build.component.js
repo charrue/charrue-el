@@ -55,7 +55,7 @@ const runBuild = async (name) => {
     }
 
     const inputOptions = {
-      input: getPkgDir("./src/index.ts"),
+      input: getPkgDir("./src/index.js"),
       plugins: [
         // terser(),
         nodeResolve(),
