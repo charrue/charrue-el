@@ -20,6 +20,6 @@ actionBtn:
 
 # 组件看板
 
-| 组件名称 | npm包名         | 下载量 |
-| -------- | --------------- | ------ |
-| layout   | @charrue/layout |        |
+| 组件名    | 下载量 |
+| -------- | ------ |
+| layout   |   ![download-image](https://img.shields.io/npm/dm/@charrue/layout.svg?style=flat-square)      |
