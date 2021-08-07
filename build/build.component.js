@@ -9,12 +9,13 @@ const fs = require('fs')
 const { getPackages } = require('@lerna/project')
 const css = require('rollup-plugin-css-only')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
-const vue = require('rollup-plugin-vue')
+const vue = require('rollup-plugin-vue').default
 const rollup = require('rollup')
 const typescript = require('rollup-plugin-typescript2')
 const { terser } = require('rollup-plugin-terser')
+const commonjs = require('@rollup/plugin-commonjs')
+const babel = require('rollup-plugin-babel')
 const ts = require('typescript')
-
 
 const compPath = process.argv[2]
 
@@ -56,28 +57,31 @@ const runBuild = async (name) => {
 
     const inputOptions = {
       input: getPkgDir("./src/index.js"),
+      external: ['vue', 'element-ui'],
       plugins: [
         // terser(),
-        nodeResolve(),
         css(),
+        commonjs(),
+        nodeResolve(),
+        babel(),
         vue({
           target: 'browser',
           css: false,
         }),
-        typescript({
-          // typescript: ts,
-          // tsconfig: tsconfigPath,
-          tsconfigOverride: {
-            compilerOptions: {
-              declaration: false,
-            },
-            'exclude': [
-              'node_modules',
-              '__tests__',
-            ],
-          },
-          abortOnError: false,
-        }),
+        // typescript({
+        //   // typescript: ts,
+        //   // tsconfig: tsconfigPath,
+        //   tsconfigOverride: {
+        //     compilerOptions: {
+        //       declaration: false,
+        //     },
+        //     'exclude': [
+        //       'node_modules',
+        //       '__tests__',
+        //     ],
+        //   },
+        //   abortOnError: false,
+        // }),
       ],
       external(id) {
         return /^vue/.test(id)
@@ -85,17 +89,25 @@ const runBuild = async (name) => {
           || deps.some(k => new RegExp('^' + k).test(id))
       },
     }
-    const getOutFile = () => {
-      return getPkgDir(`./dist/index.js`)
+    const getOutFile = (name = "index") => {
+      return getPkgDir(`./dist/${name}.js`)
     }
-    const outOptions = {
-      format: 'es',
-      file: getOutFile(),
-    }
+    const outOptions = [
+      {
+        format: 'es',
+        file: getOutFile(),
+      },
+      {
+        format: 'umd',
+        file: getOutFile(`umd/index`),
+        name: 'CharrueLayout',
+        exports: 'named',
+      },
+    ]
 
     const bundle = await rollup.rollup(inputOptions)
     console.log(name, 'done')
-    await bundle.write(outOptions)
+    await Promise.all(outOptions.map(async (t) => await bundle.write(t)))
   }
 }
 

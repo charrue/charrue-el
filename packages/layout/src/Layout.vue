@@ -74,25 +74,25 @@ export default {
     contentStyle: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       opened: false,
-    }
+    };
   },
   watch: {
     collapsed: {
       handler(val) {
-        this.opened = !val
+        this.opened = !val;
       },
       immediate: true,
     },
     opened(val) {
-      this.$emit("update:collapsed", val)
+      this.$emit("update:collapsed", val);
     },
   },
-}
+};
 </script>

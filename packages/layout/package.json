@@ -6,20 +6,22 @@
   "homepage": "https://github.com/charrue/pro-components/blob/master/packages/layout/README.md",
   "license": "MIT",
   "main": "dist/index.js",
-  "typings": "types/index.d.ts",
+  "unpkg": "dist/umd/index.js",
+  "typings": "typings/index.d.ts",
   "files": [
     "dist",
     "src",
-    "types"
+    "typings"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "cd .. && npm run build:style layout && npm run build:component layout"
   },
   "peerDependencies": {
     "element-ui": "^2.15.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0"
   },
-  "dependencies": {
-    "path-to-regexp": "^6.2.0"
+  "devDependencies": {
+    "vue-runtime-helpers": "^1.1.2"
   }
 }

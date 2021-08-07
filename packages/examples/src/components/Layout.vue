@@ -16,12 +16,12 @@
       </template>
       <template slot="content-header">
         <div style="padding: 20px">
-        <el-breadcrumb>
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
+          <el-breadcrumb>
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          </el-breadcrumb>
         </div>
       </template>
       <router-view></router-view>
@@ -42,6 +42,8 @@ export default defineComponent({
           {
             path: "page1",
             title: "page1",
+            // redirect: "path5",
+            redirect: "/page/page1/path5",
             children: [
               {
                 path: "path4",
@@ -68,7 +70,7 @@ export default defineComponent({
     const titleRender = (h, { title }) => {
       return h("span", { slot: "title" }, `${title} =>`);
     };
-    const menuHeaderExtraRender = h => {
+    const menuHeaderExtraRender = (h) => {
       return h("div", { class: "progress-bar-wrapper" }, [
         h("div", { class: "progress-bar" }, [
           h("span", { class: "progress-bar-fill" }),

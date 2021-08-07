@@ -1,8 +1,7 @@
-import Vue from 'vue'
+import Vue from "vue";
 
 declare class BaseComponent extends Vue {
-  /** Install component into Vue */
-  static install (vue: typeof Vue): void
+  static install(vue: typeof Vue): void;
 }
 
 declare class ContentView extends BaseComponent {
@@ -33,15 +32,15 @@ declare class Layout extends GlobalAside {
 }
 
 declare interface RegisterMenuData {
-  title: string
-  path: string
-  icon?: string
-  hide?: boolean
-  query?: Record<string, any>
-  params: Record<string, any>
-  redirect?: string
-  children?: RegisterMenuData[]
-  target?: string
-  subMenuProps?: Record<string, any>
-  authority?: (...args: any[]) => boolean
+  title: string;
+  path: string;
+  icon?: string;
+  hide?: boolean;
+  query?: Record<string, any>;
+  params: Record<string, any>;
+  redirect?: string;
+  children?: RegisterMenuData[];
+  target?: string;
+  subMenuProps?: Record<string, any>;
+  authority?: (...args: any[]) => boolean;
 }
