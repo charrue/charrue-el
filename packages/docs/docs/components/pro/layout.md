@@ -42,7 +42,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/basic.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/basic.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
@@ -78,7 +78,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/title-logo.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/title-logo.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
@@ -115,7 +115,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/collapsed.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/collapsed.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
@@ -156,7 +156,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/route-params.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/route-params.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
@@ -197,7 +197,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/absolute.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/absolute.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
@@ -258,7 +258,7 @@ export default {
 </script>
 `'>
   <div style="width: 100%" slot="demo">
-    <iframe style="height: 300px;width: 100%;" src="/demos/layout/render.html" frameborder="0"></iframe>
+    <iframe style="height: 300px;width: 100%;" src="../../demos/layout/render.html" frameborder="0"></iframe>
   </div>
 </NewDemoBlock>
 
