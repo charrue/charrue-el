@@ -5,6 +5,17 @@ const sidebarRoutes = [
   ['/components/pro/layout', 'layout'],
 ]
 
+const componentStyles = [
+  "https://unpkg.com/element-ui/lib/theme-chalk/index.css",
+  "https://unpkg.com/@charrue/layout/dist/style/index.css"
+]
+
+const Scripts = [
+  "https://unpkg.com/vue/dist/vue.js",
+  "https://unpkg.com/element-ui/lib/index.js",
+  "https://unpkg.com/@charrue/layout/dist/umd/index.js"
+]
+
 module.exports = {
   title: "pro-component", //左上角的博客标题以及网站显示的标题
   description: "pro-components",
@@ -18,14 +29,23 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no",
       },
     ],
-
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css",
-      },
-    ],
+    ...componentStyles.map(link => {
+      return [
+        "link",
+        {
+          href: link,
+          rel: "stylesheet",
+        }
+      ]
+    }),
+    ...Scripts.map(link => {
+      return [
+        "script",
+        {
+          src: link,
+        }
+      ]
+    })
   ],
   themeConfig: {
     //主题配置项
