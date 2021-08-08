@@ -8,12 +8,10 @@ import "element-ui/lib/theme-chalk/index.css";
 import Layout from "@charrue/layout";
 import "@charrue/layout/dist/style/index.css";
 
-import SchemaForm from '@/components/schema-form'
 
 Vue.use(CompositionApi);
 Vue.use(ElementUI);
 Vue.use(Layout);
-Vue.use(SchemaForm);
 
 Vue.config.productionTip = false;
 

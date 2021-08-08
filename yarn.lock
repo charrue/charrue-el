@@ -972,13 +972,6 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@charrue/layout@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/@charrue/layout/-/layout-0.0.1.tgz#65462fd91e44257b51a4b8c17384242985b425a9"
-  integrity sha512-VE5vMqHtzQmU9t9h2ekeqgGhrduTEmwFeytVLZfz/9luQ69SRU2u3d4SifegNmdUkBRtTW3BI9NmZFEarQClAQ==
-  dependencies:
-    path-to-regexp "^6.2.0"
-
 "@commitlint/execute-rule@^13.0.0":
   version "13.0.0"
   resolved "https://registry.nlark.com/@commitlint/execute-rule/download/@commitlint/execute-rule-13.0.0.tgz#7823303b82b5d86dac46e67cfa005f4433476981"
@@ -2643,7 +2636,7 @@
     postcss-modules-sync "^1.0.0"
     source-map "0.6.*"
 
-"@vue/composition-api@^1.0.0-rc.13":
+"@vue/composition-api@^1.0.0-rc.13", "@vue/composition-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.nlark.com/@vue/composition-api/download/@vue/composition-api-1.0.5.tgz?cache=0&sync_timestamp=1627797814439&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcomposition-api%2Fdownload%2F%40vue%2Fcomposition-api-1.0.5.tgz#c7cef457284096e75cc0894e0cb9a251f91eba3f"
   integrity sha1-x870VyhAludcwIlODLmiUfkeuj8=
@@ -11014,11 +11007,6 @@ path-to-regexp@0.1.7:
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-0.1.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
 
-path-to-regexp@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-6.2.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-6.2.0.tgz#f7b3803336104c346889adece614669230645f38"
-  integrity sha1-97OAMzYQTDRoia3s5hRmkjBkXzg=
-
 path-type@^1.0.0:
   version "1.1.0"
   resolved "https://registry.nlark.com/path-type/download/path-type-1.1.0.tgz#59c44f7ee491da704da415da5a4070ba4f8fe441"
@@ -14441,11 +14429,6 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
-
-vue-demi@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
-  integrity sha1-Jdbh69TUAQdX/zVx4r9qHXvz3oI=
 
 vue-demi@latest:
   version "0.11.2"
