@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/@charrue/layout/dist/style/index.css">
+  <style>
+    html, body {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <layout :data="menuData">
+      <router-view />
+    </layout>
+  </div>
+</body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/@charrue/layout/dist/umd/index.js"></script>
+  <script>
+    const createSimpleComponent = (name) => {
+      return Vue.extend({
+        name,
+        render(h) {
+          const { path, query = {} } = this.$route
+          return h("div", [
+            h("h1", name),
+            h("p", `path: ${path}`),
+            h("p", `query: ${JSON.stringify(query, null, 2)}`),
+          ])
+        }
+      })
+    }
+    const router = new VueRouter({
+      routes: [
+        {
+          path: "/",
+          name: "home",
+          redirect: "/page1"
+        },
+        {
+          path: "/page1",
+          name: "page1",
+          component: createSimpleComponent("Page1")
+        },
+        {
+          path: "/page2",
+          name: "page2",
+          component: createSimpleComponent("Page2")
+        },
+      ]
+    });
+
+    new Vue({
+      el: '#app',
+      router,
+      data: function() {
+        return {
+          menuData: [
+            {
+              title: "标题一",
+              path: "/page1",
+              icon: "el-icon-s-promotion"
+            },
+            {
+              title: "标题二",
+              path: "/page2",
+              icon: "el-icon-s-promotion"
+            },
+          ]
+        }
+      }
+    })
+  </script>
+</html>
