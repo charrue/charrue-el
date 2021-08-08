@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <layout
+      :collapsed.sync="collapsed"
       :data="menuData"
       title="Vue Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
       :menu-title-render="titleRender"
       :menu-header-extra-render="menuHeaderExtraRender"
-      :route-params="{ query: { t: time } }"
+      :route-params="routeParams"
     >
       <template slot="header-left">
         <div>LEFT</div>
@@ -30,10 +31,14 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "@vue/composition-api";
+import { defineComponent, ref, watch } from "@vue/composition-api";
 export default defineComponent({
   name: "PageLayout",
   setup() {
+    const collapsed = ref(false)
+    watch(collapsed, (val) => {
+      console.log(val)
+    })
     const menuData = ref([
       {
         title: "page",
@@ -77,9 +82,16 @@ export default defineComponent({
         ]),
       ]);
     };
-    const time = Date.now();
+    const routeParams = (item) => {
+      return {
+        query: {
+          path: item.path
+        }
+      }
+    }
     return {
-      time,
+      collapsed,
+      routeParams,
       menuData,
       titleRender,
       menuHeaderExtraRender,

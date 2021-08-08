@@ -65,10 +65,7 @@ export default {
     logo: String,
     title: String,
     routeParams: {
-      type: Object,
-      default() {
-        return {};
-      },
+      type: [Object, Function],
     },
     titleRender: Function,
     contentStyle: {
@@ -91,7 +88,7 @@ export default {
       immediate: true,
     },
     opened(val) {
-      this.$emit("update:collapsed", val);
+      this.$emit("update:collapsed", !val);
     },
   },
 };

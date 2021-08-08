@@ -72,10 +72,7 @@ export default {
      * 菜单进行路由跳转时，携带的参数
      */
     routeParams: {
-      type: Object,
-      default() {
-        return {};
-      },
+      type: [Object, Function],
     },
     /**
      * 自定义导航菜单文字渲染
@@ -165,7 +162,8 @@ export default {
       openKeys,
       menuData,
       route,
-      absolute
+      absolute,
+      routeParams = {}
     } = this;
 
     const renderIcon = (menuItem) => {
@@ -182,9 +180,10 @@ export default {
       );
     };
     const renderTitle = (menuItem) => {
-      return this.menuTitleRender ? this.menuTitleRender.call(this, h, menuItem) :
-      _renderTitle.call(this, menuItem);
-    }
+      return this.menuTitleRender
+        ? this.menuTitleRender.call(this, h, menuItem)
+        : _renderTitle.call(this, menuItem);
+    };
 
     const renderMenu = (menuData) => {
       return menuData.map((t) => {
@@ -217,15 +216,26 @@ export default {
           },
         });
       } else {
-        const routerLinkProps = {
+        let routerLinkProps = {
           to: {
             path: path,
             query: menuItem.query,
             params: menuItem.params,
             redirect: menuItem.redirect,
-            ...this.routeParams,
           },
         };
+
+        if (typeof routeParams === 'function') {
+          routerLinkProps.to = {
+            ...routerLinkProps.to,
+            ...routeParams(menuItem)
+          }
+        } else {
+          routerLinkProps.to = {
+            ...routerLinkProps.to,
+            ...routeParams
+          }
+        }
 
         return h(
           menuRouteComponent,
@@ -273,12 +283,11 @@ export default {
           class: "layout-global-aside",
           style: {
             width: this.width,
-            position: absolute ? 'absolute' : 'fixed',
+            position: absolute ? "absolute" : "fixed",
           },
         },
         [
-          logo &&
-            title &&
+          (logo || title) &&
             h(
               "div",
               {
