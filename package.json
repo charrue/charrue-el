@@ -14,7 +14,9 @@
     "start:docs": "cd packages/docs && npm run start",
     "build": "node ./build/build.js",
     "build:component": "node ./build/build.component.js",
-    "build:style": "gulp --gulpfile ./build/build.style.js"
+    "build:style": "gulp --gulpfile ./build/build.style.js",
+    "build:docs": "cd packages/docs && npm run build",
+    "deploy:docs": "cd packages/docs && npm run deploy"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",

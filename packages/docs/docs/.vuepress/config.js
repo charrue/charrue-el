@@ -1,6 +1,10 @@
-const sidebarRoutes = [
+const basicComponents = [
+  ['/components/', '开始使用'],
   ['/components/basic/', '基础组件'],
   ['/components/basic/button', 'Button'],
+]
+
+const proComponents = [
   ['/components/pro/', 'pro组件'],
   ['/components/pro/layout', 'layout'],
 ]
@@ -17,11 +21,12 @@ const Scripts = [
 ]
 
 module.exports = {
-  title: "pro-component", //左上角的博客标题以及网站显示的标题
+  base: "/pro-components/",
+  title: "pro-components",
   description: "pro-components",
   theme: "antdocs",
   head: [
-    ["link", { rel: "icon", href: "/favicon.ico" }], // 增加一个自定义的 favicon(网页标签的图标)
+    ["link", { rel: "icon", href: "/favicon.ico" }],
     [
       "meta",
       {
@@ -60,7 +65,10 @@ module.exports = {
     lastUpdated: "最后更新时间",
     backToTop: true,
     sidebar: {
-      "/components/": sidebarRoutes,
+      "/components/": [
+        ...basicComponents,
+        ...proComponents,
+      ],
     },
     nav: [
       {
@@ -69,7 +77,7 @@ module.exports = {
       },
       {
         text: "案例",
-        link: "/examples/",
+        link: "https://codesandbox.io/s/github/charrue/pro-components/tree/master/packages/examples",
       },
       {
         text: "联系",
@@ -95,7 +103,7 @@ module.exports = {
     ],
     //显示文章最后更新时间
     "@vuepress/last-updated",
-     // 悬挂猫返回顶部
+    // 悬挂猫返回顶部
     ["go-top"],
     'demo-container'
   ],

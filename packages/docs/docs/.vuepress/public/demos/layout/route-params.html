@@ -12,7 +12,7 @@
 </head>
 <body>
   <div id="app">
-    <layout :data="menuData">
+    <layout :data="menuData" :route-params="routeParams">
       <router-view />
     </layout>
   </div>
@@ -60,6 +60,11 @@
       router,
       data: function() {
         return {
+          routeParams: {
+            query: {
+              source: "foo"
+            }
+          },
           menuData: [
             {
               title: "标题一",

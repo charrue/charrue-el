@@ -15,22 +15,25 @@ Layout可以提供一个基础的、可定制的中后台标准布局，传入�
 <NewDemoBlock :code='`
 <template>
   <div>
-    <layout :data="menuData" :route="false"></layout>
+    <layout :data="menuData">
+      <router-view />
+    </layout>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      title: "基础使用 无路由",
       menuData: [
         {
           title: "标题一",
-          path: "page1"
+          path: "/page1",
+          icon: "el-icon-s-promotion"
         },
         {
           title: "标题二",
-          path: "page2"
+          path: "/page2",
+          icon: "el-icon-s-promotion"
         },
       ]
     }
@@ -43,15 +46,222 @@ export default {
   </div>
 </NewDemoBlock>
 
-### 关闭路由模式
+### 添加标题与Logo
+
+<NewDemoBlock :code='`
+<template>
+  <div>
+    <layout :data="menuData" title="Vue Admin" logo="/logo.png">
+      <router-view />
+    </layout>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      menuData: [
+        {
+          title: "标题一",
+          path: "/page1",
+          icon: "el-icon-s-promotion"
+        },
+        {
+          title: "标题二",
+          path: "/page2",
+          icon: "el-icon-s-promotion"
+        },
+      ]
+    }
+  }
+}
+</script>
+`'>
+  <div style="width: 100%" slot="demo">
+    <iframe style="height: 300px;width: 100%;" src="/demos/layout/title-logo.html" frameborder="0"></iframe>
+  </div>
+</NewDemoBlock>
+
+### 控制侧栏展开收缩的状态
+
+<NewDemoBlock :code='`
+<template>
+  <div>
+    <layout :data="menuData" :collapsed.sync="collapsed">
+      <router-view />
+    </layout>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      collapsed: false,
+      menuData: [
+        {
+          title: "标题一",
+          path: "/page1",
+          icon: "el-icon-s-promotion"
+        },
+        {
+          title: "标题二",
+          path: "/page2",
+          icon: "el-icon-s-promotion"
+        },
+      ]
+    }
+  }
+}
+</script>
+`'>
+  <div style="width: 100%" slot="demo">
+    <iframe style="height: 300px;width: 100%;" src="/demos/layout/collapsed.html" frameborder="0"></iframe>
+  </div>
+</NewDemoBlock>
+
+
+### 导航菜单路由跳转时携带参数
+<NewDemoBlock :code='`
+<template>
+  <div>
+    <layout :data="menuData" :route-params="routeParams">
+      <router-view />
+    </layout>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      routeParams: {
+        query: {
+          source: "foo"
+        }
+      },
+      menuData: [
+        {
+          title: "标题一",
+          path: "/page1",
+          icon: "el-icon-s-promotion"
+        },
+        {
+          title: "标题二",
+          path: "/page2",
+          icon: "el-icon-s-promotion"
+        },
+      ]
+    }
+  }
+}
+</script>
+`'>
+  <div style="width: 100%" slot="demo">
+    <iframe style="height: 300px;width: 100%;" src="/demos/layout/route-params.html" frameborder="0"></iframe>
+  </div>
+</NewDemoBlock>
 
 
 ### absolute布局
+<NewDemoBlock :code='`
+<template>
+  <div>
+    <layout :data="menuData" :route-params="routeParams" absolute>
+      <router-view />
+    </layout>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      routeParams: {
+        query: {
+          source: "foo"
+        }
+      },
+      menuData: [
+        {
+          title: "标题一",
+          path: "/page1",
+          icon: "el-icon-s-promotion"
+        },
+        {
+          title: "标题二",
+          path: "/page2",
+          icon: "el-icon-s-promotion"
+        },
+      ]
+    }
+  }
+}
+</script>
+`'>
+  <div style="width: 100%" slot="demo">
+    <iframe style="height: 300px;width: 100%;" src="/demos/layout/absolute.html" frameborder="0"></iframe>
+  </div>
+</NewDemoBlock>
 
 
-### 自定义菜单标题渲染
+### 自定义渲染
+<NewDemoBlock :code='`
+<template>
+  <div>
+    <layout
+      :data="menuData"
+      title="Vue Admin"
+      :menu-title-render="titleRender"
+      :menu-header-extra-render="menuHeaderExtraRender"
+    >
+      <router-view />
+    </layout>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      routeParams: {
+        query: {
+          source: "foo"
+        }
+      },
+      menuData: [
+        {
+          title: "标题一",
+          path: "/page1",
+          icon: "el-icon-s-promotion"
+        },
+        {
+          title: "标题二",
+          path: "/page2",
+          icon: "el-icon-s-promotion"
+        },
+      ]
+    }
+  },
+  methods: {
+    titleRender(h, { title }) {
+      return h("span", { slot: "title" }, "+ " + title + " +");
+    },
+    menuHeaderExtraRender(h) {
+      return h("div", {
+        style: {
+          width: "100%",
+          height: "30px",
+          borderRadius: "5px",
+          background: "#d9ecff"
+        }
+      })
+    }
+  }
+}
+</script>
+`'>
+  <div style="width: 100%" slot="demo">
+    <iframe style="height: 300px;width: 100%;" src="/demos/layout/render.html" frameborder="0"></iframe>
+  </div>
+</NewDemoBlock>
 
-### 菜单顶部区域渲染
 
 ## API
 

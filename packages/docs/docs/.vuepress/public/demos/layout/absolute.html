@@ -7,12 +7,19 @@
   <style>
     html, body {
       margin: 0;
+      background-color: #dcdfe6;
+    }
+    #app {
+      position: relative;
+      width: 70%;
+      margin: 0 auto;
+      background-color: #fff;
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <layout :data="menuData">
+    <layout :data="menuData" absolute>
       <router-view />
     </layout>
   </div>
