@@ -11,7 +11,11 @@
       :route-params="routeParams"
       :title-render="titleRender"
       v-bind="$attrs"
-    />
+    >
+      <template slot="side-top">
+        <slot name="side-top"></slot>
+      </template>
+    </GlobalAside>
     <div class="layout__main">
       <GlobalHeader :opened.sync="opened" :fixed="fixedHeader">
         <template slot="header-trigger">

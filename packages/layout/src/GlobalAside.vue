@@ -172,7 +172,7 @@ export default {
         slot: "title",
       });
     };
-    const _renderTitle = (menuItem) => {
+    const defaultMenuItemTitleRender = (menuItem) => {
       return h(
         "span",
         { class: this.menuTextClass, slot: "title" },
@@ -182,7 +182,7 @@ export default {
     const renderTitle = (menuItem) => {
       return this.menuTitleRender
         ? this.menuTitleRender.call(this, h, menuItem)
-        : _renderTitle.call(this, menuItem);
+        : defaultMenuItemTitleRender.call(this, menuItem);
     };
 
     const renderMenu = (menuData) => {
@@ -314,6 +314,7 @@ export default {
                 ),
               ]
             ),
+            this.$slots['side-top'],
           renderMenuHeaderExtraRender(),
           h(
             "el-menu",
