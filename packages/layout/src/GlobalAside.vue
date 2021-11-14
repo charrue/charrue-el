@@ -71,9 +71,7 @@ export default {
     /**
      * 菜单进行路由跳转时，携带的参数
      */
-    routeParams: {
-      type: [Object, Function],
-    },
+    routeParams: [Function, Object],
     /**
      * 自定义导航菜单文字渲染
      */

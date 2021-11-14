@@ -63,7 +63,11 @@ const runBuild = async (name) => {
         css(),
         commonjs(),
         nodeResolve(),
-        babel(),
+        babel({
+          exclude: 'node_modules/**',
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+          presets: ["@vue/babel-preset-jsx"]
+        }),
         vue({
           target: 'browser',
           css: false,

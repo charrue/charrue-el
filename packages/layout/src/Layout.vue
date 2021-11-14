@@ -68,9 +68,7 @@ export default {
     },
     logo: String,
     title: String,
-    routeParams: {
-      type: [Object, Function],
-    },
+    routeParams: [Function, Object],
     titleRender: Function,
     contentStyle: {
       type: Object,

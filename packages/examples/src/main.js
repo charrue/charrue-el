@@ -7,11 +7,12 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import Layout from "@charrue/layout";
 import "@charrue/layout/dist/style/index.css";
-
+import SchemaTable from '@charrue/schema-table'
 
 Vue.use(CompositionApi);
 Vue.use(ElementUI);
 Vue.use(Layout);
+Vue.component('schema-table', SchemaTable)
 
 Vue.config.productionTip = false;
 

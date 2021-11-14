@@ -1,0 +1,24 @@
+{
+  "name": "@charrue/schema-table",
+  "version": "0.0.1",
+  "description": "",
+  "author": "ckangwen",
+  "homepage": "https://github.com/charrue/pro-components/blob/master/packages/schema-table/README.md",
+  "license": "MIT",
+  "main": "src/index.js",
+  "unpkg": "dist/umd/index.js",
+  "typings": "typings/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "typings"
+  ],
+  "scripts": {
+    "build": "cd .. && npm run build:style schema-table && npm run build:component schema-table"
+  },
+  "peerDependencies": {
+    "element-ui": "^2.15.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0"
+  }
+}

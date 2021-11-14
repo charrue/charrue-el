@@ -42,6 +42,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/schema-table",
+    name: "schema-table",
+    children: [
+      {
+        path: "basic",
+        name: 'basic',
+        component: () => import("@/views/schema-table/basic")
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({

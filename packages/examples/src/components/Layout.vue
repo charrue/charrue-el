@@ -76,8 +76,14 @@ export default defineComponent({
         ],
       },
       {
-        title: "page3",
-        path: "/paeg/page3",
+        title: "schema-table",
+        path: "/schema-table",
+        children: [
+          {
+            path: 'basic',
+            title: 'basic'
+          }
+        ]
       },
     ]);
 

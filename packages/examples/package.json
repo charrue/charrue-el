@@ -8,7 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@charrue/layout": "^0.0.3",
+    "@charrue/layout": "^0.0.4",
+    "@charrue/schema-table": "^0.0.1",
     "@vue/composition-api": "^1.0.5",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.3",
