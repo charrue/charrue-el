@@ -13,7 +13,7 @@ const cleanCss = require('gulp-clean-css')
 const cssmin = require('gulp-cssmin')
 const { resolve } = require('path')
 const fs = require('fs')
-const { getPackagesSync } = require('@lerna/project')
+const { packages } = require('./packages')
 
 function css(done) {
   gulp.src('../packages/layout/src/styles/index.scss')
@@ -27,7 +27,7 @@ function css(done) {
 }
 
 const compName = process.argv[4]
-const styles = getPackagesSync()
+const styles = packages
   .map(pkg => {
     return pkg.name.replace(/@charrue\//, '')
   })
@@ -37,8 +37,11 @@ const styles = getPackagesSync()
   })
   .map(name => {
     const scssPath = resolve(__dirname, `../packages/${name}/src/styles/index.scss`)
-    if (!fs.existsSync(scssPath)) return
     const task = done => {
+      if (!fs.existsSync(scssPath)) {
+        done()
+        return
+      }
       gulp.src(scssPath, { allowEmpty: true })
         .pipe(scss())
         .pipe(autoprefixer())

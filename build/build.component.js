@@ -6,7 +6,6 @@
  */
 const path = require('path')
 const fs = require('fs')
-const { getPackages } = require('@lerna/project')
 const css = require('rollup-plugin-css-only')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const vue = require('rollup-plugin-vue').default
@@ -16,11 +15,12 @@ const { terser } = require('rollup-plugin-terser')
 const commonjs = require('@rollup/plugin-commonjs')
 const babel = require('rollup-plugin-babel')
 const ts = require('typescript')
+const { packages } = require('./packages')
 
 const compPath = process.argv[2]
 
 const runBuild = async (name) => {
-  const pkgs = await getPackages()
+  const pkgs = packages
   const inputs = pkgs
     .map(pkg => pkg.name)
     .filter(name =>
