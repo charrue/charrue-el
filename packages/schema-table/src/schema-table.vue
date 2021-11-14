@@ -5,7 +5,7 @@
     </div>
     <div class="charrue-crud__body">
       <el-table
-        ref="elTable"
+        ref="elTableRef"
         v-loading="loading"
         :data="tableData"
         :element-loading-text="loadingOptions && loadingOptions.text"
@@ -245,6 +245,8 @@ export default {
       const elTableMethods = [
         "clearSelection",
         "toggleAllSelection",
+        "toggleRowExpansion",
+        "setCurrentRow",
         "clearSort",
         "clearFilter",
         "doLayout",
@@ -252,7 +254,7 @@ export default {
       ];
       elTableMethods.forEach((item) => {
         this[item] = (...args) => {
-          this.$refs.elTable[item](...args);
+          this.$refs.elTableRef[item](...args);
         };
       });
     },
