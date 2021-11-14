@@ -143,7 +143,10 @@ importers:
       vue-runtime-helpers: registry.npmmirror.com/vue-runtime-helpers/1.1.2
 
   packages/schema-table:
-    specifiers: {}
+    specifiers:
+      lodash.clonedeep: ^4.5.0
+    devDependencies:
+      lodash.clonedeep: registry.nlark.com/lodash.clonedeep/4.5.0
 
 packages:
 

@@ -45,11 +45,12 @@ const routes = [
   {
     path: "/schema-table",
     name: "schema-table",
+    component: PageLayout,
     children: [
       {
         path: "basic",
         name: 'basic',
-        component: () => import("@/views/schema-table/basic")
+        component: () => import("@/views/schema-table/basic.vue")
       }
     ]
   }

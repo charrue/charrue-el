@@ -7,7 +7,7 @@
       <el-table
         ref="elTable"
         v-loading="loading"
-        :data="crudData"
+        :data="tableData"
         :element-loading-text="loadingOptions && loadingOptions.text"
         :element-loading-spinner="loadingOptions && loadingOptions.spinner"
         :element-loading-background="
@@ -29,35 +29,28 @@
         <!-- 遍历columns，渲染行数据 -->
         <!-- key使用name,label,index的拼接，不使用index，防止column的个数没有变化，但是值发生变化后，表头不更新 -->
         <el-table-column
-          v-for="(item, index) in computedColumn"
+          v-for="(item, index) in columns"
+          v-show="item.hidden !== true"
           :key="`${item.prop}-${item.label}-${index}`"
           :label="item.label"
           :prop="item.prop"
           v-bind="item.attrs"
         >
           <!-- 自定义表头 -->
-          <!-- <template slot="header" slot-scope="scope">
-            <template v-if="theadContent">
-              <vnodes :render="theadContent" :props="{ ...scope, ...item }" />
+          <template slot="header" slot-scope="scope">
+            <template v-if="$scopedSlots.theader">
+              <slot name="theader" :scope="scope" />
             </template>
             <span v-else>{{ item.label }}</span>
-          </template> -->
+          </template>
 
           <!-- 自定义单元格 -->
           <template slot-scope="scope">
-            <div
-              class="cell-wrapper"
-              @contextmenu.prevent="handleRowContextMenu(scope)"
-            >
-              <!-- 通过cell-content渲染单元格数据 -->
-              <!-- <template v-if="cellContent">
-                <vnodes :render="cellContent" :props="{ ...scope, ...item }" />
-              </template>
-              <template v-else-if="$scopedSlots[item.prop]">
+            <div class="cell-wrapper">
+              <template v-if="$scopedSlots[item.prop]">
                 <slot :name="item.prop" :scope="scope" />
               </template>
-              <span v-else>{{ scope.row[item.prop] }}</span> -->
-              <span>{{ scope.row[item.prop] }}</span>
+              <span v-else>{{ scope.row[item.prop] }}</span>
             </div>
           </template>
           <!-- 多级表头 -->
@@ -73,10 +66,10 @@
         <!-- 操作列 -->
         <el-table-column v-if="showExtraColumn" v-bind="extraColumnProps">
           <template slot="header">
-            <!-- <template v-if="extraHeadContent">
-              <vnodes :render="extraHeadContent" />
+            <template v-if="$scopedSlots.extraColumnHeader">
+              <slot name="extraColumnHeader" :scope="scope" />
             </template>
-            <span v-else>操作</span> -->
+            <span v-else>操作</span>
             <span>操作</span>
           </template>
           <!-- 删除操作 -->
@@ -112,9 +105,12 @@
 </template>
 <script>
 import MutliColumn from "./MutliColumn.jsx";
-// import MutliColumn from "./mutli-column.vue";
+import cloneDeep from "lodash.clonedeep";
 
 export default {
+  components: {
+    MutliColumn,
+  },
   props: {
     data: {
       type: Array,
@@ -123,12 +119,6 @@ export default {
     columns: {
       type: Array,
       required: true,
-    },
-    removeConfirmOptions: {
-      type: Object,
-      default() {
-        return {};
-      },
     },
     /* el-table的props */
     tableProps: Object,
@@ -166,12 +156,6 @@ export default {
      */
     extraHeadContent: Function,
     /**
-     * 用于自定义渲染行数据
-     * 第一个参数为渲染函数
-     * 剩余参数为row, $index, label, prop
-     */
-    cellContent: Function,
-    /**
      * 是否展示额外的列
      */
     showExtraColumn: {
@@ -183,8 +167,15 @@ export default {
     total: [Number, String],
     pageSize: Number,
   },
-  components: {
-    MutliColumn,
+  data() {
+    return {
+      events: {},
+    };
+  },
+  computed: {
+    tableData() {
+      return cloneDeep(this.data);
+    },
   },
   methods: {
     /**
@@ -267,9 +258,8 @@ export default {
     },
   },
   created() {
-    this.proxyElTableMethods()
+    this.proxyElTableMethods();
     this.proxyElTableEvents();
   },
-  // mixins: [VnodesMixin, TableMixin, DataMixin, PaginationMixin]
 };
 </script>

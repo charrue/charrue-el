@@ -6,7 +6,7 @@ export const Columns = [
   { label: "邮编", prop: "zip" },
 ]
 
-export const Data = [
+export const Data =
   [{
     date: '2016-05-02',
     name: '王小虎',
@@ -36,4 +36,3 @@ export const Data = [
     address: '上海市普陀区金沙江路 1516 弄',
     zip: 200333
   }]
-]
