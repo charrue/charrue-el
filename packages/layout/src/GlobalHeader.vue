@@ -29,6 +29,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    fixed: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     style() {
