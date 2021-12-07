@@ -79,3 +79,7 @@ export function cleanPath(path) {
 }
 
 export const inBrowser = typeof window !== undefined;
+
+export function isFunction(val) {
+  return typeof val === "function";
+}

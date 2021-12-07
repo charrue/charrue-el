@@ -1,12 +1,41 @@
+<template>
+  <div class="layout-global-aside-container">
+    <div class="layout-global-aside-placeholder" :style="{ width }"></div>
+    <div class="layout-global-aside global-aside-el-menu" :style="{ width, position: absolute ? 'absolute' : 'fixed', }">
+      <div v-if="logo || title" class="logo-container">
+        <router-link :to="homeUrl" :class="['menu-router-link']">
+          <img v-if="logo" :src="logo" alt="logo" />
+          <h1 v-if="title">{{ title }}</h1>
+        </router-link>
+      </div>
+      <slot name="sidebar-top"></slot>
+      <el-menu
+        mode="vertical"
+        unique-opened
+        :collapse="collapsed"
+        :default-active="activeRoutePath"
+        :default-openeds="openKeys"
+        style="padding: 16px 0; width: 100%;"
+      >
+        <sidebar-item v-for="(item, index) in computedMenuData" :key="index" :menuItem="item"></sidebar-item>
+      </el-menu>
+      <slot name="sidebar-bottom"></slot>
+    </div>
+  </div>
+</template>
 <script>
 import {
-  isUrl,
   urlToList,
   menuDataFormatter,
   getMenuDataPathMapping,
+  isFunction
 } from "./utils";
+import SidebarItem from './SidebarItem.vue'
 export default {
   name: "GlobalAside",
+  components: {
+    SidebarItem
+  },
   props: {
     /**
      * 导航菜单数据
@@ -48,6 +77,7 @@ export default {
     },
     /**
      * 控制导航菜单的展示
+     * ({ menu, index, deep, path, parent }) => AsideMenuData[]
      */
     Authorized: Function,
     /**
@@ -74,12 +104,9 @@ export default {
     routeParams: [Function, Object],
     /**
      * 自定义导航菜单文字渲染
+     * ()
      */
     menuTitleRender: Function,
-    /**
-     * 导航菜单顶部标题下面的区域
-     */
-    menuHeaderExtraRender: Function,
     /**
      * 导航菜单折叠，展开时的宽度
      */
@@ -89,6 +116,10 @@ export default {
         return ["54px", "200px"];
       },
     },
+    homeUrl: {
+      type: String,
+      default: "/"
+    }
   },
   data() {
     return {
@@ -99,14 +130,25 @@ export default {
     };
   },
   computed: {
-    _siderWidths() {
+    _asideWidths() {
       return [
         this.asideWidths ? this.asideWidths[0] : "54px",
         this.asideWidths ? this.asideWidths[1] : "200px",
       ];
     },
     width() {
-      return this.collapsed ? this._siderWidths[0] : this._siderWidths[1];
+      return this.collapsed ? this._asideWidths[0] : this._asideWidths[1];
+    },
+    computedMenuData() {
+      const menuData = []
+      this.menuData.forEach((menu, index) => {
+        const formattedMenu = this.formatMenuData({  menu, index, deep: 0, path: menu.path, parent: null });
+        if (formattedMenu) {
+          menuData.push(formattedMenu)
+        }
+      })
+
+      return menuData;
     },
   },
   watch: {
@@ -129,6 +171,28 @@ export default {
       deep: true,
     },
   },
+  methods: {
+    /**
+     * @private
+     * 对菜单数据进行格式化
+     */
+    formatMenuData({ menu, deep, index, path, parent } = {}) {
+        if (isFunction(this.Authorized) && !this.Authorized({ menu, deep, index, path, parent })) return false
+
+        if (menu.title && isFunction(this.menuTitleRender)) {
+          menu.title = this.menuTitleRender({ menu, deep, index, path, parent })
+        }
+
+          menu.children = menu.children || []
+        if (Array.isArray(menu.children) && menu.children.length > 0) {
+          menu.children = menu.children.filter(child => {
+            const currentPath = path.startsWith('/') ? child.path : `${path}/${child.path}`;
+            return this.formatMenuData({ menu: child, deep: deep + 1, index, path: currentPath, parent: menu })
+          })
+        }
+        return menu
+    }
+  },
   created() {
     if (this.route) {
       this.$watch(
@@ -150,206 +214,6 @@ export default {
         }
       );
     }
-  },
-  render(h) {
-    const {
-      logo,
-      title,
-      collapsed,
-      activeRoutePath,
-      openKeys,
-      menuData,
-      route,
-      absolute,
-      routeParams = {}
-    } = this;
-
-    const renderIcon = (menuItem) => {
-      return h("i", {
-        class: `${this.prefixIconClass} ${menuItem.icon || ""}`,
-        slot: "title",
-      });
-    };
-    const defaultMenuItemTitleRender = (menuItem) => {
-      return h(
-        "span",
-        { class: this.menuTextClass, slot: "title" },
-        menuItem.title
-      );
-    };
-    const renderTitle = (menuItem) => {
-      return this.menuTitleRender
-        ? this.menuTitleRender.call(this, h, menuItem)
-        : defaultMenuItemTitleRender.call(this, menuItem);
-    };
-
-    const renderMenu = (menuData) => {
-      return menuData.map((t) => {
-        if (t.children && t.children.length > 0) return renderSubMenu(t);
-        return renderMenuItem(t);
-      });
-    };
-
-    const renderMenuItem = (menuItem) => {
-      const { path, icon } = menuItem;
-      const Icon = renderIcon(menuItem);
-      const Title = renderTitle(menuItem);
-      const ElMenuItem = h(
-        "el-menu-item",
-        {
-          props: {
-            index: path,
-            disabled:
-              this.checkMenuDisabled && this.checkMenuDisabled(menuItem),
-          },
-        },
-        [icon && Icon, Title]
-      );
-
-      if (isUrl(path)) {
-        return h("a", {
-          attrs: {
-            href: path,
-            target: menuItem.target,
-          },
-        });
-      } else {
-        let routerLinkProps = {
-          to: {
-            path: path,
-            query: menuItem.query,
-            params: menuItem.params,
-            redirect: menuItem.redirect,
-          },
-        };
-
-        if (typeof routeParams === 'function') {
-          routerLinkProps.to = {
-            ...routerLinkProps.to,
-            ...routeParams(menuItem)
-          }
-        } else {
-          routerLinkProps.to = {
-            ...routerLinkProps.to,
-            ...routeParams
-          }
-        }
-
-        return h(
-          menuRouteComponent,
-          {
-            class: "menu-router-link",
-            props: routerLinkProps,
-          },
-          [ElMenuItem]
-        );
-      }
-    };
-
-    const renderSubMenu = (menuItem) => {
-      if (menuItem.children && menuItem.children.length > 0) {
-        return h(
-          "el-submenu",
-          {
-            props: {
-              index: menuItem.path,
-              ...(menuItem.subMenuProps || {}),
-            },
-            key: menuItem.path,
-          },
-          [
-            menuItem.icon && renderIcon(menuItem),
-            menuItem.title && renderTitle(menuItem),
-            renderMenu(menuItem.children || []),
-          ]
-        );
-      }
-    };
-
-    const renderMenuHeaderExtraRender = () => {
-      if (this.menuHeaderExtraRender) {
-        return this.menuHeaderExtraRender.call(this, h);
-      }
-      return null;
-    };
-
-    const menuRouteComponent = route ? "router-link" : "span";
-    const renderSider = () => {
-      return h(
-        "div",
-        {
-          class: "layout-global-aside",
-          style: {
-            width: this.width,
-            position: absolute ? "absolute" : "fixed",
-          },
-        },
-        [
-          (logo || title) &&
-            h(
-              "div",
-              {
-                class: "logo-container",
-              },
-              [
-                h(
-                  menuRouteComponent,
-                  {
-                    class: "menu-router-link",
-                    props: {
-                      to: "/",
-                    },
-                  },
-                  [
-                    logo &&
-                      h("img", {
-                        attrs: {
-                          src: logo,
-                        },
-                      }),
-                    title && h("h1", title),
-                  ]
-                ),
-              ]
-            ),
-            this.$slots['side-top'],
-          renderMenuHeaderExtraRender(),
-          h(
-            "el-menu",
-            {
-              props: {
-                mode: "vertical",
-                "unique-opened": true,
-                collapse: collapsed,
-                "default-active": activeRoutePath,
-                "default-openeds": openKeys,
-              },
-              style: {
-                padding: "16px 0",
-                width: "100%",
-              },
-            },
-            renderMenu(menuData)
-          ),
-        ]
-      );
-    };
-
-    const renderSiderPlaceholder = () => {
-      return h("div", {
-        class: "layout-global-aside-placeholder",
-        style: {
-          width: this.width,
-        },
-      });
-    };
-    return h(
-      "div",
-      {
-        class: "layout-global-aside-container",
-      },
-      [renderSiderPlaceholder(), renderSider()]
-    );
   },
 };
 </script>

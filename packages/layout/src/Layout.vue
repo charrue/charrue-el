@@ -12,8 +12,11 @@
       :title-render="titleRender"
       v-bind="$attrs"
     >
-      <template slot="side-top">
-        <slot name="side-top"></slot>
+      <template slot="sidebar-top">
+        <slot name="sidebar-top"></slot>
+      </template>
+      <template slot="sidebar-bottom">
+        <slot name="sidebar-bottom"></slot>
       </template>
     </GlobalAside>
     <div class="layout__main">

@@ -3,16 +3,15 @@
     <layout
       :collapsed.sync="collapsed"
       :data="menuData"
-      :class="theme"
       title="Vue Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
       :menu-title-render="titleRender"
       :menu-header-extra-render="menuHeaderExtraRender"
       :route-params="routeParams"
     >
-      <template slot="side-top">
+      <template slot="sidebar-top">
         <div class="side-top-title">主题切换</div>
-        <el-radio-group class="radio-container" v-model="theme">
+        <el-radio-group class="radio-container" v-model="theme" @change="onThemeChange">
           <el-radio label="normal">normal</el-radio>
           <el-radio label="light">light</el-radio>
           <el-radio label="dark">dark</el-radio>
@@ -52,26 +51,31 @@ export default defineComponent({
       {
         title: "page",
         path: "/page",
+        icon: 'el-icon-document',
         children: [
           {
             path: "page1",
             title: "page1",
+            icon: 'el-icon-document',
             // redirect: "path5",
             redirect: "/page/page1/path5",
             children: [
               {
                 path: "path4",
                 title: "path4",
+                icon: 'el-icon-document'
               },
               {
                 path: "path5",
                 title: "path5",
+                icon: 'el-icon-document'
               },
             ],
           },
           {
             path: "page2",
             title: "page3",
+            icon: 'el-icon-document'
           },
         ],
       },
@@ -87,8 +91,8 @@ export default defineComponent({
       },
     ]);
 
-    const titleRender = (h, { title }) => {
-      return h("span", { slot: "title" }, `* ${title}`);
+    const titleRender = ({ menu }) => {
+      return menu.title + '?'
     };
     const menuHeaderExtraRender = (h) => {
       return h("div", { class: "progress-bar-wrapper" }, [
@@ -106,6 +110,16 @@ export default defineComponent({
     };
 
     const theme = ref("normal");
+    const onThemeChange = (value) => {
+      const cls = Array.from(document.body.classList)
+      const idx = cls.findIndex(t => t.startsWith("theme-"))
+      console.log()
+      if (idx > -1) {
+        cls.splice(idx, 1)
+      }
+      cls.push(`theme-${value}`)
+      document.body.className = cls.join(" ")
+    }
     return {
       collapsed,
       routeParams,
@@ -113,6 +127,7 @@ export default defineComponent({
       titleRender,
       menuHeaderExtraRender,
       theme,
+      onThemeChange
     };
   },
 });
@@ -183,7 +198,7 @@ export default defineComponent({
 }
 </style>
 <style>
-.light {
+.theme-light {
   --layout-aside-content-bg-color: #ebf1f6;
   --layout-aside-active-text-color: #2f9afd;
   --layout-aside-active-bg-color: #f5f8fb;
@@ -191,14 +206,15 @@ export default defineComponent({
 
   --layout-aside-hover-text-color: #2f9afd;
   --layout-aside-hover-bg-color: #f5f8fb;
+
+  --layout-aside-active-submenu-bg-color: #ebf1f6;
 }
-.dark {
+.theme-dark {
   --layout-aside-content-bg-color: #2c3643;
   --layout-aside-active-text-color: #cccccc;
-  --layout-aside-active-bg-color: #2a2d2e;
+  --layout-aside-active-bg-color: #222a34;
   --layout-aside-normal-text-color: #ccbe9c;
 
-  --layout-aside-hover-text-color: #cccccc;
-  --layout-aside-hover-bg-color: #2a2d2e;
+  --layout-aside-active-submenu-bg-color: #2a2d2e;
 }
 </style>
