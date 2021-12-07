@@ -9,7 +9,7 @@
       :logo="logo"
       :title="title"
       :route-params="routeParams"
-      :title-render="titleRender"
+      :authorized="authorized"
       v-bind="$attrs"
     >
       <template slot="sidebar-top">
@@ -72,7 +72,7 @@ export default {
     logo: String,
     title: String,
     routeParams: [Function, Object],
-    titleRender: Function,
+    authorized: Function,
     contentStyle: {
       type: Object,
       default() {

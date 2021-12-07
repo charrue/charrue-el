@@ -5,9 +5,9 @@
       :data="menuData"
       title="Vue Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
-      :menu-title-render="titleRender"
       :menu-header-extra-render="menuHeaderExtraRender"
       :route-params="routeParams"
+      :authorized="authority"
     >
       <template slot="sidebar-top">
         <div class="side-top-title">主题切换</div>
@@ -39,15 +39,9 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "@vue/composition-api";
-export default defineComponent({
-  name: "PageLayout",
-  setup() {
-    const collapsed = ref(false);
-    watch(collapsed, (val) => {
-      console.log(val);
-    });
-    const menuData = ref([
+import { computed, defineComponent, ref, watch } from "@vue/composition-api";
+import { useStore } from '@/hooks/store'
+const TOTAL_MENUS = [
       {
         title: "page",
         path: "/page",
@@ -57,17 +51,16 @@ export default defineComponent({
             path: "page1",
             title: "page1",
             icon: 'el-icon-document',
-            // redirect: "path5",
-            redirect: "/page/page1/path5",
+            redirect: "/page/page1/page5",
             children: [
               {
-                path: "path4",
-                title: "path4",
+                path: "page4",
+                title: "page4",
                 icon: 'el-icon-document'
               },
               {
-                path: "path5",
-                title: "path5",
+                path: "page5",
+                title: "page5",
                 icon: 'el-icon-document'
               },
             ],
@@ -89,11 +82,30 @@ export default defineComponent({
           }
         ]
       },
-    ]);
+    ]
+export default defineComponent({
+  name: "PageLayout",
+  setup() {
+    const store = useStore()
+    const auth = computed(() => store.state.auth)
 
-    const titleRender = ({ menu }) => {
-      return menu.title + '?'
-    };
+    const menuData = ref(TOTAL_MENUS);
+
+    // watch(auth, (val) => {
+    //   if (val == 'user') {
+    //     menuData.value = menuData.value.filter(item => {
+    //       return item.title !== 'page4'
+    //     })
+    //   } else {
+    //     menuData.value = TOTAL_MENUS
+    //   }
+    // })
+
+    const collapsed = ref(false);
+    watch(collapsed, (val) => {
+      console.log(val);
+    });
+
     const menuHeaderExtraRender = (h) => {
       return h("div", { class: "progress-bar-wrapper" }, [
         h("div", { class: "progress-bar" }, [
@@ -113,21 +125,32 @@ export default defineComponent({
     const onThemeChange = (value) => {
       const cls = Array.from(document.body.classList)
       const idx = cls.findIndex(t => t.startsWith("theme-"))
-      console.log()
       if (idx > -1) {
         cls.splice(idx, 1)
       }
       cls.push(`theme-${value}`)
       document.body.className = cls.join(" ")
     }
+
+    const authority = ({ menu } = {}) => {
+      if (!menu) return true
+      if (auth.value == 'user') {
+        return menu.title !== "page4"
+      } else {
+        return true
+      }
+    }
+
+
     return {
       collapsed,
       routeParams,
       menuData,
-      titleRender,
       menuHeaderExtraRender,
       theme,
-      onThemeChange
+      onThemeChange,
+      authority,
+      auth
     };
   },
 });

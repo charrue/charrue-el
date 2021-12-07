@@ -1,7 +1,10 @@
 <template>
   <div class="layout-global-aside-container">
     <div class="layout-global-aside-placeholder" :style="{ width }"></div>
-    <div class="layout-global-aside global-aside-el-menu" :style="{ width, position: absolute ? 'absolute' : 'fixed', }">
+    <div
+      class="layout-global-aside global-aside-el-menu"
+      :style="{ width, position: absolute ? 'absolute' : 'fixed' }"
+    >
       <div v-if="logo || title" class="logo-container">
         <router-link :to="homeUrl" :class="['menu-router-link']">
           <img v-if="logo" :src="logo" alt="logo" />
@@ -15,9 +18,13 @@
         :collapse="collapsed"
         :default-active="activeRoutePath"
         :default-openeds="openKeys"
-        style="padding: 16px 0; width: 100%;"
+        style="padding: 16px 0; width: 100%"
       >
-        <sidebar-item v-for="(item, index) in computedMenuData" :key="index" :menuItem="item"></sidebar-item>
+        <sidebar-item
+          v-for="item in computedMenuData"
+          :key="item.path"
+          :menuItem="item"
+        ></sidebar-item>
       </el-menu>
       <slot name="sidebar-bottom"></slot>
     </div>
@@ -28,13 +35,13 @@ import {
   urlToList,
   menuDataFormatter,
   getMenuDataPathMapping,
-  isFunction
+  isFunction,
 } from "./utils";
-import SidebarItem from './SidebarItem.vue'
+import SidebarItem from "./SidebarItem.vue";
 export default {
   name: "GlobalAside",
   components: {
-    SidebarItem
+    SidebarItem,
   },
   props: {
     /**
@@ -79,7 +86,7 @@ export default {
      * 控制导航菜单的展示
      * ({ menu, index, deep, path, parent }) => AsideMenuData[]
      */
-    Authorized: Function,
+    authorized: Function,
     /**
      * 导航菜单图标的图标前缀
      */
@@ -103,11 +110,6 @@ export default {
      */
     routeParams: [Function, Object],
     /**
-     * 自定义导航菜单文字渲染
-     * ()
-     */
-    menuTitleRender: Function,
-    /**
      * 导航菜单折叠，展开时的宽度
      */
     asideWidths: {
@@ -118,8 +120,8 @@ export default {
     },
     homeUrl: {
       type: String,
-      default: "/"
-    }
+      default: "/",
+    },
   },
   data() {
     return {
@@ -140,58 +142,81 @@ export default {
       return this.collapsed ? this._asideWidths[0] : this._asideWidths[1];
     },
     computedMenuData() {
-      const menuData = []
+      const menuData = [];
       this.menuData.forEach((menu, index) => {
-        const formattedMenu = this.formatMenuData({  menu, index, deep: 0, path: menu.path, parent: null });
+        const formattedMenu = this.formatMenuData({
+          menu,
+          index,
+          deep: 0,
+          path: menu.path,
+          parent: null,
+        });
         if (formattedMenu) {
-          menuData.push(formattedMenu)
+          menuData.push(formattedMenu);
         }
-      })
+      });
 
       return menuData;
     },
   },
   watch: {
     data: {
-      handler(val) {
-        const _menuData = val
-          .filter((t) => t.title && !t.hide)
-          .map((t) => {
-            if (this.Authorized && this.Authorized(t.authority, t)) {
-              return t;
-            }
-            return t;
-          })
-          .filter((t) => !!t);
-
-        this.menuData = menuDataFormatter(_menuData);
-        this.menuDataPathMapping = getMenuDataPathMapping(this.menuData);
+      handler() {
+        this.filterAsideMenuData();
       },
       immediate: true,
       deep: true,
     },
   },
   methods: {
+    filterAsideMenuData() {
+      const _menuData = this.data
+        .filter((t) => t.title && !t.hide)
+        .map((t) => {
+          if (this.authorized && this.authorized(t.authority, t)) {
+            return t;
+          }
+          return t;
+        })
+        .filter((t) => !!t);
+
+      this.menuData = menuDataFormatter(_menuData);
+      this.menuDataPathMapping = getMenuDataPathMapping(this.menuData);
+    },
     /**
      * @private
      * 对菜单数据进行格式化
      */
-    formatMenuData({ menu, deep, index, path, parent } = {}) {
-        if (isFunction(this.Authorized) && !this.Authorized({ menu, deep, index, path, parent })) return false
+    _formatMenuData({ menu, deep, index, path, parent } = {}) {
+      let menuCopy = menu ? { ...menu } : {};
+      if (!this.authorized) return menuCopy;
+      if (
+        isFunction(this.authorized) &&
+        !this.authorized({ menu: menuCopy, deep, index, path, parent })
+      ) {
+        return false;
+      }
 
-        if (menu.title && isFunction(this.menuTitleRender)) {
-          menu.title = this.menuTitleRender({ menu, deep, index, path, parent })
-        }
-
-          menu.children = menu.children || []
-        if (Array.isArray(menu.children) && menu.children.length > 0) {
-          menu.children = menu.children.filter(child => {
-            const currentPath = path.startsWith('/') ? child.path : `${path}/${child.path}`;
-            return this.formatMenuData({ menu: child, deep: deep + 1, index, path: currentPath, parent: menu })
+      menuCopy.children = menuCopy.children || [];
+      if (Array.isArray(menuCopy.children) && menuCopy.children.length > 0) {
+        menuCopy.children = menuCopy.children
+          .map((child) => {
+            const currentPath = path.startsWith("/")
+              ? child.path
+              : `${path}/${child.path}`;
+            return this._formatMenuData({
+              menu: child,
+              deep: deep + 1,
+              index,
+              path: currentPath,
+              parent: menuCopy,
+            });
           })
-        }
-        return menu
-    }
+          .filter((t) => t);
+      }
+
+      return menuCopy;
+    },
   },
   created() {
     if (this.route) {
@@ -213,6 +238,37 @@ export default {
           immediate: true,
         }
       );
+    }
+
+    this.formatMenuData = function({ menu, deep, index, path, parent } = {}) {
+      let menuCopy = menu ? { ...menu } : {};
+      if (!this.authorized) return menuCopy;
+      if (
+        isFunction(this.authorized) &&
+        !this.authorized({ menu: menuCopy, deep, index, path, parent })
+      ) {
+        return false;
+      }
+
+      menuCopy.children = menuCopy.children || [];
+      if (Array.isArray(menuCopy.children) && menuCopy.children.length > 0) {
+        menuCopy.children = menuCopy.children
+          .map((child) => {
+            const currentPath = path.startsWith("/")
+              ? child.path
+              : `${path}/${child.path}`;
+            return this.formatMenuData({
+              menu: child,
+              deep: deep + 1,
+              index,
+              path: currentPath,
+              parent: menuCopy,
+            });
+          })
+          .filter((t) => t);
+      }
+
+      return menuCopy;
     }
   },
 };

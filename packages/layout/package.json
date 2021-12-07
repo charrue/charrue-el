@@ -1,6 +1,6 @@
 {
   "name": "@charrue/layout",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
   "author": "ckangwen <2437037469@qq.com>",
   "homepage": "https://github.com/charrue/pro-components/blob/master/packages/layout/README.md",

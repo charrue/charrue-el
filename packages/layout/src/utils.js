@@ -19,7 +19,7 @@ export function urlToList(url) {
  * @param { RegisterMenuData } data
  * @returns { RegisterMenuData }
  */
-export function menuDataFormatter(data, parentPath = "", parentAuthority) {
+export function menuDataFormatter(data, parentPath = "") {
   return data.map((item) => {
     let { path, redirect } = item;
     if (path && !isUrl(path)) {
@@ -40,14 +40,11 @@ export function menuDataFormatter(data, parentPath = "", parentAuthority) {
       ...item,
       path,
       redirect,
-      // 权限默认继承自父级
-      authority: item.authority || parentAuthority,
     };
     if (item.children) {
       result.children = menuDataFormatter(
         item.children,
         `${parentPath}/${item.path}`,
-        item.authority
       );
     }
     return result;

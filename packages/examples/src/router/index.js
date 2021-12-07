@@ -20,13 +20,13 @@ const routes = [
         component: () => import("@/views/page/page-container.vue"),
         children: [
           {
-            path: "path4",
-            name: "path4",
+            path: "page4",
+            name: "page4",
             component: () => import("@/views/page/page4.vue"),
           },
           {
-            path: "path5",
-            name: "path5",
+            path: "page5",
+            name: "page5",
             component: () => import("@/views/page/page5.vue"),
           },
         ],
