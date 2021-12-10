@@ -13,6 +13,7 @@
         :element-loading-background="
           loadingOptions && loadingOptions.background
         "
+        @selection-change="onSelectionChange"
         v-bind="tableProps"
         v-on="events"
       >
@@ -88,10 +89,10 @@
       >
         <el-pagination
           v-bind="typeof pagination === 'boolean' ? {} : pagination"
-          :current-page="currentPage"
+          :current-page="page"
           @update:current-page="onCurrentPageChange"
           :total="computedTotal"
-          :page-size="pageSize"
+          :page-size="size"
           @size-change="handlePaginationSizeChange"
           @current-change="handlePaginationCurrentChange"
           @prev-click="handlePaginationPrevClick"
@@ -104,10 +105,11 @@
   </div>
 </template>
 <script>
-import MutliColumn from "./MutliColumn.jsx";
+import MutliColumn from "./mutli-column.vue";
 import cloneDeep from "lodash.clonedeep";
 
 export default {
+  name: 'SchemaTable',
   components: {
     MutliColumn,
   },
@@ -124,6 +126,8 @@ export default {
     tableProps: Object,
     /* 如果是boolean，表示启用多选模式，如果是一个对象，表示多选列的props */
     selection: [Boolean, Object],
+    /** 分页多选时，是否把非当前页选中的数据记录下来 */
+    shouldCacheSelection: Boolean,
     /* 如果是boolean，表示启用详细模式，如果是一个数组，表示详细区域需要展示的列 */
     expand: [Array, Boolean],
     /* 表格是否在加载中 */
@@ -163,50 +167,122 @@ export default {
       default: true,
     },
     pagination: [Boolean, Object],
-    currentPage: Number,
+    page: Number,
     total: [Number, String],
-    pageSize: Number,
+    size: Number,
   },
   data() {
     return {
       events: {},
+      prevPage: 0,
+      prevSize: 0,
+      startSelect: false,
+      selectionData: {}
     };
   },
   computed: {
     tableData() {
-      return cloneDeep(this.data);
+      if (this.shouldCacheSelection) {
+        return this.data.map((item, index) => {
+          return {
+            ...item,
+            __key: (this.page - 1) * this.size + index + 1,
+          };
+        });
+      } else {
+        return cloneDeep(this.data);
+      }
+    },
+    computedIndex() {
+      // 如果分页了，则索引序号从`size`开始计数
+      if (this.index === true) {
+        return (index) => this.size * (this.page - 1) + index + 1;
+      }
+      return this.index;
+    },
+    computedTotal() {
+      return Number(this.total);
     },
   },
   methods: {
     /**
      * @private 派发 el-pagination 的 size-change 事件
      */
-    handlePaginationSizeChange(pageSize) {
-      this.$emit("pagination-size-change", pageSize);
+    handlePaginationSizeChange(size) {
+      // 记录上一次的分页条数
+      this.prevSize = this.size;
+      this.cachedSelectionData = Object.values(this.selectionData).reduce((acc, cur) => {
+        acc = acc.concat(cur)
+        return acc
+      }, []);
+
+      console.log(this.cachedSelectionData)
+
+      this.$emit("size-change", size);
+      this.setCurrentPageRowSelection();
     },
     /**
      * @private
      */
-    handlePaginationCurrentChange(currentPage) {
-      this.$emit("pagination-current-change", currentPage);
+    handlePaginationCurrentChange(page) {
+      // 记录上一次的页码数
+      this.prevPage = this.page;
+      this.cachedSelectionData = Object.values(this.selectionData).reduce((acc, cur) => {
+        acc = acc.concat(cur)
+        return acc
+      }, []);
+      console.log(this.cachedSelectionData)
+
+      this.$emit("page-change", page);
+      this.setCurrentPageRowSelection();
     },
     /**
      * @private
      */
-    handlePaginationPrevClick(currentPage) {
-      this.$emit("pagination-prev-click", currentPage);
+    handlePaginationPrevClick(page) {
+      this.$emit("prev-click", page);
     },
     /**
      * @private
      */
-    handlePaginationNextClick(currentPage) {
-      this.$emit("pagination-next-click", currentPage);
+    handlePaginationNextClick(page) {
+      this.$emit("next-click", page);
     },
     /**
      * @private
      */
     onCurrentPageChange(value) {
-      this.$emit("update:currentPage", value);
+      this.$emit("update:page", value);
+    },
+    /**
+     * @private
+     */
+    onSelectionChange(value) {
+      if (this.shouldCacheSelection) {
+        this.selectionData[this.page] = value;
+
+        // // this.prevCachedSelectionData = value;
+        // this.cachedSelectionData = uniqBy(
+        //   value.concat(this.prevCachedSelectionData),
+        //   "__key"
+        // );
+
+        // this.$emit("total-selection-change", this.cachedSelectionData);
+      }
+      this.$emit("selection-change", value);
+    },
+
+    setCurrentPageRowSelection() {
+      this.$nextTick(() => {
+        this.tableData.forEach((row) => {
+          const index = this.cachedSelectionData.findIndex(
+            (t) => t.__key === row.__key
+          );
+          if (index !== -1) {
+            this.$refs.elTableRef.toggleRowSelection(row, true);
+          }
+        });
+      });
     },
 
     /**
@@ -216,7 +292,6 @@ export default {
       const elTableEvents = [
         "select",
         "select-all",
-        "selection-change",
         "cell-mouse-enter",
         "cell-mouse-leave",
         "cell-click",
@@ -262,6 +337,11 @@ export default {
   created() {
     this.proxyElTableMethods();
     this.proxyElTableEvents();
+    this.prevSize = this.size;
+    this.prevPage = this.page;
+    this.cachedSelectionData = [];
+    // 用于记录当前页之前的勾选总数据，不需要进行响应式转化
+    this.prevCachedSelectionData = [];
   },
 };
 </script>

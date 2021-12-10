@@ -1,11 +1,11 @@
 {
   "name": "@charrue/schema-table",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "author": "ckangwen",
   "homepage": "https://github.com/charrue/pro-components/blob/master/packages/schema-table/README.md",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "unpkg": "dist/umd/index.js",
   "typings": "typings/index.d.ts",
   "files": [
@@ -16,7 +16,7 @@
   "scripts": {
     "build": "cd .. && npm run build:style schema-table && npm run build:component schema-table"
   },
-  "devDependencies": {
+  "dependencies": {
     "lodash.clonedeep": "^4.5.0"
   }
 }
