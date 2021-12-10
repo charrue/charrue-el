@@ -132,10 +132,11 @@ $default-active-submenu-bg-color: #000c17;
 }
 
 .layout-main-container {
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - 50px);
   width: 100%;
   position: relative;
-  overflow: hidden;
+  margin-top: 50px;
+  overflow: auto;
   box-sizing: border-box;
 
   .layout-main__header {

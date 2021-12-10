@@ -1,5 +1,5 @@
 <template>
-  <div :class="className">
+  <div :class="className" :style="style">
     <slot name="header-trigger">
       <Hamburger
         :is-active="opened"
@@ -37,7 +37,7 @@ export default {
   computed: {
     style() {
       return {
-        width: `calc(100% - ${this.opened ? "54px" : "200px"})`,
+        width: `calc(100% - ${!this.opened ? "54px" : "200px"})`,
       };
     },
     className() {
