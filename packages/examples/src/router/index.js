@@ -53,7 +53,19 @@ const routes = [
         component: () => import("@/views/schema-table/basic.vue")
       }
     ]
-  }
+  },
+  {
+    path: "/schema-form",
+    name: "schema-form",
+    component: PageLayout,
+    children: [
+      {
+        path: "basic",
+        name: 'schema-form-basic',
+        component: () => import("@/views/schema-form/index.vue")
+      }
+    ]
+  },
 ];
 
 const router = new VueRouter({

@@ -9,11 +9,13 @@ import "element-ui/lib/theme-chalk/index.css";
 import Layout from "@charrue/layout";
 import "@charrue/layout/src/styles/index.scss";
 import SchemaTable from '@charrue/schema-table'
+import SchemaForm from '@charrue/schema-form'
 
 Vue.use(CompositionApi);
 Vue.use(ElementUI);
 Vue.use(Layout);
 Vue.component('schema-table', SchemaTable)
+Vue.component('schema-form', SchemaForm)
 
 Vue.config.productionTip = false;
 

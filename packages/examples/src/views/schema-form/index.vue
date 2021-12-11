@@ -26,6 +26,7 @@
     <div class="content">
       <schema-form
         class="form-content"
+        ref="schemaFormRef"
         :schema="schema"
         v-model="formData"
         v-bind="schemaFormProps"
@@ -92,10 +93,8 @@ export default {
       switch (val) {
         case "formProps": {
           this.$set(this, "schemaFormProps", {
-            formProps: {
-              labelPosition: "left",
-              labelWidth: "100px",
-            },
+            labelPosition: "left",
+            labelWidth: "100px",
           });
           this.$set(this, "schema", basic);
           break;

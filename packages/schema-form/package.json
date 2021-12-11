@@ -1,0 +1,27 @@
+{
+  "name": "@charrue/schema-form",
+  "version": "0.0.1",
+  "description": "",
+  "author": "ckangwen",
+  "homepage": "https://github.com/charrue/pro-components/blob/master/packages/schema-form/README.md",
+  "license": "MIT",
+  "main": "src/index.js",
+  "unpkg": "dist/umd/index.js",
+  "typings": "typings/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "typings"
+  ],
+  "scripts": {
+    "build": "cd .. && npm run build:style schema-form && npm run build:component schema-form"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.7",
+    "lodash.clonedeep": "^4.5.0"
+  },
+  "devDependencies": {
+    "element-ui": "^2.15.3",
+    "vue": "^2.6.11"
+  }
+}

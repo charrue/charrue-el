@@ -82,6 +82,16 @@ const TOTAL_MENUS = [
           }
         ]
       },
+      {
+        title: "schema-form",
+        path: "/schema-form",
+        children: [
+          {
+            path: 'basic',
+            title: 'basic'
+          }
+        ]
+      },
     ]
 export default defineComponent({
   name: "PageLayout",
