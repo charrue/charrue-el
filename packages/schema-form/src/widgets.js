@@ -1,4 +1,4 @@
-import Select from "./widgets/select/index";
+import Select from "./widgets/select/index.vue";
 import Checkbox from "./widgets/checkbox/checkbox.vue";
 import CheckboxButton from "./widgets/checkbox/button.vue";
 import Radio from "./widgets/radio/radio.vue";

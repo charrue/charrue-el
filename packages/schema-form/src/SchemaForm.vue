@@ -41,7 +41,7 @@
 </template>
 <script>
 import cloneDeep from "lodash.clonedeep";
-import SchemaField from "./SchemaField";
+import SchemaField from "./SchemaField.vue";
 import { defaultReadonlyWidgets } from "./widgets";
 import { registerWidget } from "./register";
 
