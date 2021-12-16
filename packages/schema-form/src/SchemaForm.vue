@@ -5,12 +5,13 @@
     :rules="rules"
     :label-width="labelWidth"
     :label-position="labelPosition"
+    :size="size"
     v-bind="formProps"
     ref="elFormRef"
     :disabled="disabled"
   >
-    <template v-if="layout">
-      <el-row v-bind="gridProps">
+    <template v-if="col ? true : layout">
+      <el-row :gutter="gutter" :justify="justify" :align="align">
         <schema-field
           v-for="item in computedFields"
           :key="item.property"
@@ -82,18 +83,19 @@ export default {
     rules: Object,
     labelWidth: [String, Number],
     labelPosition: String,
+    size: String,
     formProps: {
       type: Object,
       default() {
         return {};
       },
     },
-    gridProps: {
-      type: Object,
-      default() {
-        return {};
-      },
+    gutter: Number,
+    justify: {
+      type: String,
+      default: "start",
     },
+    align: String,
     layout: Boolean,
     /**
      * 针对于响应式设计，进行的预设

@@ -19,7 +19,7 @@
         <slot name="sidebar-bottom"></slot>
       </template>
     </GlobalAside>
-    <div class="layout__main">
+    <div class="layout__main" :style="{ width: `calc(100% - ${opened ? '54px' : '200px'})` }">
       <GlobalHeader :opened.sync="opened" :fixed="fixedHeader">
         <template slot="header-trigger">
           <slot name="header-trigger"></slot>

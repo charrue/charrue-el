@@ -71,7 +71,6 @@
               <slot name="extraColumnHeader" :scope="scope" />
             </template>
             <span v-else>操作</span>
-            <span>操作</span>
           </template>
           <!-- 删除操作 -->
           <template slot-scope="scope">
