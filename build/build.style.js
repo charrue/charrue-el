@@ -38,6 +38,7 @@ const styles = packages
   .map(name => {
     const scssPath = resolve(__dirname, `../packages/${name}/src/styles/index.scss`)
     if (!fs.existsSync(scssPath)) {
+      gulp.task(name, (done) => done())
       return
     }
     const task = done => {
