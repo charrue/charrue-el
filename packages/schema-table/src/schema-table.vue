@@ -230,8 +230,8 @@ export default {
         acc = acc.concat(cur)
         return acc
       }, []);
-      console.log(this.cachedSelectionData)
 
+      this.$emit("update:page", page);
       this.$emit("page-change", page);
       this.setCurrentPageRowSelection();
     },
@@ -250,23 +250,9 @@ export default {
     /**
      * @private
      */
-    onCurrentPageChange(value) {
-      this.$emit("update:page", value);
-    },
-    /**
-     * @private
-     */
     onSelectionChange(value) {
       if (this.shouldCacheSelection) {
         this.selectionData[this.page] = value;
-
-        // // this.prevCachedSelectionData = value;
-        // this.cachedSelectionData = uniqBy(
-        //   value.concat(this.prevCachedSelectionData),
-        //   "__key"
-        // );
-
-        // this.$emit("total-selection-change", this.cachedSelectionData);
       }
       this.$emit("selection-change", value);
     },
