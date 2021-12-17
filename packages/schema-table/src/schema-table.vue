@@ -235,6 +235,9 @@ export default {
       this.$emit("page-change", page);
       this.setCurrentPageRowSelection();
     },
+    onCurrentPageChange(page) {
+      this.$emit("update:page", page);
+    },
     /**
      * @private
      */
