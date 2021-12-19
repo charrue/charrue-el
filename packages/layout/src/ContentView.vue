@@ -25,7 +25,6 @@ export default {
   computed: {
     _contentStyle() {
       return {
-        padding: '20px',
         ...this.contentStyle,
       }
     },
