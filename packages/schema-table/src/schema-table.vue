@@ -27,6 +27,13 @@
         <!-- 表格首列之前显示索引 -->
         <el-table-column v-if="index" type="index" :index="computedIndex" />
 
+        <!-- 行展开 -->
+        <el-table-column v-if="$scopedSlots['expand']" type="expand">
+          <template slot-scope="props">
+              <slot name="expand" :scope="props" />
+          </template>
+        </el-table-column>
+
         <!-- 遍历columns，渲染行数据 -->
         <!-- key使用name,label,index的拼接，不使用index，防止column的个数没有变化，但是值发生变化后，表头不更新 -->
         <el-table-column

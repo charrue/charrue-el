@@ -12,6 +12,11 @@
     @page-change="onPageChange"
     @size-change="onSizeChange"
   >
+    <template v-slot:expand="{ scope }">
+      <div>
+        {{ scope.$index }}
+      </div>
+    </template>
   </schema-table>
 </template>
 <script>
