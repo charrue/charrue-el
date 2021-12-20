@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div style="position: relative;">
     <layout
       :data="menuData"
       :route="false"
+      :fixed-header="false"
       :absolute="true"
       :collapsed.sync="collapsed"
+      :aside-widths="[60, 300]"
     ></layout>
   </div>
 </template>

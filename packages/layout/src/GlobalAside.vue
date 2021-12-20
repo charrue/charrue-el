@@ -115,7 +115,7 @@ export default {
     asideWidths: {
       type: Array,
       default() {
-        return ["54px", "200px"];
+        return [50, 200];
       },
     },
     homeUrl: {
@@ -132,14 +132,8 @@ export default {
     };
   },
   computed: {
-    _asideWidths() {
-      return [
-        this.asideWidths ? this.asideWidths[0] : "54px",
-        this.asideWidths ? this.asideWidths[1] : "200px",
-      ];
-    },
     width() {
-      return this.collapsed ? this._asideWidths[0] : this._asideWidths[1];
+      return this.collapsed ? this.asideWidths[0] + 'px' : this.asideWidths[1] + 'px';
     },
     computedMenuData() {
       const menuData = [];

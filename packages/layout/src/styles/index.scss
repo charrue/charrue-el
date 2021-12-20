@@ -170,7 +170,6 @@ $default-active-submenu-bg-color: #000c17;
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - 54px);
     transition: width 0.28s;
   }
 
@@ -185,15 +184,6 @@ $default-active-submenu-bg-color: #000c17;
       width: 1px;
       background: var(--layout-aside-border-color, transparent);
       z-index: 11;
-    }
-  }
-
-  &.hideSidebar {
-    .fixed-header {
-      width: calc(100% - 54px);
-    }
-    .layout-global-aside {
-      width: 54px;
     }
   }
 }

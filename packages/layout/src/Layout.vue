@@ -1,7 +1,7 @@
 <template>
   <div
     class="layout-container"
-    :class="[opened ? 'openSidebar' : 'hideSidebar']"
+    :class="[collapsed ? 'hideSidebar' : 'openSidebar']"
   >
     <GlobalAside
       :collapsed="!opened"
@@ -10,6 +10,7 @@
       :title="title"
       :route-params="routeParams"
       :authorized="authorized"
+      :asideWidths="asideWidths"
       v-bind="$attrs"
     >
       <template slot="sidebar-top">
@@ -19,8 +20,8 @@
         <slot name="sidebar-bottom"></slot>
       </template>
     </GlobalAside>
-    <div class="layout__main" :style="{ width: `calc(100% - ${collapsed ? '54px' : '200px'})` }">
-      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader">
+    <div class="layout__main" :style="contentWidthStyle">
+      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader" :style="contentWidthStyle">
         <template slot="header-trigger">
           <slot name="header-trigger"></slot>
         </template>
@@ -79,11 +80,24 @@ export default {
         return {};
       },
     },
+    asideWidths: {
+      type: Array,
+      default() {
+        return [54, 200];
+      },
+    },
   },
   data() {
     return {
       opened: false,
     };
+  },
+  computed: {
+    contentWidthStyle() {
+      return {
+        width: `calc(100% - ${this.collapsed ? this.asideWidths[0] : this.asideWidths[1]}px)`,
+      };
+    }
   },
   watch: {
     collapsed: {
