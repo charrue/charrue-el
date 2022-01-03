@@ -24,9 +24,9 @@ npm install @charrue/layout -S
 ```
 
 ## 使用演示
-组件具体的使用可以在仓库的[examples](https://github/charrue/pro-components/tree/master/packages/examples)文件夹下查看，或者访问CodeSandbox上导入该目录后的演示项目。
+组件具体的使用可以在仓库的[examples](https://github/charrue/charrue-el/tree/master/packages/examples)文件夹下查看，或者访问CodeSandbox上导入该目录后的演示项目。
 
-<iframe src="https://codesandbox.io/embed/github/charrue/pro-components/tree/master/packages/examples?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+<iframe src="https://codesandbox.io/embed/github/charrue/charrue-el/tree/master/packages/examples?fontsize=14&hidenavigation=1&theme=dark&view=preview"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="@charrue/examples"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"

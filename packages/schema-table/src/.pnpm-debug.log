@@ -6,7 +6,7 @@
   },
   "1 debug pnpm:package-manifest": {
     "initial": {
-      "name": "pro-components",
+      "name": "charrue-el",
       "version": "1.0.0",
       "main": "index.js",
       "author": "曹康文",
@@ -62,7 +62,7 @@
   },
   "2 debug pnpm:package-manifest": {
     "initial": {
-      "name": "pro-components-docs",
+      "name": "charrue-el-docs",
       "version": "0.0.1",
       "private": true,
       "main": "index.js",
@@ -134,7 +134,7 @@
       "version": "0.0.6",
       "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
       "author": "ckangwen <2437037469@qq.com>",
-      "homepage": "https://github.com/charrue/pro-components/blob/master/packages/layout/README.md",
+      "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout/README.md",
       "license": "MIT",
       "main": "dist/index.js",
       "unpkg": "dist/umd/index.js",
@@ -156,7 +156,7 @@
       "version": "0.0.1",
       "description": "",
       "author": "ckangwen",
-      "homepage": "https://github.com/charrue/pro-components/blob/master/packages/schema-table/README.md",
+      "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/schema-table/README.md",
       "license": "MIT",
       "main": "src/index.js",
       "unpkg": "dist/umd/index.js",

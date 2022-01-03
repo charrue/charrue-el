@@ -21,9 +21,9 @@ const Scripts = [
 ]
 
 module.exports = {
-  base: "/pro-components/",
-  title: "pro-components",
-  description: "pro-components",
+  base: "/charrue-el/",
+  title: "charrue-el",
+  description: "charrue-el",
   theme: "antdocs",
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
@@ -57,8 +57,8 @@ module.exports = {
     logo: "/logo.png",
     smoothScroll: true, //平滑滚动
     sidebarDepth: 1,
-    repo: "charrue/pro-components",
-    docsRepo: "charrue/pro-components",
+    repo: "charrue/charrue-el",
+    docsRepo: "charrue/charrue-el",
     docsBranch: "master",
     editLinks: true,
     editLinkText: "帮助我改善这个页面",
@@ -77,7 +77,7 @@ module.exports = {
       },
       {
         text: "案例",
-        link: "https://codesandbox.io/s/github/charrue/pro-components/tree/master/packages/examples",
+        link: "https://codesandbox.io/s/github/charrue/charrue-el/tree/master/packages/examples",
       },
       {
         text: "联系",
