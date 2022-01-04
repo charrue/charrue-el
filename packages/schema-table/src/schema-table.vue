@@ -25,19 +25,21 @@
         />
 
         <!-- 表格首列之前显示索引 -->
-        <el-table-column v-if="index" type="index" :index="computedIndex">
-          <template v-if="indexHeader" slot="header">
-            <span>{{ indexHeader }}</span>
+        <el-table-column v-if="index" type="index" :index="computedIndex" v-bind="indexProps">
+          <template slot="header">
+            <span v-if="indexHeader">{{ indexHeader }}</span>
+            <slot v-if="!indexHeader && $slots['index-header']" name="index-header"></slot>
           </template>
         </el-table-column>
 
         <!-- 行展开 -->
-        <el-table-column v-if="$scopedSlots['expand']" type="expand">
-          <template v-if="expandHeader" slot="header">
-            <span>{{ expandHeader }}</span>
+        <el-table-column v-if="$scopedSlots['expand']" type="expand" v-bind="expandProps">
+          <template slot="header">
+            <span v-if="expandHeader">{{ expandHeader }}</span>
+            <slot v-if="!expandHeader && $slots['extra-header']" name="extra-header"></slot>
           </template>
           <template slot-scope="props">
-              <slot name="expand" :scope="props" />
+            <slot name="expand" :scope="props" />
           </template>
         </el-table-column>
 
@@ -189,11 +191,23 @@ export default {
     indexHeader: {
       type: String,
     },
+    indexProps: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
     /**
      * 扩展列表头
      */
     expandHeader: {
       type: String,
+    },
+    expandProps: {
+      type: Object,
+      default() {
+        return {}
+      }
     },
   },
   data() {
@@ -356,6 +370,7 @@ export default {
     this.cachedSelectionData = [];
     // 用于记录当前页之前的勾选总数据，不需要进行响应式转化
     this.prevCachedSelectionData = [];
+    console.log(this)
   },
 };
 </script>

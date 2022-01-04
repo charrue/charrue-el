@@ -12,8 +12,11 @@
     @page-change="onPageChange"
     @size-change="onSizeChange"
     index-header="序号"
-    expand-header="Expand"
+    :expand-props="{ width: '150px' }"
   >
+  <template slot="extra-header">
+    <span>Expand</span>
+  </template>
     <template v-slot:expand="{ scope }">
       <div>
         {{ scope.$index }}
