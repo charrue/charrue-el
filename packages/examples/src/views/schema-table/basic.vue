@@ -11,6 +11,8 @@
     :total="total"
     @page-change="onPageChange"
     @size-change="onSizeChange"
+    index-header="序号"
+    expand-header="Expand"
   >
     <template v-slot:expand="{ scope }">
       <div>

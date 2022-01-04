@@ -33,6 +33,9 @@
 
         <!-- 行展开 -->
         <el-table-column v-if="$scopedSlots['expand']" type="expand">
+          <template v-if="expandHeader" slot="header">
+            <span>{{ expandHeader }}</span>
+          </template>
           <template slot-scope="props">
               <slot name="expand" :scope="props" />
           </template>
@@ -180,7 +183,16 @@ export default {
     page: Number,
     total: [Number, String],
     size: Number,
+    /**
+     * 索引列表头
+     */
     indexHeader: {
+      type: String,
+    },
+    /**
+     * 扩展列表头
+     */
+    expandHeader: {
       type: String,
     },
   },
