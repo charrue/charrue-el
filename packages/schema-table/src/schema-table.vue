@@ -25,7 +25,11 @@
         />
 
         <!-- 表格首列之前显示索引 -->
-        <el-table-column v-if="index" type="index" :index="computedIndex" />
+        <el-table-column v-if="index" type="index" :index="computedIndex">
+          <template v-if="indexHeader" slot="header">
+            <span>{{ indexHeader }}</span>
+          </template>
+        </el-table-column>
 
         <!-- 行展开 -->
         <el-table-column v-if="$scopedSlots['expand']" type="expand">
@@ -176,6 +180,9 @@ export default {
     page: Number,
     total: [Number, String],
     size: Number,
+    indexHeader: {
+      type: String,
+    },
   },
   data() {
     return {
