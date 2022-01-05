@@ -255,8 +255,6 @@ export default {
         return acc
       }, []);
 
-      console.log(this.cachedSelectionData)
-
       this.$emit("size-change", size);
       this.setCurrentPageRowSelection();
     },
@@ -370,7 +368,6 @@ export default {
     this.cachedSelectionData = [];
     // 用于记录当前页之前的勾选总数据，不需要进行响应式转化
     this.prevCachedSelectionData = [];
-    console.log(this)
   },
 };
 </script>
