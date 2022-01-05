@@ -1,6 +1,6 @@
 {
-  "name": "@charrue/layout",
-  "version": "0.0.10",
+  "name": "@charrue/layout-next",
+  "version": "0.0.11",
   "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
   "author": "ckangwen <2437037469@qq.com>",
   "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout/README.md",

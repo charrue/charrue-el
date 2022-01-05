@@ -11,8 +11,9 @@
           <h1 v-if="title">{{ title }}</h1>
         </router-link>
       </div>
-      <slot name="sidebar-top"></slot>
+      <slot name="aside-top"></slot>
       <el-menu
+        class="vvvv"
         mode="vertical"
         unique-opened
         :collapse="collapsed"
@@ -26,7 +27,7 @@
           :menuItem="item"
         ></sidebar-item>
       </el-menu>
-      <slot name="sidebar-bottom"></slot>
+      <slot name="aside-bottom"></slot>
     </div>
   </div>
 </template>
@@ -213,6 +214,7 @@ export default {
     },
   },
   created() {
+    console.log(this.$slots)
     if (this.route) {
       this.$watch(
         "$route.path",

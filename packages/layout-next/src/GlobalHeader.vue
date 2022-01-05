@@ -1,13 +1,10 @@
 <template>
-  <div :class="{
-    'layout-global-header': true,
-    'fixed-header': fixed
-  }">
+  <div :class="className">
     <slot name="header-trigger">
       <Hamburger
         :is-active="opened"
         class="hamburger-container"
-        @toggleClick="toggleSideBar"
+        @toggle-click="toggleSideBar"
       />
     </slot>
     <div class="global-header-content">
@@ -37,14 +34,18 @@ export default {
       default: true,
     },
   },
-  emits: ["update:opened"],
-  setup(props, { emit }) {
-    const toggleSideBar = () => {
-      emit("update:opened", !props.opened);
-    }
-    return {
-      toggleSideBar
-    }
+  computed: {
+    className() {
+      return {
+        "layout-global-header": true,
+        "fixed-header": this.fixed,
+      };
+    },
+  },
+  methods: {
+    toggleSideBar() {
+      this.$emit("update:opened", !this.opened);
+    },
   },
 };
 </script>

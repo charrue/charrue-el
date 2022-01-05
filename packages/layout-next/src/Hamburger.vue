@@ -24,14 +24,10 @@ export default {
       default: false,
     },
   },
-  emits: ["toggleClick"],
-  setup(props, { emit }) {
-    const toggleClick = () => {
-      emit("toggleClick")
-    }
-    return {
-      toggleClick
-    }
+  methods: {
+    toggleClick() {
+      this.$emit("toggleClick", this.isActive)
+    },
   },
 }
 </script>

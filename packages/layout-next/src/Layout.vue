@@ -13,30 +13,30 @@
       :asideWidths="asideWidths"
       v-bind="$attrs"
     >
-      <template slot="sidebar-top">
-        <slot name="sidebar-top"></slot>
+      <template #aside-top>
+        <slot name="aside-top"></slot>
       </template>
-      <template slot="sidebar-bottom">
-        <slot name="sidebar-bottom"></slot>
+      <template #aside-bottom>
+        <slot name="aside-bottom"></slot>
       </template>
     </GlobalAside>
     <div class="layout__main" :style="contentWidthStyle">
-      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader" :style="contentWidthStyle">
-        <template slot="header-trigger">
+      <GlobalHeader v-model:opened="opened" :fixed="fixedHeader" :style="contentWidthStyle">
+        <template #header-trigger>
           <slot name="header-trigger"></slot>
         </template>
-        <template slot="header-left">
+        <template #header-left>
           <slot name="header-left"></slot>
         </template>
-        <template slot="header-right">
+        <template #header-right>
           <slot name="header-right"></slot>
         </template>
       </GlobalHeader>
       <ContentView :content-style="contentStyle">
-        <template slot="header">
+        <template #header>
           <slot name="content-header"></slot>
         </template>
-        <template slot="content">
+        <template #content>
           <slot></slot>
         </template>
       </ContentView>

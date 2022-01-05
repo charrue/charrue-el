@@ -1,11 +1,11 @@
 <template>
   <div class="global-aside-el-menu">
-    <el-submenu
+    <el-sub-menu
       v-if="menuItem.children && menuItem.children.length > 0"
       :index="menuItem.path"
       popper-append-to-body
     >
-      <template slot="title">
+      <template #title>
         <div :class="['submenu-title', menuItem.icon ? 'submenu-title-with-icon' : '']">
           <i :class="['aside-menu-icon', prefixIconClass, menuItem.icon]"></i>
           <span :class="[menuTextClass, 'common-menu-text']">{{ menuItem.title }}</span>
@@ -18,11 +18,11 @@
         :is-nest="true"
         :menuItem="child"
       />
-    </el-submenu>
+    </el-sub-menu>
     <template v-else>
       <router-link :to="menuItem.path" class="menu-router-link">
         <el-menu-item :index="menuItem.path">
-          <template slot="title">
+          <template #title>
             <div :class="['submenu-title', menuItem.icon ? 'submenu-title-with-icon' : '']">
               <i :class="['aside-menu-icon', prefixIconClass, menuItem.icon]"></i>
               <span :class="[menuTextClass, 'common-menu-text']">{{ menuItem.title }}</span>

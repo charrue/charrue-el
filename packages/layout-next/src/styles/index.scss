@@ -200,7 +200,7 @@ $default-active-submenu-bg-color: #000c17;
     border-right: 0;
 
     &--collapse {
-      .el-submenu__title {
+      .el-sub-menu__title {
         .common-menu-text {
           display: none;
         }
@@ -212,13 +212,13 @@ $default-active-submenu-bg-color: #000c17;
     width: 100%;
     text-align: left;
     @include common-menu-text-color;
-    .aside-menu-icon, .el-submenu__icon-arrow  {
+    .aside-menu-icon, .el-sub-menu__icon-arrow  {
       @include common-menu-text-color;
     }
     &:hover {
       @include hover-menu-text-color;
       @include hover-menu-text-bg;
-      a, .aside-menu-icon, .el-submenu__icon-arrow  {
+      a, .aside-menu-icon, .el-sub-menu__icon-arrow  {
         @include hover-menu-text-color;
         // @include hover-menu-text-bg;
         text-decoration: none;
@@ -233,13 +233,13 @@ $default-active-submenu-bg-color: #000c17;
     &.is-active {
       @include active-menu-text-color;
       @include active-menu-text-bg;
-      a, .aside-menu-icon, .el-submenu__icon-arrow {
+      a, .aside-menu-icon, .el-sub-menu__icon-arrow {
         @include active-menu-text-color;
       }
     }
   }
 
-  .el-submenu {
+  .el-sub-menu {
     &__title {
       text-align: left;
       @include common-menu-text-color;
@@ -250,7 +250,7 @@ $default-active-submenu-bg-color: #000c17;
       &:hover {
         @include hover-menu-text-color;
         @include hover-menu-text-bg;
-        .aside-menu-icon, .el-submenu__icon-arrow {
+        .aside-menu-icon, .el-sub-menu__icon-arrow {
           @include hover-menu-text-color;
         }
       }
@@ -290,7 +290,7 @@ $default-active-submenu-bg-color: #000c17;
     white-space: nowrap;
   }
 
-  .el-menu--collapse .submenu-title-with-icon ~ .el-submenu__icon-arrow {
+  .el-menu--collapse .submenu-title-with-icon ~ .el-sub-menu__icon-arrow {
     display: none;
   }
 }
@@ -298,5 +298,15 @@ $default-active-submenu-bg-color: #000c17;
 .el-popup-parent--hidden {
   .fixed-header {
     padding-right: 15px;
+  }
+}
+
+/* 侧边栏折叠后的菜单栏会有白边 */
+#app ~ div.el-popper.is-pure {
+  border: 0;
+  .el-menu--vertical {
+    .el-menu.el-menu--popup {
+      @include common-menu-text-bg;
+    }
   }
 }

@@ -17,5 +17,6 @@ module.exports = {
   rules: {
     "prettier-vue/prettier": "off",
     "vue/script-setup-uses-vars": "off",
+    "vue/no-v-model-argument": "off",
   },
 };

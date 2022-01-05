@@ -1,29 +1,32 @@
 <template>
-  <div class="home">
+  <div class="example-container" :class="['theme-' + theme]">
     <layout
-      :collapsed.sync="collapsed"
+      v-model:collapsed="collapsed"
       :data="menuData"
-      title="Vue Admin"
+      title="Vue3 Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
-      :menu-header-extra-render="menuHeaderExtraRender"
       :route-params="routeParams"
-      :authorized="authority"
     >
-      <template slot="sidebar-top">
-        <div class="side-top-title">主题切换</div>
-        <el-radio-group class="radio-container" v-model="theme" @change="onThemeChange">
+      <template #aside-top>
+        <div v-show="!collapsed" class="side-top-title">主题切换</div>
+        <el-radio-group
+          v-show="!collapsed"
+          class="radio-container"
+          v-model="theme"
+          @change="onThemeChange"
+        >
           <el-radio label="normal">normal</el-radio>
           <el-radio label="light">light</el-radio>
           <el-radio label="dark">dark</el-radio>
         </el-radio-group>
       </template>
-      <template slot="header-left">
+      <template #header-left>
         <div>LEFT</div>
       </template>
-      <template slot="header-right">
+      <template #header-right>
         <div>RIGHT</div>
       </template>
-      <template slot="content-header">
+      <template #content-header>
         <div style="padding: 20px">
           <el-breadcrumb>
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -39,70 +42,46 @@
 </template>
 
 <script>
-import { computed, defineComponent, ref, watch } from "@vue/composition-api";
-import { useStore } from '@/hooks/store'
+import { defineComponent, ref, watch } from "vue";
 const TOTAL_MENUS = [
+  {
+    title: "page",
+    path: "/page",
+    icon: "el-icon-document",
+    children: [
       {
-        title: "page",
-        path: "/page",
-        icon: 'el-icon-document',
+        path: "page1",
+        title: "page1",
+        icon: "el-icon-document",
+        redirect: "/page/page1/page5",
         children: [
           {
-            path: "page1",
-            title: "page1",
-            icon: 'el-icon-document',
-            redirect: "/page/page1/page5",
-            children: [
-              {
-                path: "page4",
-                title: "page4",
-                icon: 'el-icon-document'
-              },
-              {
-                path: "page5",
-                title: "page5",
-                icon: 'el-icon-document'
-              },
-            ],
+            path: "page4",
+            title: "page4",
+            icon: "el-icon-document",
           },
           {
-            path: "page2",
-            title: "page3",
-            icon: 'el-icon-document'
+            path: "page5",
+            title: "page5",
+            icon: "el-icon-document",
           },
         ],
       },
-    ]
+      {
+        path: "page2",
+        title: "page3",
+        icon: "el-icon-document",
+      },
+    ],
+  },
+];
 export default defineComponent({
   name: "PageLayout",
   setup() {
-    const store = useStore()
-    const auth = computed(() => store.state.auth)
-
     const menuData = ref(TOTAL_MENUS);
 
-    // watch(auth, (val) => {
-    //   if (val == 'user') {
-    //     menuData.value = menuData.value.filter(item => {
-    //       return item.title !== 'page4'
-    //     })
-    //   } else {
-    //     menuData.value = TOTAL_MENUS
-    //   }
-    // })
-
     const collapsed = ref(false);
-    watch(collapsed, (val) => {
-      console.log(val);
-    });
 
-    const menuHeaderExtraRender = (h) => {
-      return h("div", { class: "progress-bar-wrapper" }, [
-        h("div", { class: "progress-bar" }, [
-          h("span", { class: "progress-bar-fill" }),
-        ]),
-      ]);
-    };
     const routeParams = (item) => {
       return {
         query: {
@@ -113,34 +92,21 @@ export default defineComponent({
 
     const theme = ref("normal");
     const onThemeChange = (value) => {
-      const cls = Array.from(document.body.classList)
-      const idx = cls.findIndex(t => t.startsWith("theme-"))
+      const cls = Array.from(document.body.classList);
+      const idx = cls.findIndex((t) => t.startsWith("theme-"));
       if (idx > -1) {
-        cls.splice(idx, 1)
+        cls.splice(idx, 1);
       }
-      cls.push(`theme-${value}`)
-      document.body.className = cls.join(" ")
-    }
-
-    const authority = ({ menu } = {}) => {
-      if (!menu) return true
-      if (auth.value == 'user') {
-        return menu.title !== "page4"
-      } else {
-        return true
-      }
-    }
-
+      cls.push(`theme-${value}`);
+      document.body.className = cls.join(" ");
+    };
 
     return {
       collapsed,
       routeParams,
       menuData,
-      menuHeaderExtraRender,
       theme,
       onThemeChange,
-      authority,
-      auth
     };
   },
 });
@@ -176,15 +142,21 @@ export default defineComponent({
 .radio-container.el-radio-group {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
 
   .el-radio {
+    display: flex;
+    justify-content: center;
     margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .el-radio:last-child {
+    margin-right: 32px;
   }
 }
 .side-top-title {
   margin-bottom: 10px;
-  color: var(--layout-aside-active-text-color,#1cd17a);
+  color: var(--layout-aside-active-text-color, #1cd17a);
 }
 
 @keyframes fill {
