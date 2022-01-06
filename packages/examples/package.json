@@ -12,6 +12,7 @@
     "@charrue/layout": "workspace:*",
     "@charrue/schema-table": "workspace:*",
     "@charrue/schema-form": "workspace:*",
+    "@charrue/basic-ele": "workspace:*",
     "@vue/composition-api": "^1.0.5",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.3",

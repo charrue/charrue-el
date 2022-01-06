@@ -74,6 +74,9 @@ importers:
       rollup-plugin-vue: registry.npmmirror.com/rollup-plugin-vue/4.3.0
       typescript: registry.npmmirror.com/typescript/4.4.4
 
+  packages/basic-element:
+    specifiers: {}
+
   packages/docs:
     specifiers:
       '@babel/compat-data': ^7.9.0
@@ -178,6 +181,7 @@ importers:
 
   packages/examples:
     specifiers:
+      '@charrue/basic-ele': workspace:*
       '@charrue/layout': workspace:*
       '@charrue/schema-form': workspace:*
       '@charrue/schema-table': workspace:*
@@ -197,6 +201,7 @@ importers:
       vue-template-compiler: ^2.6.11
       vuex: ^3.6.2
     dependencies:
+      '@charrue/basic-ele': link:../basic-element
       '@charrue/layout': link:../layout
       '@charrue/schema-form': link:../schema-form
       '@charrue/schema-table': link:../schema-table

@@ -10,12 +10,14 @@ import Layout from "@charrue/layout";
 import "@charrue/layout/src/styles/index.scss";
 import SchemaTable from '@charrue/schema-table'
 import SchemaForm from '@charrue/schema-form'
+import { FormField } from "@charrue/basic-ele"
 
 Vue.use(CompositionApi);
 Vue.use(ElementUI);
 Vue.use(Layout);
 Vue.component('schema-table', SchemaTable)
 Vue.component('schema-form', SchemaForm)
+Vue.component('form-field', FormField)
 
 Vue.config.productionTip = false;
 

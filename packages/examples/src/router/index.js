@@ -66,6 +66,19 @@ const routes = [
       }
     ]
   },
+  {
+    path: "/basic-ele",
+    name: "basic-ele",
+    component: PageLayout,
+    redirect: "/basic-ele/index",
+    children: [
+      {
+        path: "index",
+        name: "basic-ele-index",
+        component: () => import("@/views/basic-ele/index.vue"),
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({

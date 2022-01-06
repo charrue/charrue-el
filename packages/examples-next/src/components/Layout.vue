@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref } from "vue";
 const TOTAL_MENUS = [
   {
     title: "page",

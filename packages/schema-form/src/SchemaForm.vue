@@ -195,11 +195,11 @@ export default {
       this.$emit("input", cloneValue);
       this.$emit("change", cloneValue);
     },
-    async validate() {
+    validate() {
       if (this.$refs.form) {
-        await this.$refs.elFormRef.validate()
+        return this.$refs.elFormRef.validate()
       } else {
-        throw new Error("el-form ref not found")
+        return Promise.reject(new Error("el-form ref not found"))
       }
     },
   },

@@ -5,13 +5,16 @@
       :data="menuData"
       title="Vue Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
-      :menu-header-extra-render="menuHeaderExtraRender"
       :route-params="routeParams"
       :authorized="authority"
     >
       <template slot="sidebar-top">
         <div class="side-top-title">主题切换</div>
-        <el-radio-group class="radio-container" v-model="theme" @change="onThemeChange">
+        <el-radio-group
+          class="radio-container"
+          v-model="theme"
+          @change="onThemeChange"
+        >
           <el-radio label="normal">normal</el-radio>
           <el-radio label="light">light</el-radio>
           <el-radio label="dark">dark</el-radio>
@@ -40,69 +43,56 @@
 
 <script>
 import { computed, defineComponent, ref, watch } from "@vue/composition-api";
-import { useStore } from '@/hooks/store'
+import { useStore } from "@/hooks/store";
 const TOTAL_MENUS = [
+  {
+    title: "page",
+    path: "/page",
+    icon: "el-icon-document",
+    children: [
       {
-        title: "page",
-        path: "/page",
-        icon: 'el-icon-document',
+        path: "page1",
+        title: "page1",
+        icon: "el-icon-document",
+        redirect: "/page/page1/page5",
         children: [
           {
-            path: "page1",
-            title: "page1",
-            icon: 'el-icon-document',
-            redirect: "/page/page1/page5",
-            children: [
-              {
-                path: "page4",
-                title: "page4",
-                icon: 'el-icon-document'
-              },
-              {
-                path: "page5",
-                title: "page5",
-                icon: 'el-icon-document'
-              },
-            ],
+            path: "page4",
+            title: "page4",
+            icon: "el-icon-document",
           },
           {
-            path: "page2",
-            title: "page3",
-            icon: 'el-icon-document'
+            path: "page5",
+            title: "page5",
+            icon: "el-icon-document",
           },
         ],
       },
-    ]
+      {
+        path: "page2",
+        title: "page3",
+        icon: "el-icon-document",
+      },
+    ],
+  },
+  {
+    title: "basic-ele",
+    path: "/basic-ele/index",
+  }
+];
 export default defineComponent({
   name: "PageLayout",
   setup() {
-    const store = useStore()
-    const auth = computed(() => store.state.auth)
+    const store = useStore();
+    const auth = computed(() => store.state.auth);
 
     const menuData = ref(TOTAL_MENUS);
-
-    // watch(auth, (val) => {
-    //   if (val == 'user') {
-    //     menuData.value = menuData.value.filter(item => {
-    //       return item.title !== 'page4'
-    //     })
-    //   } else {
-    //     menuData.value = TOTAL_MENUS
-    //   }
-    // })
 
     const collapsed = ref(false);
     watch(collapsed, (val) => {
       console.log(val);
     });
 
-    const menuHeaderExtraRender = (h) => {
-      return h("div", { class: "progress-bar-wrapper" }, [
-        h("div", { class: "progress-bar" }, [
-          h("span", { class: "progress-bar-fill" }),
-        ]),
-      ]);
-    };
     const routeParams = (item) => {
       return {
         query: {
@@ -113,34 +103,32 @@ export default defineComponent({
 
     const theme = ref("normal");
     const onThemeChange = (value) => {
-      const cls = Array.from(document.body.classList)
-      const idx = cls.findIndex(t => t.startsWith("theme-"))
+      const cls = Array.from(document.body.classList);
+      const idx = cls.findIndex((t) => t.startsWith("theme-"));
       if (idx > -1) {
-        cls.splice(idx, 1)
+        cls.splice(idx, 1);
       }
-      cls.push(`theme-${value}`)
-      document.body.className = cls.join(" ")
-    }
+      cls.push(`theme-${value}`);
+      document.body.className = cls.join(" ");
+    };
 
     const authority = ({ menu } = {}) => {
-      if (!menu) return true
-      if (auth.value == 'user') {
-        return menu.title !== "page4"
+      if (!menu) return true;
+      if (auth.value == "user") {
+        return menu.title !== "page4";
       } else {
-        return true
+        return true;
       }
-    }
-
+    };
 
     return {
       collapsed,
       routeParams,
       menuData,
-      menuHeaderExtraRender,
       theme,
       onThemeChange,
       authority,
-      auth
+      auth,
     };
   },
 });
@@ -184,7 +172,7 @@ export default defineComponent({
 }
 .side-top-title {
   margin-bottom: 10px;
-  color: var(--layout-aside-active-text-color,#1cd17a);
+  color: var(--layout-aside-active-text-color, #1cd17a);
 }
 
 @keyframes fill {
