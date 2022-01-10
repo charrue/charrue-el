@@ -74,6 +74,17 @@ const TOTAL_MENUS = [
       },
     ],
   },
+  {
+    title: "element-ui-plus-extension",
+    path: "/element-ui-plus-extension",
+    icon: "el-icon-document",
+    children: [
+      {
+        title: "form-field",
+        path: "/element-ui-plus-extension/form-field",
+      }
+    ]
+  }
 ];
 export default defineComponent({
   name: "PageLayout",

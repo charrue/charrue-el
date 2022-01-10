@@ -74,9 +74,6 @@ importers:
       rollup-plugin-vue: registry.npmmirror.com/rollup-plugin-vue/4.3.0
       typescript: registry.npmmirror.com/typescript/4.4.4
 
-  packages/basic-element:
-    specifiers: {}
-
   packages/docs:
     specifiers:
       '@babel/compat-data': ^7.9.0
@@ -179,9 +176,15 @@ importers:
       vue-jest: 5.0.0-alpha.10_2418a7e22271732a08f5fd3a92156f35
       vue-tsc: 0.29.8_typescript@4.4.4
 
+  packages/element-ui-extension:
+    specifiers: {}
+
+  packages/element-ui-plus-extension:
+    specifiers: {}
+
   packages/examples:
     specifiers:
-      '@charrue/basic-ele': workspace:*
+      '@charrue/element-ui-extension': workspace:*
       '@charrue/layout': workspace:*
       '@charrue/schema-form': workspace:*
       '@charrue/schema-table': workspace:*
@@ -201,7 +204,7 @@ importers:
       vue-template-compiler: ^2.6.11
       vuex: ^3.6.2
     dependencies:
-      '@charrue/basic-ele': link:../basic-element
+      '@charrue/element-ui-extension': link:../element-ui-extension
       '@charrue/layout': link:../layout
       '@charrue/schema-form': link:../schema-form
       '@charrue/schema-table': link:../schema-table
@@ -224,14 +227,18 @@ importers:
 
   packages/examples-next:
     specifiers:
+      '@charrue/element-ui-plus-extension': workspace:*
       '@charrue/layout-next': workspace:*
       '@vitejs/plugin-vue': ^2.0.0
+      dayjs: ^1.10.7
       element-plus: ^1.3.0-beta.1
       vite: ^2.7.2
       vue: ^3.2.25
       vue-router: '4'
     dependencies:
+      '@charrue/element-ui-plus-extension': link:../element-ui-plus-extension
       '@charrue/layout-next': link:../layout-next
+      dayjs: 1.10.7
       element-plus: 1.3.0-beta.1_vue@3.2.26
       vue: 3.2.26
       vue-router: 4.0.12_vue@3.2.26

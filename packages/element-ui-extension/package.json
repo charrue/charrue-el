@@ -1,0 +1,19 @@
+{
+  "name": "@charrue/element-ui-extension",
+  "version": "0.0.1",
+  "description": "",
+  "author": "ckangwen <2437037469@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charrue/charrue-el.git",
+    "directory": "packages/element-ui-extension"
+  },
+  "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/element-ui-extension/README.md",
+  "license": "MIT",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+  }
+}

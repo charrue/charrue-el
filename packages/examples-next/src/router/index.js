@@ -40,6 +40,16 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/element-ui-plus-extension",
+    component: PageLayout,
+    children: [
+      {
+        path: "form-field",
+        component: () => import("../views/element-ui-plus-extension/form-field.vue"),
+      }
+    ]
+  }
 ]
 
 const router = createRouter({

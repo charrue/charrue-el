@@ -67,15 +67,15 @@ const routes = [
     ]
   },
   {
-    path: "/basic-ele",
-    name: "basic-ele",
+    path: "/element-ui-extension",
+    name: "element-ui-extension",
     component: PageLayout,
-    redirect: "/basic-ele/index",
+    redirect: "/element-ui-extension/index",
     children: [
       {
         path: "index",
-        name: "basic-ele-index",
-        component: () => import("@/views/basic-ele/index.vue"),
+        name: "element-ui-extension-index",
+        component: () => import("@/views/element-ui-extension/index.vue"),
       }
     ]
   }

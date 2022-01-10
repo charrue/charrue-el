@@ -76,8 +76,8 @@ const TOTAL_MENUS = [
     ],
   },
   {
-    title: "basic-ele",
-    path: "/basic-ele/index",
+    title: "element-ui-extension",
+    path: "/element-ui-extension/index",
   }
 ];
 export default defineComponent({

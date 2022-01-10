@@ -1,8 +1,22 @@
 <template>
   <div id="app">
-    <router-view />
+    <el-config-provider :locale="locale">
+      <router-view />
+    </el-config-provider>
   </div>
 </template>
+<script>
+import locale from "element-plus/lib/locale/lang/zh-cn"
+
+export default {
+  name: "App",
+  data() {
+    return {
+      locale
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -49,7 +49,7 @@
 </template>
 <script>
 export default {
-  name: "basic-ele",
+  name: "element-ui-extension",
   data() {
     return {
       formData: {
