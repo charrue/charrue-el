@@ -12,20 +12,6 @@ const createElInputInstance = (options = {}) => {
 }
 
 describe('createElInputTestUtils', () => {
-  it('default', () => {
-    const { wrapper } = createElInputInstance({
-      template: `<el-input v-model="inputValue"></el-input>`,
-      data() {
-        return {
-          inputValue: "Hello World"
-        }
-      }
-    })
-
-    const { expectDefaultValueToBe } = createElInputTestUtils(wrapper)
-    expectDefaultValueToBe("Hello World")
-  })
-
   it('getValue', () => {
     const { wrapper } = createElInputInstance({
       template: `<el-input v-model="inputValue"></el-input>`,
@@ -37,6 +23,23 @@ describe('createElInputTestUtils', () => {
     })
 
     const { getValue } = createElInputTestUtils(wrapper)
+    expect(getValue()).toBe("Hello World")
+  })
+
+
+  it('setValue', () => {
+    const { wrapper } = createElInputInstance({
+      template: `<el-input v-model="inputValue"></el-input>`,
+      data() {
+        return {
+          inputValue: ""
+        }
+      }
+    })
+
+    const { setValue, getValue } = createElInputTestUtils(wrapper)
+    expect(getValue()).toBe("")
+    setValue("Hello World")
     expect(getValue()).toBe("Hello World")
   })
 
@@ -55,20 +58,6 @@ describe('createElInputTestUtils', () => {
     expect(getElInputVm().clearable).toBe(true)
   })
 
-  it('set value', () => {
-    const { wrapper } = createElInputInstance({
-      template: `<el-input v-model="inputValue"></el-input>`,
-      data() {
-        return {
-          inputValue: ""
-        }
-      }
-    })
-
-    const { expectDefaultValueToBe, setValueAndToBe } = createElInputTestUtils(wrapper)
-    expectDefaultValueToBe("")
-    setValueAndToBe("Hello World")
-  })
 
   it('clear', async  () => {
     const { wrapper } = createElInputInstance({
@@ -79,11 +68,14 @@ describe('createElInputTestUtils', () => {
         }
       },
     })
-    const { clear } = createElInputTestUtils(wrapper)
+
+    const { clear, getValue } = createElInputTestUtils(wrapper)
+    expect(getValue()).toBe("Hello World")
     await clear()
+    expect(getValue()).toBe("")
   })
 
-  it('disabled', () => {
+  it('getDisabled', () => {
     const { wrapper } = createElInputInstance({
       template: `<el-input v-model="inputValue" disabled></el-input>`,
       data() {
@@ -92,9 +84,8 @@ describe('createElInputTestUtils', () => {
         }
       },
     })
-    const { expectDisabled } = createElInputTestUtils(wrapper)
-    expectDisabled(true)
+
+    const { getDisabled, } = createElInputTestUtils(wrapper)
+    expect(getDisabled()).toBe(true)
   });
-
-
 });

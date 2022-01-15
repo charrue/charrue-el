@@ -18,46 +18,41 @@ export const createElInputTestUtils = (wrapper: Wrapper<Vue>) => {
     expect(exists).toBe(true)
   }
 
-  // 检查input的值是否与传入的值相等
-  const expectValue = (value: string | number) => expect(nativeInput.value).toBe(value)
   // 监听el-input的事件
   const listen = (eventName: string, cb: () => void) => elInputWrapper.vm.$on(eventName, cb)
 
   return {
-    getValue: () => nativeInput.value,
+    getElInputVm: () => {
+      checkElInput()
+
+      return elInputWrapper.vm as any
+    },
+
+    getValue: () => {
+      checkElInput()
+
+      return nativeInput.value
+    },
     setValue(value: ValueType) {
       checkElInput()
 
       inputWrapper.setValue(value)
     },
-    getElInputVm: () => elInputWrapper.vm as any,
-    expectValue,
-    listen,
-    /**
-     * 检查input的默认值是否与传入的值相等
-     */
-    expectDefaultValueToBe(defaultValue: ValueType) {
+    listen(eventName: string, cb: () => void) {
       checkElInput()
 
-      expectValue(`${defaultValue}`)
-    },
-    /**
-     * 为el-input赋值，检查input的值是否与传入的值相等
-     */
-    setValueAndToBe(value: ValueType) {
-      checkElInput()
-
-      wrapper.find("input").setValue(value)
-      expectValue(`${value}`)
+      listen(eventName, cb)
     },
 
-    expectDisabledToBe(disabled = false) {
+    getDisabled() {
       checkElInput()
 
-      expect(inputWrapper.element.disabled).toBe(disabled)
+      return nativeInput.disabled
     },
 
     async clear() {
+      checkElInput()
+
       const clearMock = jest.fn()
       // 如果值为空，无法触发clear事件
       expect(nativeInput.value).not.toBe("")
@@ -66,16 +61,12 @@ export const createElInputTestUtils = (wrapper: Wrapper<Vue>) => {
       await wrapper.vm.$nextTick()
 
       listen("clear", clearMock)
+
       const clearIconWrapper = wrapper.find<HTMLElement>(".el-input__clear")
       clearIconWrapper.trigger("click");
       await wrapper.vm.$nextTick()
 
       expect(clearMock).toBeCalled()
-      expectValue("")
     },
-
-    expectDisabled(disabled: boolean) {
-      expect(nativeInput.disabled).toBe(disabled)
-    }
   }
 }
