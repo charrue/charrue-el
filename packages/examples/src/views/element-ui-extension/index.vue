@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       formData: {
-        string: "",
+        string: "Hello World",
         number: "",
         date: "",
         week: "",
