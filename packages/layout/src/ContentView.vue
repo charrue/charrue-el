@@ -3,7 +3,7 @@
     <div class="layout-main__header">
       <slot name="header"></slot>
     </div>
-    <div class="layout-main__content" :style="_contentStyle">
+    <div class="layout-main__content" :style="contentStyle">
       <transition name="fade-transform" mode="out-in">
         <slot name="content"></slot>
       </transition>
@@ -20,13 +20,6 @@ export default {
       default() {
         return {}
       },
-    },
-  },
-  computed: {
-    _contentStyle() {
-      return {
-        ...this.contentStyle,
-      }
     },
   },
 };

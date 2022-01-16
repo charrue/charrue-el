@@ -3,7 +3,7 @@
     class="layout-container"
     :class="[collapsed ? 'hideSidebar' : 'openSidebar']"
   >
-    <GlobalAside
+    <global-aside
       :collapsed="!opened"
       :data="data"
       :logo="logo"
@@ -19,9 +19,10 @@
       <template slot="sidebar-bottom">
         <slot name="sidebar-bottom"></slot>
       </template>
-    </GlobalAside>
+    </global-aside>
+
     <div class="layout__main" :style="contentWidthStyle">
-      <GlobalHeader :opened.sync="opened" :fixed="fixedHeader" :style="contentWidthStyle">
+      <global-header :opened.sync="opened" :fixed="fixedHeader" :style="contentWidthStyle">
         <template slot="header-trigger">
           <slot name="header-trigger"></slot>
         </template>
@@ -31,15 +32,16 @@
         <template slot="header-right">
           <slot name="header-right"></slot>
         </template>
-      </GlobalHeader>
-      <ContentView :content-style="contentStyle">
+      </global-header>
+
+      <content-view :content-style="contentStyle">
         <template slot="header">
           <slot name="content-header"></slot>
         </template>
         <template slot="content">
           <slot></slot>
         </template>
-      </ContentView>
+      </content-view>
     </div>
   </div>
 </template>

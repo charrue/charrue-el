@@ -1,12 +1,10 @@
 <template>
-  <div :class="className">
-    <slot name="header-trigger">
-      <Hamburger
-        :is-active="opened"
-        class="hamburger-container"
-        @toggleClick="toggleSideBar"
-      />
-    </slot>
+  <div
+    :class="{
+      'layout-global-header': true,
+      'fixed-header': fixed,
+    }"
+  >
     <div class="global-header-content">
       <div class="global-header-content__left">
         <slot name="header-left"></slot>
@@ -18,12 +16,8 @@
   </div>
 </template>
 <script>
-import Hamburger from "./Hamburger.vue";
 export default {
   name: "GlobalHeader",
-  components: {
-    Hamburger,
-  },
   props: {
     opened: {
       type: Boolean,
@@ -32,14 +26,6 @@ export default {
     fixed: {
       type: Boolean,
       default: true,
-    },
-  },
-  computed: {
-    className() {
-      return {
-        "layout-global-header": true,
-        "fixed-header": this.fixed,
-      };
     },
   },
   methods: {
