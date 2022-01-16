@@ -1,8 +1,7 @@
 const getFormattedValue = (type, val = "", { trim } = {}) => {
   if (type === "number") {
     if (val === "") return val
-    // eslint-disable-next-line no-useless-escape
-    return Number(val.replace(/[^\d^\.]+/g, ""))
+    return Number(val.replace(/[^\d^.]+/g, ""))
   }
   if (type === "string") {
     return trim ? val.trim() : val
@@ -12,15 +11,33 @@ const getFormattedValue = (type, val = "", { trim } = {}) => {
 
 export default {
   functional: true,
+  name: 'FormField',
   props: {
     /**
      * 表单组件类型
      */
     type: {
       type: String,
-      default: "string"
+      default: "string",
+      validator(type) {
+        return [
+          'string',
+          'number',
+          'date',
+          'time',
+          'week',
+          'datetime',
+          'daterange',
+          'timerange',
+          'monthrange',
+          'dates'
+        ].includes(type)
+      }
     },
-    value: null,
+    value: {
+      type: [String, Number, Array, Object, Date],
+      default: ""
+    },
     /**
      * 是否清除输入框的空格
      */
@@ -55,6 +72,7 @@ export default {
         slots
       })
     }
+
     if (type === "number" || type === "string") {
       return createField("el-input")
     }
@@ -73,6 +91,7 @@ export default {
       'arrow-control': true,
       'value-format': "HH:mm:ss",
     })
+
     if (type === "week") return createField("el-date-picker", {
       type: "week",
       format: "yyyy 第 WW 周",
