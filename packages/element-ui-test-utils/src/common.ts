@@ -1,9 +1,11 @@
 
-import { mount } from '@vue/test-utils'
+import { mount, Wrapper } from '@vue/test-utils'
 import Vue, { ComponentOptions } from 'vue'
 
+export type ElWrapper = Wrapper<Vue>
+
 export const createInstance = (options: ComponentOptions<Vue> = {}) => {
-  const wrapper = mount(options)
+  const wrapper = mount(options) as Wrapper<Vue, HTMLElement>
   const vm = wrapper.vm.$children[0]
 
   return {

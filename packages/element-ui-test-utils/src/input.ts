@@ -1,9 +1,8 @@
-import type Vue from "vue"
-import type { Wrapper } from "@vue/test-utils"
+import type { ElWrapper } from "./common"
 
 type ValueType = string | number
 
-export const createElInputTestUtils = (wrapper: Wrapper<Vue>) => {
+export const createElInputTestUtils = (wrapper: ElWrapper) => {
   const inputWrapper = wrapper.find<HTMLInputElement>('input');
   const nativeInput = inputWrapper.element
   const elInputWrapper = wrapper.findComponent({ name: 'el-input' })
