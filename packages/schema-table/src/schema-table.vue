@@ -83,10 +83,10 @@
         <!-- 操作列 -->
         <el-table-column v-if="showExtraColumn" v-bind="extraColumnProps">
           <template slot="header">
-            <template v-if="$scopedSlots.extraColumnHeader">
-              <slot name="extraColumnHeader" :scope="scope" />
+            <template v-if="$slots.extraColumnHeader">
+              <slot name="extraColumnHeader" />
             </template>
-            <span v-else>操作</span>
+            <span v-else>{{ extraColumnTitle }}</span>
           </template>
           <!-- 删除操作 -->
           <template slot-scope="scope">
@@ -171,9 +171,12 @@ export default {
      */
     theadContent: Function,
     /**
-     * 自定义操作列的表头元素
+     * 自定义操作列的表头文案
      */
-    extraHeadContent: Function,
+    extraColumnTitle: {
+      type: String,
+      default: "操作"
+    },
     /**
      * 是否展示额外的列
      */
