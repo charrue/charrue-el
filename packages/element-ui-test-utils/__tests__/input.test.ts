@@ -74,18 +74,4 @@ describe('createElInputTestUtils', () => {
     await clear()
     expect(getValue()).toBe("")
   })
-
-  it('getDisabled', () => {
-    const { wrapper } = createElInputInstance({
-      template: `<el-input v-model="inputValue" disabled></el-input>`,
-      data() {
-        return {
-          inputValue: "Hello World"
-        }
-      },
-    })
-
-    const { getDisabled, } = createElInputTestUtils(wrapper)
-    expect(getDisabled()).toBe(true)
-  });
 });

@@ -2,7 +2,11 @@
 import { mount, Wrapper } from '@vue/test-utils'
 import Vue, { ComponentOptions } from 'vue'
 
-export type ElWrapper = Wrapper<Vue>
+export type ElWrapper = Wrapper<Vue, HTMLElement>
+
+export type ElVm = any
+
+export type BaseValueType = string | number | boolean
 
 export const createInstance = (options: ComponentOptions<Vue> = {}) => {
   const wrapper = mount(options) as Wrapper<Vue, HTMLElement>

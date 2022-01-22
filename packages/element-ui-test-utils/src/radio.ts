@@ -1,39 +1,39 @@
-import { ElWrapper } from './common';
+import type { ElWrapper, ElVm, BaseValueType } from './common';
 
 export const createElRadioGroupTestUtils = (wrapper: ElWrapper) => {
   const radioGroupWrapper = wrapper.findComponent({ name: 'el-radio-group' });
-  const radioGroupVm = radioGroupWrapper.vm as any
-  const radioLabels = radioGroupVm.$children.map((item: any) => {
+  const radioGroupVm: ElVm = radioGroupWrapper.vm as ElVm
+  const radioLabels = radioGroupVm.$children.map((item: ElVm) => {
     return item.label
   })
 
-  const getValue = () => {
+  const getValue = (): BaseValueType => {
     return radioGroupVm.value
   }
-  const getRadioVmByIndex = (index: number) => {
-    return radioGroupVm.$children[index]
+  const getRadioVmByIndex = (index: number): ElVm => {
+    return radioGroupVm.$children[index] as ElVm
   }
-  const getRadioWrapperByIndex = (index = 0) => {
-    const elRadioWrappers = wrapper.findAllComponents({ name: 'el-radio' })
-    return elRadioWrappers.at(index)
-  }
-  const getRadioVmByLabel = (value: string | number) => {
-    const index = radioLabels.indexOf(value)
+  const getRadioVmByLabel = (label: BaseValueType): ElVm => {
+    const index = radioLabels.indexOf(label)
     return getRadioVmByIndex(index)
   }
-  const getRadioWrapperByLabel = (value: string | number) => {
+  const getRadioWrapperByIndex = (index = 0): ElWrapper  => {
+    const elRadioWrappers = wrapper.findAllComponents({ name: 'el-radio' })
+    return elRadioWrappers.at(index) as ElWrapper
+  }
+  const getRadioWrapperByLabel = (value: BaseValueType) => {
     const index = radioLabels.indexOf(value)
     return getRadioWrapperByIndex(index)
   }
 
   return {
-    findRadioGroupVm() {
+    findRadioGroupVm(): ElVm {
       return radioGroupVm
     },
-    getValue() {
-      return radioGroupVm.value
+    getValue(): BaseValueType {
+      return getValue()
     },
-    async setValue(value: string | number) {
+    async setValue(value: BaseValueType): Promise<void> {
       const radioWrapper = getRadioWrapperByLabel(value);
       const radio = radioWrapper.find(".el-radio__original")
       radio.setChecked()
@@ -41,23 +41,23 @@ export const createElRadioGroupTestUtils = (wrapper: ElWrapper) => {
 
       expect(radioWrapper.classes()).toContain('is-checked')
     },
-    getRadioVmByIndex(index = 0) {
+    getRadioVmByIndex(index = 0): ElVm {
       return getRadioVmByIndex(index)
     },
-    getRadioWrapperByIndex(index = 0) {
+    getRadioWrapperByIndex(index = 0): ElWrapper {
       return getRadioWrapperByIndex(index)
     },
-    getRadioVmByLabel(label: string | number) {
+    getRadioVmByLabel(label: BaseValueType): ElVm {
       return getRadioVmByLabel(label)
     },
-    getRadioWrapperByLabel(label: string | number) {
+    getRadioWrapperByLabel(label: BaseValueType): ElWrapper {
       return getRadioWrapperByLabel(label)
     },
-    getSelectedRadioWrapper() {
+    getSelectedRadioWrapper(): ElWrapper {
       const value = getValue()
       return getRadioWrapperByLabel(value)
     },
-    getSelectedIndex() {
+    getSelectedIndex(): number {
       const value = getValue()
       return radioLabels.indexOf(value)
     },

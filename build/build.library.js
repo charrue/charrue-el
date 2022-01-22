@@ -1,7 +1,11 @@
-const esbuild = require("rollup-plugin-esbuild")
 const path = require("path")
+const fs = require("fs")
+const esbuild = require("rollup-plugin-esbuild")
 const cwd = process.cwd()
-const inputPath = path.resolve(cwd, './src/index')
+
+const inputJsPath = path.resolve(cwd, './src/index.js')
+const inputTsPath = path.resolve(cwd, './src/index.ts')
+const hasTsInputPath = fs.existsSync(inputTsPath)
 const distPath = path.resolve(cwd, './dist')
 
 const config = [
@@ -14,7 +18,7 @@ const config = [
         target: "esnext",
       }),
     ],
-    input: inputPath,
+    input: hasTsInputPath ? inputTsPath : inputJsPath,
     output: [
       {
         dir: distPath,

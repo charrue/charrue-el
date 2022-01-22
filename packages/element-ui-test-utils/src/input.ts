@@ -1,6 +1,4 @@
-import type { ElWrapper } from "./common"
-
-type ValueType = string | number
+import type { ElWrapper, ElVm } from "./common"
 
 export const createElInputTestUtils = (wrapper: ElWrapper) => {
   const inputWrapper = wrapper.find<HTMLInputElement>('input');
@@ -20,38 +18,28 @@ export const createElInputTestUtils = (wrapper: ElWrapper) => {
   // 监听el-input的事件
   const listen = (eventName: string, cb: () => void) => elInputWrapper.vm.$on(eventName, cb)
 
-  return {
-    getElInputVm: () => {
-      checkElInput()
+  checkElInput()
 
-      return elInputWrapper.vm as any
+  return {
+    getElInputVm(): ElVm {
+
+      return elInputWrapper.vm as ElVm
+    },
+    getInputWrapper(): ElWrapper {
+      return elInputWrapper as ElWrapper
     },
 
-    getValue: () => {
-      checkElInput()
-
+    getValue(): string {
       return nativeInput.value
     },
-    setValue(value: ValueType) {
-      checkElInput()
-
+    setValue(value: number | string) {
       inputWrapper.setValue(value)
     },
     listen(eventName: string, cb: () => void) {
-      checkElInput()
-
       listen(eventName, cb)
     },
 
-    getDisabled() {
-      checkElInput()
-
-      return nativeInput.disabled
-    },
-
-    async clear() {
-      checkElInput()
-
+    async clear(): Promise<void> {
       const clearMock = jest.fn()
       // 如果值为空，无法触发clear事件
       expect(nativeInput.value).not.toBe("")

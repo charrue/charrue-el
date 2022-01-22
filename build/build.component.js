@@ -59,7 +59,7 @@ const runBuild = async (name) => {
       input: getPkgDir("./src/index.js"),
       external: ['vue', 'element-ui'],
       plugins: [
-        // terser(),
+        terser(),
         css(),
         commonjs(),
         nodeResolve(),
