@@ -1,0 +1,27 @@
+{
+  "name": "demo",
+  "private": true,
+  "devDependencies": {
+    "@charrue/build-v2": "workspace:*",
+    "@charrue/build-v3": "workspace:*"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.1.0",
+    "vue": "^2.6.0 || ^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "vue-demi": "*"
+  },
+  "scripts": {
+    "build": "build-v2 --input=./index.js --name=demo",
+    "build:v3": "build-v3 ./index.js demo"
+  }
+}

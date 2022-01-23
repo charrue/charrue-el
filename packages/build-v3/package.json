@@ -1,0 +1,13 @@
+{
+  "name": "@charrue/build-v3",
+  "private": true,
+  "version": "0.0.1",
+  "main": "index.js",
+  "devDependencies": {
+    "@charrue/build-v2": "workspace:*",
+    "rollup-plugin-vue": "^6.0.0-beta.11"
+  },
+  "bin": {
+    "build-v3": "./index.js"
+  }
+}

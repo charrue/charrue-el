@@ -1,0 +1,16 @@
+{
+  "name": "@charrue/build-v2",
+  "private": true,
+  "version": "0.0.1",
+  "devDependencies": {
+    "rollup-plugin-vue": "4.3.0"
+  },
+  "main": "./index.js",
+  "bin": {
+    "build-v2": "./command.js"
+  },
+  "dependencies": {
+    "minimist": "^1.2.5",
+    "rimraf": "^3.0.2"
+  }
+}

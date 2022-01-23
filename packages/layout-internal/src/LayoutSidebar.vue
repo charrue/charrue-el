@@ -1,8 +1,8 @@
 <template>
-  <div class="layout-global-aside-container">
-    <div class="layout-global-aside-placeholder" :style="{ width }"></div>
+  <div class="charrue-layout-sidebar-container">
+    <div class="charrue-layout-sidebar-placeholder" :style="{ width }"></div>
     <div
-      class="layout-global-aside global-aside-el-menu"
+      class="charrue-layout-sidebar charrue-layout-sidebar-el-menu-container"
       :style="{ width, position: absolute ? 'absolute' : 'fixed' }"
     >
       <div v-if="logo || title" class="logo-container">
@@ -11,22 +11,23 @@
           <h1 v-if="title">{{ title }}</h1>
         </router-link>
       </div>
-      <slot name="aside-top"></slot>
+      <slot name="sidebar-top"></slot>
       <el-menu
+        class="charrue-layout-sidebar-el-menu"
         mode="vertical"
         unique-opened
         :collapse="collapsed"
         :default-active="activeRoutePath"
         :default-openeds="openKeys"
-        style="padding: 16px 0; width: 100%"
       >
         <sidebar-item
           v-for="item in computedMenuData"
           :key="item.path"
+          :subMenuComponent="subMenuComponent"
           :menuItem="item"
         ></sidebar-item>
       </el-menu>
-      <slot name="aside-bottom"></slot>
+      <slot name="sidebar-bottom"></slot>
     </div>
   </div>
 </template>
@@ -88,40 +89,25 @@ export default {
      */
     authorized: Function,
     /**
-     * 导航菜单图标的图标前缀
-     */
-    prefixIconClass: {
-      type: String,
-      default: "",
-    },
-    /**
-     * 菜单文字的类名
-     */
-    menuTextClass: {
-      type: [String, Array, Object],
-      default: "",
-    },
-    /**
      * 控制菜单是否可用
      */
     checkMenuDisabled: Function,
-    /**
-     * 菜单进行路由跳转时，携带的参数
-     */
-    routeParams: [Function, Object],
     /**
      * 导航菜单折叠，展开时的宽度
      */
     asideWidths: {
       type: Array,
       default() {
-        return [50, 200];
+        return [54, 200];
       },
     },
     homeUrl: {
       type: String,
       default: "/",
     },
+    subMenuComponent: {
+      type: String
+    }
   },
   data() {
     return {
@@ -211,31 +197,7 @@ export default {
 
       return menuCopy;
     },
-  },
-  created() {
-    console.log(this.$slots)
-    if (this.route) {
-      this.$watch(
-        "$route.path",
-        (val) => {
-          if (
-            this.menuDataPathMapping[val] &&
-            this.menuDataPathMapping[val].redirect
-          ) {
-            this.activeRoutePath = this.menuDataPathMapping[val].redirect;
-          } else {
-            this.activeRoutePath = val;
-          }
-
-          this.openKeys = urlToList(val);
-        },
-        {
-          immediate: true,
-        }
-      );
-    }
-
-    this.formatMenuData = function({ menu, deep, index, path, parent } = {}) {
+    formatMenuData({ menu, deep, index, path, parent } = {}) {
       let menuCopy = menu ? { ...menu } : {};
       if (!this.authorized) return menuCopy;
       if (
@@ -264,6 +226,28 @@ export default {
       }
 
       return menuCopy;
+    }
+  },
+  created() {
+    if (this.route) {
+      this.$watch(
+        "$route.path",
+        (val) => {
+          if (
+            this.menuDataPathMapping[val] &&
+            this.menuDataPathMapping[val].redirect
+          ) {
+            this.activeRoutePath = this.menuDataPathMapping[val].redirect;
+          } else {
+            this.activeRoutePath = val;
+          }
+
+          this.openKeys = urlToList(val);
+        },
+        {
+          immediate: true,
+        }
+      );
     }
   },
 };

@@ -36,7 +36,7 @@ const styles = packages
     return name ? name === compName : true
   })
   .map(name => {
-    const scssPath = resolve(__dirname, `../packages/${name}/src/styles/index.scss`)
+    const scssPath = resolve(__dirname, `../packages/${name}/styles/index.scss`)
     if (!fs.existsSync(scssPath)) {
       gulp.task(name, (done) => done())
       return
@@ -52,7 +52,7 @@ const styles = packages
         .pipe(cleanCss())
         .pipe(rename('index.css'))
         .pipe(
-          gulp.dest(resolve(__dirname, `../packages/${name}/dist/style`))
+          gulp.dest(resolve(__dirname, `../packages/${name}/dist/styles`))
         )
       done()
     }

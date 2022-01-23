@@ -12,7 +12,8 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from "vue-demi"
+export default defineComponent({
   name: "ContentView",
   props: {
     contentStyle: {
@@ -22,5 +23,5 @@ export default {
       },
     },
   },
-};
+});
 </script>
