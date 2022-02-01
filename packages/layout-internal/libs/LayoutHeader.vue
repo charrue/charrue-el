@@ -5,6 +5,7 @@
   >
     <div class="charrue-layout-header-main">
       <div class="charrue-layout-header-left">
+        <hamburger @toggle-click="toggleSideBar" />
         <slot name="header-left"></slot>
       </div>
       <div class="charrue-layout-header-right">
@@ -14,8 +15,12 @@
   </div>
 </template>
 <script>
+import Hamburger from "./Hamburger.vue"
 export default {
   name: "LayoutHeader",
+  components: {
+    Hamburger,
+  },
   props: {
     collapse: {
       type: Boolean,
@@ -26,6 +31,7 @@ export default {
       default: true,
     },
   },
+  emits: ["update:collapse"],
   methods: {
     toggleSideBar() {
       this.$emit("update:collapse", !this.collapse);

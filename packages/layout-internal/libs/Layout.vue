@@ -16,40 +16,37 @@
       :homeUrl="homeUrl"
       :subMenuComponent="componentConfig.subMenu"
     >
-      <template slot="sidebar-top">
+      <template #sidebar-top>
         <slot name="sidebar-top"></slot>
       </template>
-      <template slot="sidebar-bottom">
+      <template #sidebar-bottom>
         <slot name="sidebar-bottom"></slot>
       </template>
     </layout-sidebar>
 
-    <div class="charrue-layout-main" :style="contentWidthStyle">
+    <div class="charrue-layout-main" :style="mainWidthStyle">
       <layout-header
         :collapse="innerCollapse"
         :fixed="fixedHeader"
-        :style="contentWidthStyle"
-        @update:collapse="(val) => innerCollapse = val"
+        :style="headerWidthStyle"
+        @update:collapse="(val) => (innerCollapse = val)"
       >
-        <template slot="header-trigger">
+        <template #header-trigger>
           <slot name="header-trigger"></slot>
         </template>
-        <template slot="header-left">
+        <template #header-left>
           <slot name="header-left"></slot>
         </template>
-        <template slot="header-right">
+        <template #header-right>
           <slot name="header-right"></slot>
         </template>
       </layout-header>
 
-      <layout-content
-        :content-style="contentStyle"
-        :animation="animation"
-      >
-        <template slot="header">
+      <layout-content :content-style="contentStyle" :animation="animation">
+        <template #content-header>
           <slot name="content-header"></slot>
         </template>
-        <template slot="content">
+        <template #content>
           <slot></slot>
         </template>
       </layout-content>
@@ -60,7 +57,7 @@
 import LayoutSidebar from "./LayoutSidebar.vue";
 import LayoutHeader from "./LayoutHeader.vue";
 import LayoutContent from "./LayoutContent.vue";
-import { getComponentConfig, PluginKey } from "./utils"
+import { getComponentConfig, PluginKey } from "./utils";
 
 export default {
   name: "Layout",
@@ -73,9 +70,9 @@ export default {
     version: {
       type: Number,
       validator(value) {
-        return [2, 3].indexOf(value) > -1
+        return [2, 3].indexOf(value) > -1;
       },
-      default: 2
+      default: 2,
     },
     collapsed: {
       type: Boolean,
@@ -109,15 +106,15 @@ export default {
     },
     animation: {
       type: Boolean,
-      default: true
+      default: true,
     },
     absolute: {
       type: Boolean,
-      default: false
+      default: false,
     },
     route: {
       type: Boolean,
-      default: true
+      default: true,
     },
     authorized: Function,
     homeUrl: {
@@ -128,13 +125,23 @@ export default {
   data() {
     return {
       innerCollapse: false,
-      componentConfig: {}
+      componentConfig: {},
     };
   },
   computed: {
-    contentWidthStyle() {
+    mainWidthStyle() {
       return {
-        width: `calc(100% - ${this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1]}px)`,
+        width: `calc(100% - ${ this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1] }px)`,
+      };
+    },
+    headerWidthStyle() {
+      let width = "100%";
+      if (this.fixedHeader) {
+        width = `calc(100% - ${ this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1] }px)`;
+      }
+
+      return {
+        width,
       };
     },
   },
@@ -151,6 +158,7 @@ export default {
   },
   created() {
     this.componentConfig = getComponentConfig(this[PluginKey].version || 2);
-  }
+  },
+  emits: ["update:collapsed"],
 };
 </script>

@@ -1,22 +1,27 @@
 {
   "name": "@charrue/layout-next",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
   "author": "ckangwen <2437037469@qq.com>",
-  "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charrue/charrue-el.git",
+    "directory": "packages/layout-next"
+  },
+  "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout-next/README.md",
   "license": "MIT",
-  "main": "src/index.js",
-  "unpkg": "dist/umd/index.js",
-  "typings": "typings/index.d.ts",
-  "files": [
-    "dist",
-    "src",
-    "typings"
-  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "peerDependencies": {
     "vue": "3"
   },
+  "dependencies": {
+    "@charrue/layout-internal": "workspace:*"
+  },
+  "devDependencies": {
+    "@charrue/build-v3": "workspace:*"
+  },
   "scripts": {
-    "build": "cd .. && npm run build:style layout && npm run build:component layout"
+    "build": "build-v3 --input=./index.js --name=layout-next --ignore-dependencies=all"
   }
 }

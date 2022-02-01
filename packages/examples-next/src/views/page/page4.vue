@@ -5,8 +5,8 @@
       :route="false"
       :fixed-header="false"
       :absolute="true"
-      :collapsed.sync="collapsed"
-      :aside-widths="[60, 300]"
+      :collapsed="collapsed"
+      :sidebar-width="[60, 300]"
     ></layout>
   </div>
 </template>

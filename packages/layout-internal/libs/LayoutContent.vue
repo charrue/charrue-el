@@ -1,7 +1,7 @@
 <template>
   <section class="charrue-layout-content-container">
     <div class="charrue-layout-content-header">
-      <slot name="header"></slot>
+      <slot name="content-header"></slot>
     </div>
     <div class="charrue-layout-content-main" :style="contentStyle">
       <template v-if="animation">

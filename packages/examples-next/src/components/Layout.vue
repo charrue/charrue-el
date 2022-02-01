@@ -1,16 +1,15 @@
 <template>
   <div class="example-container" :class="['theme-' + theme]">
     <layout
+      ref="layoutRef"
       v-model:collapsed="collapsed"
       :data="menuData"
       title="Vue3 Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
-      :route-params="routeParams"
     >
-      <template #aside-top>
-        <div v-show="!collapsed" class="side-top-title">主题切换</div>
+      <template #sidebar-top>
+        <div class="side-top-title">主题切换</div>
         <el-radio-group
-          v-show="!collapsed"
           class="radio-container"
           v-model="theme"
           @change="onThemeChange"
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, getCurrentInstance } from "vue";
 const TOTAL_MENUS = [
   {
     title: "page",
@@ -112,12 +111,17 @@ export default defineComponent({
       document.body.className = cls.join(" ");
     };
 
+    console.log(getCurrentInstance());
+
+    const layoutRef = ref()
+
     return {
       collapsed,
       routeParams,
       menuData,
       theme,
       onThemeChange,
+      layoutRef
     };
   },
 });

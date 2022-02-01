@@ -4,11 +4,13 @@ const fs = require('fs')
 const path = require('path')
 const rollup = require('rollup')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
-const esbuild = require("rollup-plugin-esbuild")
+const rollupEsBuildPlugin = require("rollup-plugin-esbuild")
 const dts = require('rollup-plugin-dts').default
 const { camelize, upperCaseFirst } = require("./utils")
 
 const pwd = process.cwd()
+const esbuild = rollupEsBuildPlugin.default ? rollupEsBuildPlugin.default : rollupEsBuildPlugin
+const minify = rollupEsBuildPlugin.minify
 
 const VUE_DEMI_IIFE = fs.readFileSync(require.resolve('vue-demi/lib/index.iife.js'), 'utf-8')
 const injectVueDemi = {
@@ -45,7 +47,7 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
     external(id) {
       const aboutVue = /^vue/.test(id)
       const aboutCharrue = ["all", "charrue"].indexOf(ignoreDependencies) > -1 ? false : /^@charrue/.test(id)
-      const aboutDep = ["all", "dependencies"].indexOf(ignoreDependencies) > -1? false : deps.some(k => new RegExp('^' + k).test(id))
+      const aboutDep = ["all", "dependencies"].indexOf(ignoreDependencies) > -1 ? false : deps.some(k => new RegExp('^' + k).test(id))
       return aboutVue || aboutCharrue || aboutDep
     },
   }
@@ -58,7 +60,7 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
       format: 'cjs',
       file: getOutFile('index.cjs.js'),
       globals: {
-        'vue-demi': 'VueDemi'
+        'vue-demi': 'VueDemi',
       },
     },
     {
@@ -78,6 +80,7 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
       },
       plugins: [
         deps['vue-demi'] && injectVueDemi,
+        minify(),
       ],
     },
   ]

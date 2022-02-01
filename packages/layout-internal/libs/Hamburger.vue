@@ -1,8 +1,8 @@
 <template>
-  <div style="padding: 0 17px" @click="toggleClick">
+  <div class="hamburger-container" @click="toggleClick">
     <svg
       :class="{ 'is-active': isActive }"
-      class="hamburger"
+      class="hamburger-svg"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"
       width="64"
@@ -24,9 +24,10 @@ export default {
       default: false,
     },
   },
+  emits: ["toggle-click"],
   methods: {
     toggleClick() {
-      this.$emit("toggleClick", this.isActive)
+      this.$emit("toggle-click", this.isActive)
     },
   },
 }
