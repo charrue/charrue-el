@@ -2,12 +2,12 @@
   "name": "@charrue/build-v2",
   "private": true,
   "version": "0.0.1",
-  "devDependencies": {
-    "rollup-plugin-vue": "4.3.0"
-  },
   "main": "./index.js",
   "bin": {
     "build-v2": "./command.js"
+  },
+  "devDependencies": {
+    "rollup-plugin-vue": "4.3.0"
   },
   "dependencies": {
     "@rollup/plugin-node-resolve": "^13.1.3",
