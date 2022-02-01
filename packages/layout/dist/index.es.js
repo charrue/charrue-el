@@ -83,7 +83,7 @@ function isFunction(val) {
   return typeof val === "function";
 }
 
-var script$4 = {
+var script$5 = {
   name: "SidebarItem",
   props: {
     subMenuComponent: {
@@ -95,15 +95,16 @@ var script$4 = {
       required: true
     },
     prefixIconClass: String,
-    menuTextClass: String
+    menuTextClass: String,
+    route: Boolean
   }
 };
 
 /* script */
-            const __vue_script__$4 = script$4;
+            const __vue_script__$5 = script$5;
             
 /* template */
-var __vue_render__$4 = function() {
+var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -134,7 +135,7 @@ var __vue_render__$4 = function() {
                           [
                             _c("i", {
                               class: [
-                                "aside-menu-icon",
+                                "sidebar-menu-icon",
                                 _vm.prefixIconClass,
                                 _vm.menuItem.icon
                               ]
@@ -156,7 +157,7 @@ var __vue_render__$4 = function() {
                 ],
                 null,
                 false,
-                747635859
+                1635619749
               )
             },
             [
@@ -165,6 +166,7 @@ var __vue_render__$4 = function() {
                 return _c("sidebar-item", {
                   key: child.path,
                   attrs: {
+                    route: _vm.route,
                     "is-nest": true,
                     menuItem: child,
                     subMenuComponent: _vm.subMenuComponent
@@ -175,14 +177,67 @@ var __vue_render__$4 = function() {
             2
           )
         : [
-            _c(
-              "router-link",
-              {
-                staticClass: "menu-router-link",
-                attrs: { to: _vm.menuItem.path }
-              },
-              [
-                _c("el-menu-item", {
+            _vm.route
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "menu-router-link",
+                    attrs: { to: _vm.menuItem.path }
+                  },
+                  [
+                    _c("el-menu-item", {
+                      attrs: { index: _vm.menuItem.path },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "title",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "div",
+                                  {
+                                    class: [
+                                      "submenu-title",
+                                      _vm.menuItem.icon
+                                        ? "submenu-title-with-icon"
+                                        : ""
+                                    ]
+                                  },
+                                  [
+                                    _c("i", {
+                                      class: [
+                                        "sidebar-menu-icon",
+                                        _vm.prefixIconClass,
+                                        _vm.menuItem.icon
+                                      ]
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        class: [
+                                          _vm.menuTextClass,
+                                          "common-menu-text"
+                                        ]
+                                      },
+                                      [_vm._v(_vm._s(_vm.menuItem.title))]
+                                    )
+                                  ]
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        false,
+                        1717388709
+                      )
+                    })
+                  ],
+                  1
+                )
+              : _c("el-menu-item", {
                   attrs: { index: _vm.menuItem.path },
                   scopedSlots: _vm._u([
                     {
@@ -202,7 +257,7 @@ var __vue_render__$4 = function() {
                             [
                               _c("i", {
                                 class: [
-                                  "aside-menu-icon",
+                                  "sidebar-menu-icon",
                                   _vm.prefixIconClass,
                                   _vm.menuItem.icon
                                 ]
@@ -223,25 +278,22 @@ var __vue_render__$4 = function() {
                     }
                   ])
                 })
-              ],
-              1
-            )
           ]
     ],
     2
   )
 };
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$4 = undefined;
+  const __vue_inject_styles__$5 = undefined;
   /* scoped */
-  const __vue_scope_id__$4 = undefined;
+  const __vue_scope_id__$5 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$4 = false;
+  const __vue_is_functional_template__$5 = false;
   /* component normalizer */
-  function __vue_normalize__$4(
+  function __vue_normalize__$5(
     template, style, script,
     scope, functional, moduleIdentifier,
     createInjector, createInjectorSSR
@@ -269,12 +321,12 @@ __vue_render__$4._withStripped = true;
   
 
   
-  var SidebarItem = __vue_normalize__$4(
-    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4);
+  var SidebarItem = __vue_normalize__$5(
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5);
 
 var __defProp = Object.defineProperty;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
@@ -292,7 +344,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var script$3 = {
+var script$4 = {
   name: "GlobalAside",
   components: {
     SidebarItem
@@ -445,10 +497,10 @@ var script$3 = {
 };
 
 /* script */
-            const __vue_script__$3 = script$3;
+            const __vue_script__$4 = script$4;
             
 /* template */
-var __vue_render__$3 = function() {
+var __vue_render__$4 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -507,7 +559,11 @@ var __vue_render__$3 = function() {
           _vm._l(_vm.computedMenuData, function(item) {
             return _c("sidebar-item", {
               key: item.path,
-              attrs: { subMenuComponent: _vm.subMenuComponent, menuItem: item }
+              attrs: {
+                route: _vm.route,
+                subMenuComponent: _vm.subMenuComponent,
+                menuItem: item
+              }
             })
           }),
           1
@@ -519,17 +575,17 @@ var __vue_render__$3 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$3 = [];
-__vue_render__$3._withStripped = true;
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$3 = undefined;
+  const __vue_inject_styles__$4 = undefined;
   /* scoped */
-  const __vue_scope_id__$3 = undefined;
+  const __vue_scope_id__$4 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$3 = false;
+  const __vue_is_functional_template__$4 = false;
   /* component normalizer */
-  function __vue_normalize__$3(
+  function __vue_normalize__$4(
     template, style, script,
     scope, functional, moduleIdentifier,
     createInjector, createInjectorSSR
@@ -557,7 +613,104 @@ __vue_render__$3._withStripped = true;
   
 
   
-  var LayoutSidebar = __vue_normalize__$3(
+  var LayoutSidebar = __vue_normalize__$4(
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4);
+
+var script$3 = {
+  name: "Hamburger",
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: ["toggle-click"],
+  methods: {
+    toggleClick() {
+      this.$emit("toggle-click", this.isActive);
+    }
+  }
+};
+
+/* script */
+            const __vue_script__$3 = script$3;
+            
+/* template */
+var __vue_render__$3 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "hamburger-container", on: { click: _vm.toggleClick } },
+    [
+      _c(
+        "svg",
+        {
+          staticClass: "hamburger-svg",
+          class: { "is-active": _vm.isActive },
+          attrs: {
+            viewBox: "0 0 1024 1024",
+            xmlns: "http://www.w3.org/2000/svg",
+            width: "64",
+            height: "64"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              d:
+                "M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 0 0 0-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0 0 14.4 7z"
+            }
+          })
+        ]
+      )
+    ]
+  )
+};
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$3 = undefined;
+  /* scoped */
+  const __vue_scope_id__$3 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$3 = false;
+  /* component normalizer */
+  function __vue_normalize__$3(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    const component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "C:\\all\\code\\plow\\charrue-el\\packages\\layout-internal\\libs\\Hamburger.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) component.functional = true;
+    }
+
+    component._scopeId = scope;
+
+    return component
+  }
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Hamburger = __vue_normalize__$3(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
@@ -566,6 +719,9 @@ __vue_render__$3._withStripped = true;
 
 var script$2 = {
   name: "LayoutHeader",
+  components: {
+    Hamburger
+  },
   props: {
     collapse: {
       type: Boolean,
@@ -576,6 +732,7 @@ var script$2 = {
       default: true
     }
   },
+  emits: ["update:collapse"],
   methods: {
     toggleSideBar() {
       this.$emit("update:collapse", !this.collapse);
@@ -602,7 +759,11 @@ var __vue_render__$2 = function() {
         _c(
           "div",
           { staticClass: "charrue-layout-header-left" },
-          [_vm._t("header-left")],
+          [
+            _c("hamburger", { on: { "toggle-click": _vm.toggleSideBar } }),
+            _vm._v(" "),
+            _vm._t("header-left")
+          ],
           2
         ),
         _vm._v(" "),
@@ -689,7 +850,7 @@ var __vue_render__$1 = function() {
     _c(
       "div",
       { staticClass: "charrue-layout-content-header" },
-      [_vm._t("header")],
+      [_vm._t("content-header")],
       2
     ),
     _vm._v(" "),
@@ -827,9 +988,18 @@ var script = {
     };
   },
   computed: {
-    contentWidthStyle() {
+    mainWidthStyle() {
       return {
         width: `calc(100% - ${this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1]}px)`
+      };
+    },
+    headerWidthStyle() {
+      let width = "100%";
+      if (this.fixedHeader) {
+        width = `calc(100% - ${this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1]}px)`;
+      }
+      return {
+        width
       };
     }
   },
@@ -846,7 +1016,8 @@ var script = {
   },
   created() {
     this.componentConfig = getComponentConfig(this[PluginKey$1].version || 2);
-  }
+  },
+  emits: ["update:collapsed"]
 };
 
 /* script */
@@ -864,91 +1035,109 @@ var __vue_render__ = function() {
       class: [_vm.collapsed ? "hideSidebar" : "openSidebar"]
     },
     [
-      _c(
-        "layout-sidebar",
-        {
-          attrs: {
-            collapsed: _vm.innerCollapse,
-            data: _vm.data,
-            logo: _vm.logo,
-            title: _vm.title,
-            "route-params": _vm.routeParams,
-            route: _vm.route,
-            absolute: _vm.absolute,
-            authorized: _vm.authorized,
-            sidebarWidth: _vm.sidebarWidth,
-            homeUrl: _vm.homeUrl,
-            subMenuComponent: _vm.componentConfig.subMenu
-          }
+      _c("layout-sidebar", {
+        attrs: {
+          collapsed: _vm.innerCollapse,
+          data: _vm.data,
+          logo: _vm.logo,
+          title: _vm.title,
+          "route-params": _vm.routeParams,
+          route: _vm.route,
+          absolute: _vm.absolute,
+          authorized: _vm.authorized,
+          sidebarWidth: _vm.sidebarWidth,
+          homeUrl: _vm.homeUrl,
+          subMenuComponent: _vm.componentConfig.subMenu
         },
-        [
-          _c("template", { slot: "sidebar-top" }, [_vm._t("sidebar-top")], 2),
-          _vm._v(" "),
-          _c(
-            "template",
-            { slot: "sidebar-bottom" },
-            [_vm._t("sidebar-bottom")],
-            2
-          )
-        ],
-        2
-      ),
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "sidebar-top",
+              fn: function() {
+                return [_vm._t("sidebar-top")]
+              },
+              proxy: true
+            },
+            {
+              key: "sidebar-bottom",
+              fn: function() {
+                return [_vm._t("sidebar-bottom")]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          true
+        )
+      }),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "charrue-layout-main", style: _vm.contentWidthStyle },
+        { staticClass: "charrue-layout-main", style: _vm.mainWidthStyle },
         [
-          _c(
-            "layout-header",
-            {
-              style: _vm.contentWidthStyle,
-              attrs: { collapse: _vm.innerCollapse, fixed: _vm.fixedHeader },
-              on: {
-                "update:collapse": function(val) {
-                  return (_vm.innerCollapse = val)
+          _c("layout-header", {
+            style: _vm.headerWidthStyle,
+            attrs: { collapse: _vm.innerCollapse, fixed: _vm.fixedHeader },
+            on: {
+              "update:collapse": function(val) {
+                return (_vm.innerCollapse = val)
+              }
+            },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "header-trigger",
+                  fn: function() {
+                    return [_vm._t("header-trigger")]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "header-left",
+                  fn: function() {
+                    return [_vm._t("header-left")]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "header-right",
+                  fn: function() {
+                    return [_vm._t("header-right")]
+                  },
+                  proxy: true
                 }
-              }
-            },
-            [
-              _c(
-                "template",
-                { slot: "header-trigger" },
-                [_vm._t("header-trigger")],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "template",
-                { slot: "header-left" },
-                [_vm._t("header-left")],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "template",
-                { slot: "header-right" },
-                [_vm._t("header-right")],
-                2
-              )
-            ],
-            2
-          ),
+              ],
+              null,
+              true
+            )
+          }),
           _vm._v(" "),
-          _c(
-            "layout-content",
-            {
-              attrs: {
-                "content-style": _vm.contentStyle,
-                animation: _vm.animation
-              }
+          _c("layout-content", {
+            attrs: {
+              "content-style": _vm.contentStyle,
+              animation: _vm.animation
             },
-            [
-              _c("template", { slot: "header" }, [_vm._t("content-header")], 2),
-              _vm._v(" "),
-              _c("template", { slot: "content" }, [_vm._t("default")], 2)
-            ],
-            2
-          )
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "content-header",
+                  fn: function() {
+                    return [_vm._t("content-header")]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "content",
+                  fn: function() {
+                    return [_vm._t("default")]
+                  },
+                  proxy: true
+                }
+              ],
+              null,
+              true
+            )
+          })
         ],
         1
       )
