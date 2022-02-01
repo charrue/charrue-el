@@ -117,15 +117,29 @@ $default-active-submenu-bg-color: #000c17;
     align-items: center;
     height: 100%;
 
-    .charrue-layout-header-left {
-      display: flex;
-      align-items: center;
-      padding-left: 25px;
+    .hamburger-container {
+      line-height: var(--charrue-header-height, $charrue-header-height);
+      padding: 0 16px;
+      height: 100%;
+      float: left;
+      cursor: pointer;
+      transition: background .3s;
+      -webkit-tap-highlight-color: transparent;
+
+      .hamburger-svg {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+      }
     }
+
+    .charrue-layout-header-left,
     .charrue-layout-header-right {
       display: flex;
       align-items: center;
-      padding-right: 25px;
+      padding-left: 25px;
+      height: 100%;
     }
   }
 
@@ -220,13 +234,13 @@ $default-active-submenu-bg-color: #000c17;
     width: 100%;
     text-align: left;
     @include common-menu-text-color;
-    .aside-menu-icon, .el-submenu__icon-arrow  {
+    .sidebar-menu-icon, .el-submenu__icon-arrow  {
       @include common-menu-text-color;
     }
     &:hover {
       @include hover-menu-text-color;
       @include hover-menu-text-bg;
-      a, .aside-menu-icon, .el-submenu__icon-arrow  {
+      a, .sidebar-menu-icon, .el-submenu__icon-arrow  {
         @include hover-menu-text-color;
         // @include hover-menu-text-bg;
         text-decoration: none;
@@ -241,7 +255,7 @@ $default-active-submenu-bg-color: #000c17;
     &.is-active {
       @include active-menu-text-color;
       @include active-menu-text-bg;
-      a, .aside-menu-icon, .el-submenu__icon-arrow {
+      a, .sidebar-menu-icon, .el-submenu__icon-arrow {
         @include active-menu-text-color;
       }
     }
@@ -252,13 +266,13 @@ $default-active-submenu-bg-color: #000c17;
       text-align: left;
       @include common-menu-text-color;
 
-      .aside-menu-icon {
+      .sidebar-menu-icon {
         @include common-menu-text-color;
       }
       &:hover {
         @include hover-menu-text-color;
         @include hover-menu-text-bg;
-        .aside-menu-icon, .el-submenu__icon-arrow {
+        .sidebar-menu-icon, .el-submenu__icon-arrow {
           @include hover-menu-text-color;
         }
       }

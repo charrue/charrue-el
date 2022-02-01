@@ -1,7 +1,15 @@
 const vue = require('rollup-plugin-vue')
-const runBuild = require("@charrue/build-v2")
+const { resolveInput, runBuild } = require("@charrue/build-v2")
 
-// eslint-disable-next-line no-unused-vars
-const [_, __, inputPath, packageName ] = process.argv
+const {
+  input,
+  name,
+  ignoreDependencies
+} = resolveInput()
 
-runBuild(packageName, inputPath, vue)
+runBuild({
+  input,
+  name,
+  ignoreDependencies,
+  rollupVuePlugin: vue
+})

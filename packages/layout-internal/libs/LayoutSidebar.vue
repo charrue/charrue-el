@@ -22,6 +22,7 @@
       >
         <sidebar-item
           v-for="item in computedMenuData"
+          :route="route"
           :key="item.path"
           :subMenuComponent="subMenuComponent"
           :menuItem="item"

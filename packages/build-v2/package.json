@@ -10,7 +10,10 @@
     "build-v2": "./command.js"
   },
   "dependencies": {
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "minimist": "^1.2.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-esbuild": "^4.5.0"
   }
 }
