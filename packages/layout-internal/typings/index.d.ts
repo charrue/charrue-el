@@ -23,7 +23,7 @@ declare class GlobalAside extends BaseComponent {
   menuHeaderExtraRender?: (...args: any[]) => boolean;
   menuTextClass?: any;
   routeParams?: Record<string, any>;
-  asideWidths?: [string, string];
+  sidebarWidths?: [string, string];
 }
 
 declare class Layout extends GlobalAside {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="global-charrue-layout"
+    class="charrue-layout"
     :class="[collapsed ? 'hideSidebar' : 'openSidebar']"
   >
     <layout-sidebar
@@ -12,7 +12,7 @@
       :route="route"
       :absolute="absolute"
       :authorized="authorized"
-      :asideWidths="asideWidths"
+      :sidebarWidth="sidebarWidth"
       :homeUrl="homeUrl"
       :subMenuComponent="componentConfig.subMenu"
     >
@@ -24,7 +24,7 @@
       </template>
     </layout-sidebar>
 
-    <div class="global-charrue-layout-main" :style="contentWidthStyle">
+    <div class="charrue-layout-main" :style="contentWidthStyle">
       <layout-header
         :collapse="innerCollapse"
         :fixed="fixedHeader"
@@ -101,7 +101,7 @@ export default {
         return {};
       },
     },
-    asideWidths: {
+    sidebarWidth: {
       type: Array,
       default() {
         return [54, 200];
@@ -134,7 +134,7 @@ export default {
   computed: {
     contentWidthStyle() {
       return {
-        width: `calc(100% - ${this.collapsed ? this.asideWidths[0] : this.asideWidths[1]}px)`,
+        width: `calc(100% - ${this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1]}px)`,
       };
     },
   },

@@ -1,6 +1,6 @@
 {
   "name": "@charrue/layout",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
   "author": "ckangwen <2437037469@qq.com>",
   "repository": {
@@ -9,10 +9,8 @@
   },
   "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout/README.md",
   "license": "MIT",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "dependencies": {
     "@charrue/layout-internal": "workspace:*"
   },
@@ -20,7 +18,6 @@
     "@charrue/build-v2": "workspace:*"
   },
   "scripts": {
-    "build": "build-v2 --input=./index.js --name=layout --ignore-dependencies=all",
-    "build:style": "cd .. && npm run build:style layout"
+    "build": "build-v2 --input=./index.js --name=layout --ignore-dependencies=all"
   }
 }

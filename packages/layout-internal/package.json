@@ -1,6 +1,6 @@
 {
   "name": "@charrue/layout-internal",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "解决中后台布局的问题，提供自动生成菜单与定制页面布局",
   "author": "ckangwen <2437037469@qq.com>",
   "repository": {
@@ -9,11 +9,12 @@
   },
   "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/layout/README.md",
   "license": "MIT",
-  "main": "dist/index.cjs.js",
+  "main": "libs/index.js",
   "files": [
-    "dist"
+    "dist",
+    "libs"
   ],
   "scripts": {
-    "build": "cd .. && npm run build:style layout && npm run build:component layout"
+    "build": "cd .. && npm run build:style layout-internal"
   }
 }

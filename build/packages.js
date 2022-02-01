@@ -8,6 +8,9 @@ const packages = [
   {
     name: "@charrue/schema-form"
   },
+  {
+    name: "@charrue/layout-internal"
+  },
 ]
 
 exports.packages = packages

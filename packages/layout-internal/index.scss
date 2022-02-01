@@ -1,8 +1,8 @@
+$charrue-header-height: 50px;
 $default-normal-text-color: #a6adb4;
 $default-active-text-color: #fff;
 $default-normal-aside-bg-color: #001529;
 $default-active-aside-bg-color: #1890ff;
-
 $default-active-submenu-bg-color: #000c17;
 
 @mixin common-menu-text-color {
@@ -78,7 +78,7 @@ $default-active-submenu-bg-color: #000c17;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: var(--charrue-header-height, $charrue-header-height);
   overflow: hidden;
   position: relative;
   background: var(--layout-header-content-bg-color, --layout-aside-content-bg-color);
@@ -133,10 +133,10 @@ $default-active-submenu-bg-color: #000c17;
 
 .charrue-layout-content {
   &-container {
-    height: calc(100vh - 50px);
+    height: calc(100vh - var(--charrue-header-height, $charrue-header-height));
     width: 100%;
     position: relative;
-    margin-top: 50px;
+    margin-top: var(--charrue-header-height, $charrue-header-height);
     overflow: auto;
     box-sizing: border-box;
   }
@@ -150,10 +150,10 @@ $default-active-submenu-bg-color: #000c17;
 
 }
 .fixed-header + .charrue-layout-content-main {
-  margin-top: 50px;
+  margin-top: var(--charrue-header-height, $charrue-header-height);
 }
 
-.global-charrue-layout {
+.charrue-layout {
   position: relative;
   height: 100%;
   width: 100%;
@@ -189,8 +189,8 @@ $default-active-submenu-bg-color: #000c17;
 
 
     .charrue-layout-sidebar-el-menu {
-      padding: 0 16px;
       width: 100%;
+      box-sizing: border-box
     }
   }
 }

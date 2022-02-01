@@ -2,7 +2,7 @@
   "name": "charrue-el",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "曹康文",
+  "author": "ckangwen <2437037469@qq.com>",
   "license": "MIT",
   "private": true,
   "workspaces": [

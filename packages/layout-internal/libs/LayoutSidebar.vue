@@ -95,7 +95,7 @@ export default {
     /**
      * 导航菜单折叠，展开时的宽度
      */
-    asideWidths: {
+    sidebarWidth: {
       type: Array,
       default() {
         return [54, 200];
@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     width() {
-      return this.collapsed ? this.asideWidths[0] + 'px' : this.asideWidths[1] + 'px';
+      return this.collapsed ? this.sidebarWidth[0] + 'px' : this.sidebarWidth[1] + 'px';
     },
     computedMenuData() {
       const menuData = [];

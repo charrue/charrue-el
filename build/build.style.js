@@ -36,7 +36,7 @@ const styles = packages
     return name ? name === compName : true
   })
   .map(name => {
-    const scssPath = resolve(__dirname, `../packages/${name}/styles/index.scss`)
+    const scssPath = resolve(__dirname, `../packages/${name}/index.scss`)
     if (!fs.existsSync(scssPath)) {
       gulp.task(name, (done) => done())
       return
