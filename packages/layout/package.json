@@ -11,10 +11,8 @@
   "license": "MIT",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
-  "dependencies": {
-    "@charrue/layout-internal": "workspace:*"
-  },
   "devDependencies": {
+  "@charrue/layout-internal": "workspace:*",
     "@charrue/build-v2": "workspace:*"
   },
   "scripts": {

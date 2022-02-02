@@ -15,10 +15,8 @@
   "peerDependencies": {
     "vue": "3"
   },
-  "dependencies": {
-    "@charrue/layout-internal": "workspace:*"
-  },
   "devDependencies": {
+    "@charrue/layout-internal": "workspace:*",
     "@charrue/build-v3": "workspace:*"
   },
   "scripts": {
