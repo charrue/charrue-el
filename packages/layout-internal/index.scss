@@ -157,11 +157,9 @@ $default-active-submenu-bg-color: #000c17;
   }
   &-header {
     flex: 0 0 auto;
-    background: var(--layout-main-header-bg-color);
   }
-  &-bottom {
+  &-footer {
     flex: 0 0 auto;
-    background: var(--layout-main-header-bg-color);
   }
   &-main {
     flex: 1;

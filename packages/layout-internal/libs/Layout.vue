@@ -8,7 +8,6 @@
       :data="data"
       :logo="logo"
       :title="title"
-      :route-params="routeParams"
       :route="route"
       :absolute="absolute"
       :authorized="authorized"
@@ -42,15 +41,15 @@
         </template>
       </layout-header>
 
-      <layout-content :content-style="contentStyle" :animation="animation">
+      <layout-content :animation="animation">
         <template #content-header>
           <slot name="content-header"></slot>
         </template>
         <template #content>
           <slot></slot>
         </template>
-        <template #content-bottom>
-          <slot name="content-bottom"></slot>
+        <template #content-footer>
+          <slot name="content-footer"></slot>
         </template>
       </layout-content>
     </div>
@@ -94,13 +93,6 @@ export default {
     },
     logo: String,
     title: String,
-    routeParams: [Function, Object],
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
     sidebarWidth: {
       type: Array,
       default() {

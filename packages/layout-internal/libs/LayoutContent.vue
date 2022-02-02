@@ -3,7 +3,7 @@
     <div class="charrue-layout-content-header">
       <slot name="content-header"></slot>
     </div>
-    <div class="charrue-layout-content-main" :style="contentStyle">
+    <div class="charrue-layout-content-main">
       <template v-if="animation">
         <transition name="fade-transform" mode="out-in">
           <slot name="content"></slot>
@@ -13,8 +13,8 @@
         <slot name="content"></slot>
       </template>
     </div>
-    <div class="charrue-layout-content-bottom">
-      <slot name="content-bottom"></slot>
+    <div class="charrue-layout-content-footer">
+      <slot name="content-footer"></slot>
     </div>
   </section>
 </template>
@@ -23,12 +23,6 @@
 export default {
   name: "LayoutContent",
   props: {
-    contentStyle: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
     animation: {
       type: Boolean,
       default: true,
