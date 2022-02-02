@@ -294,10 +294,9 @@ importers:
     specifiers:
       '@charrue/build-v2': workspace:*
       '@charrue/layout-internal': workspace:*
-    dependencies:
-      '@charrue/layout-internal': link:../layout-internal
     devDependencies:
       '@charrue/build-v2': link:../build-v2
+      '@charrue/layout-internal': link:../layout-internal
 
   packages/layout-internal:
     specifiers: {}
@@ -306,10 +305,9 @@ importers:
     specifiers:
       '@charrue/build-v3': workspace:*
       '@charrue/layout-internal': workspace:*
-    dependencies:
-      '@charrue/layout-internal': link:../layout-internal
     devDependencies:
       '@charrue/build-v3': link:../build-v3
+      '@charrue/layout-internal': link:../layout-internal
 
   packages/schema-form:
     specifiers:
