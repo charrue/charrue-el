@@ -153,19 +153,14 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
             index: $props.menuItem.path
           }, {
             title: vue.withCtx(() => [
-              vue.createElementVNode("div", {
-                class: vue.normalizeClass([
-                  "submenu-title",
-                  $props.menuItem.icon ? "submenu-title-with-icon" : ""
-                ])
-              }, [
-                vue.createElementVNode("i", {
-                  class: vue.normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
-                }, null, 2),
-                vue.createElementVNode("span", {
-                  class: vue.normalizeClass([$props.menuTextClass, "common-menu-text"])
-                }, vue.toDisplayString($props.menuItem.title), 3)
-              ], 2)
+              vue.createElementVNode("span", {
+                class: vue.normalizeClass([$props.menuTextClass, "common-menu-text"])
+              }, vue.toDisplayString($props.menuItem.title), 3)
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode("i", {
+                class: vue.normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+              }, null, 2)
             ]),
             _: 1
           }, 8, ["index"])
@@ -176,19 +171,14 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
         index: $props.menuItem.path
       }, {
         title: vue.withCtx(() => [
-          vue.createElementVNode("div", {
-            class: vue.normalizeClass([
-              "submenu-title",
-              $props.menuItem.icon ? "submenu-title-with-icon" : ""
-            ])
-          }, [
-            vue.createElementVNode("i", {
-              class: vue.normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
-            }, null, 2),
-            vue.createElementVNode("span", {
-              class: vue.normalizeClass([$props.menuTextClass, "common-menu-text"])
-            }, vue.toDisplayString($props.menuItem.title), 3)
-          ], 2)
+          vue.createElementVNode("span", {
+            class: vue.normalizeClass([$props.menuTextClass, "common-menu-text"])
+          }, vue.toDisplayString($props.menuItem.title), 3)
+        ]),
+        default: vue.withCtx(() => [
+          vue.createElementVNode("i", {
+            class: vue.normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+          }, null, 2)
         ]),
         _: 1
       }, 8, ["index"]))
@@ -372,8 +362,8 @@ const _hoisted_2$3 = {
   key: 0,
   class: "logo-container"
 };
-const _hoisted_3$1 = ["src"];
-const _hoisted_4 = { key: 1 };
+const _hoisted_3$2 = ["src"];
+const _hoisted_4$1 = { key: 1 };
 function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_link = vue.resolveComponent("router-link");
   const _component_sidebar_item = vue.resolveComponent("sidebar-item");
@@ -397,8 +387,8 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
               key: 0,
               src: $props.logo,
               alt: "logo"
-            }, null, 8, _hoisted_3$1)) : vue.createCommentVNode("v-if", true),
-            $props.title ? (vue.openBlock(), vue.createElementBlock("h1", _hoisted_4, vue.toDisplayString($props.title), 1)) : vue.createCommentVNode("v-if", true)
+            }, null, 8, _hoisted_3$2)) : vue.createCommentVNode("v-if", true),
+            $props.title ? (vue.openBlock(), vue.createElementBlock("h1", _hoisted_4$1, vue.toDisplayString($props.title), 1)) : vue.createCommentVNode("v-if", true)
           ]),
           _: 1
         }, 8, ["to"])
@@ -495,7 +485,7 @@ var script$2 = {
 
 const _hoisted_1$1 = { class: "charrue-layout-header-main" };
 const _hoisted_2$1 = { class: "charrue-layout-header-left" };
-const _hoisted_3 = { class: "charrue-layout-header-right" };
+const _hoisted_3$1 = { class: "charrue-layout-header-right" };
 function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_hamburger = vue.resolveComponent("hamburger");
   return vue.openBlock(), vue.createElementBlock("div", {
@@ -503,10 +493,12 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   }, [
     vue.createElementVNode("div", _hoisted_1$1, [
       vue.createElementVNode("div", _hoisted_2$1, [
-        vue.createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"]),
+        vue.renderSlot(_ctx.$slots, "header-trigger", {}, () => [
+          vue.createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"])
+        ]),
         vue.renderSlot(_ctx.$slots, "header-left")
       ]),
-      vue.createElementVNode("div", _hoisted_3, [
+      vue.createElementVNode("div", _hoisted_3$1, [
         vue.renderSlot(_ctx.$slots, "header-right")
       ])
     ])
@@ -519,12 +511,6 @@ script$2.__file = "layout-internal/libs/LayoutHeader.vue";
 var script$1 = {
   name: "LayoutContent",
   props: {
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     animation: {
       type: Boolean,
       default: true
@@ -534,15 +520,14 @@ var script$1 = {
 
 const _hoisted_1 = { class: "charrue-layout-content-container" };
 const _hoisted_2 = { class: "charrue-layout-content-header" };
+const _hoisted_3 = { class: "charrue-layout-content-main" };
+const _hoisted_4 = { class: "charrue-layout-content-footer" };
 function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return vue.openBlock(), vue.createElementBlock("section", _hoisted_1, [
     vue.createElementVNode("div", _hoisted_2, [
       vue.renderSlot(_ctx.$slots, "content-header")
     ]),
-    vue.createElementVNode("div", {
-      class: "charrue-layout-content-main",
-      style: vue.normalizeStyle($props.contentStyle)
-    }, [
+    vue.createElementVNode("div", _hoisted_3, [
       $props.animation ? (vue.openBlock(), vue.createBlock(vue.Transition, {
         key: 0,
         name: "fade-transform",
@@ -553,7 +538,10 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 3
       })) : vue.renderSlot(_ctx.$slots, "content", { key: 1 })
-    ], 4)
+    ]),
+    vue.createElementVNode("div", _hoisted_4, [
+      vue.renderSlot(_ctx.$slots, "content-footer")
+    ])
   ]);
 }
 
@@ -592,13 +580,6 @@ var script = {
     },
     logo: String,
     title: String,
-    routeParams: [Function, Object],
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     sidebarWidth: {
       type: Array,
       default() {
@@ -674,7 +655,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       data: $props.data,
       logo: $props.logo,
       title: $props.title,
-      "route-params": $props.routeParams,
       route: $props.route,
       absolute: $props.absolute,
       authorized: $props.authorized,
@@ -689,7 +669,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         vue.renderSlot(_ctx.$slots, "sidebar-bottom")
       ]),
       _: 3
-    }, 8, ["collapsed", "data", "logo", "title", "route-params", "route", "absolute", "authorized", "sidebarWidth", "homeUrl", "subMenuComponent"]),
+    }, 8, ["collapsed", "data", "logo", "title", "route", "absolute", "authorized", "sidebarWidth", "homeUrl", "subMenuComponent"]),
     vue.createElementVNode("div", {
       class: "charrue-layout-main",
       style: vue.normalizeStyle($options.mainWidthStyle)
@@ -711,18 +691,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 3
       }, 8, ["collapse", "fixed", "style"]),
-      vue.createVNode(_component_layout_content, {
-        "content-style": $props.contentStyle,
-        animation: $props.animation
-      }, {
+      vue.createVNode(_component_layout_content, { animation: $props.animation }, {
         "content-header": vue.withCtx(() => [
           vue.renderSlot(_ctx.$slots, "content-header")
         ]),
         content: vue.withCtx(() => [
           vue.renderSlot(_ctx.$slots, "default")
         ]),
+        "content-footer": vue.withCtx(() => [
+          vue.renderSlot(_ctx.$slots, "content-footer")
+        ]),
         _: 3
-      }, 8, ["content-style", "animation"])
+      }, 8, ["animation"])
     ], 4)
   ], 2);
 }

@@ -187,99 +187,81 @@ var __vue_render__$5 = function() {
                     attrs: { to: _vm.menuItem.path }
                   },
                   [
-                    _c("el-menu-item", {
-                      attrs: { index: _vm.menuItem.path },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "title",
-                            fn: function() {
-                              return [
-                                _c(
-                                  "div",
-                                  {
-                                    class: [
-                                      "submenu-title",
-                                      _vm.menuItem.icon
-                                        ? "submenu-title-with-icon"
-                                        : ""
-                                    ]
-                                  },
-                                  [
-                                    _c("i", {
+                    _c(
+                      "el-menu-item",
+                      {
+                        attrs: { index: _vm.menuItem.path },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "title",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "span",
+                                    {
                                       class: [
-                                        "sidebar-menu-icon",
-                                        _vm.prefixIconClass,
-                                        _vm.menuItem.icon
+                                        _vm.menuTextClass,
+                                        "common-menu-text"
                                       ]
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        class: [
-                                          _vm.menuTextClass,
-                                          "common-menu-text"
-                                        ]
-                                      },
-                                      [_vm._v(_vm._s(_vm.menuItem.title))]
-                                    )
-                                  ]
-                                )
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        false,
-                        1717388709
-                      )
-                    })
+                                    },
+                                    [_vm._v(_vm._s(_vm.menuItem.title))]
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          false,
+                          2300878676
+                        )
+                      },
+                      [
+                        _c("i", {
+                          class: [
+                            "sidebar-menu-icon",
+                            _vm.prefixIconClass,
+                            _vm.menuItem.icon
+                          ]
+                        })
+                      ]
+                    )
                   ],
                   1
                 )
-              : _c("el-menu-item", {
-                  attrs: { index: _vm.menuItem.path },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "title",
-                      fn: function() {
-                        return [
-                          _c(
-                            "div",
-                            {
-                              class: [
-                                "submenu-title",
-                                _vm.menuItem.icon
-                                  ? "submenu-title-with-icon"
-                                  : ""
-                              ]
-                            },
-                            [
-                              _c("i", {
-                                class: [
-                                  "sidebar-menu-icon",
-                                  _vm.prefixIconClass,
-                                  _vm.menuItem.icon
-                                ]
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  class: [_vm.menuTextClass, "common-menu-text"]
-                                },
-                                [_vm._v(_vm._s(_vm.menuItem.title))]
-                              )
-                            ]
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ])
-                })
+              : _c(
+                  "el-menu-item",
+                  {
+                    attrs: { index: _vm.menuItem.path },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "title",
+                        fn: function() {
+                          return [
+                            _c(
+                              "span",
+                              {
+                                class: [_vm.menuTextClass, "common-menu-text"]
+                              },
+                              [_vm._v(_vm._s(_vm.menuItem.title))]
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  },
+                  [
+                    _c("i", {
+                      class: [
+                        "sidebar-menu-icon",
+                        _vm.prefixIconClass,
+                        _vm.menuItem.icon
+                      ]
+                    })
+                  ]
+                )
           ]
     ],
     2
@@ -762,7 +744,11 @@ var __vue_render__$2 = function() {
           "div",
           { staticClass: "charrue-layout-header-left" },
           [
-            _c("hamburger", { on: { "toggle-click": _vm.toggleSideBar } }),
+            _vm._t("header-trigger", function() {
+              return [
+                _c("hamburger", { on: { "toggle-click": _vm.toggleSideBar } })
+              ]
+            }),
             _vm._v(" "),
             _vm._t("header-left")
           ],
@@ -827,12 +813,6 @@ __vue_render__$2._withStripped = true;
 var script$1 = {
   name: "LayoutContent",
   props: {
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     animation: {
       type: Boolean,
       default: true
@@ -858,7 +838,7 @@ var __vue_render__$1 = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "charrue-layout-content-main", style: _vm.contentStyle },
+      { staticClass: "charrue-layout-content-main" },
       [
         _vm.animation
           ? [
@@ -871,6 +851,13 @@ var __vue_render__$1 = function() {
             ]
           : [_vm._t("content")]
       ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "charrue-layout-content-footer" },
+      [_vm._t("content-footer")],
       2
     )
   ])
@@ -952,13 +939,6 @@ var script = {
     },
     logo: String,
     title: String,
-    routeParams: [Function, Object],
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     sidebarWidth: {
       type: Array,
       default() {
@@ -1043,7 +1023,6 @@ var __vue_render__ = function() {
           data: _vm.data,
           logo: _vm.logo,
           title: _vm.title,
-          "route-params": _vm.routeParams,
           route: _vm.route,
           absolute: _vm.absolute,
           authorized: _vm.authorized,
@@ -1115,10 +1094,7 @@ var __vue_render__ = function() {
           }),
           _vm._v(" "),
           _c("layout-content", {
-            attrs: {
-              "content-style": _vm.contentStyle,
-              animation: _vm.animation
-            },
+            attrs: { animation: _vm.animation },
             scopedSlots: _vm._u(
               [
                 {
@@ -1132,6 +1108,13 @@ var __vue_render__ = function() {
                   key: "content",
                   fn: function() {
                     return [_vm._t("default")]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "content-footer",
+                  fn: function() {
+                    return [_vm._t("content-footer")]
                   },
                   proxy: true
                 }

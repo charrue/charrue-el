@@ -151,19 +151,14 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
             index: $props.menuItem.path
           }, {
             title: withCtx(() => [
-              createElementVNode("div", {
-                class: normalizeClass([
-                  "submenu-title",
-                  $props.menuItem.icon ? "submenu-title-with-icon" : ""
-                ])
-              }, [
-                createElementVNode("i", {
-                  class: normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
-                }, null, 2),
-                createElementVNode("span", {
-                  class: normalizeClass([$props.menuTextClass, "common-menu-text"])
-                }, toDisplayString($props.menuItem.title), 3)
-              ], 2)
+              createElementVNode("span", {
+                class: normalizeClass([$props.menuTextClass, "common-menu-text"])
+              }, toDisplayString($props.menuItem.title), 3)
+            ]),
+            default: withCtx(() => [
+              createElementVNode("i", {
+                class: normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+              }, null, 2)
             ]),
             _: 1
           }, 8, ["index"])
@@ -174,19 +169,14 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
         index: $props.menuItem.path
       }, {
         title: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass([
-              "submenu-title",
-              $props.menuItem.icon ? "submenu-title-with-icon" : ""
-            ])
-          }, [
-            createElementVNode("i", {
-              class: normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
-            }, null, 2),
-            createElementVNode("span", {
-              class: normalizeClass([$props.menuTextClass, "common-menu-text"])
-            }, toDisplayString($props.menuItem.title), 3)
-          ], 2)
+          createElementVNode("span", {
+            class: normalizeClass([$props.menuTextClass, "common-menu-text"])
+          }, toDisplayString($props.menuItem.title), 3)
+        ]),
+        default: withCtx(() => [
+          createElementVNode("i", {
+            class: normalizeClass(["sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+          }, null, 2)
         ]),
         _: 1
       }, 8, ["index"]))
@@ -370,8 +360,8 @@ const _hoisted_2$3 = {
   key: 0,
   class: "logo-container"
 };
-const _hoisted_3$1 = ["src"];
-const _hoisted_4 = { key: 1 };
+const _hoisted_3$2 = ["src"];
+const _hoisted_4$1 = { key: 1 };
 function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_link = resolveComponent("router-link");
   const _component_sidebar_item = resolveComponent("sidebar-item");
@@ -395,8 +385,8 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
               key: 0,
               src: $props.logo,
               alt: "logo"
-            }, null, 8, _hoisted_3$1)) : createCommentVNode("v-if", true),
-            $props.title ? (openBlock(), createElementBlock("h1", _hoisted_4, toDisplayString($props.title), 1)) : createCommentVNode("v-if", true)
+            }, null, 8, _hoisted_3$2)) : createCommentVNode("v-if", true),
+            $props.title ? (openBlock(), createElementBlock("h1", _hoisted_4$1, toDisplayString($props.title), 1)) : createCommentVNode("v-if", true)
           ]),
           _: 1
         }, 8, ["to"])
@@ -493,7 +483,7 @@ var script$2 = {
 
 const _hoisted_1$1 = { class: "charrue-layout-header-main" };
 const _hoisted_2$1 = { class: "charrue-layout-header-left" };
-const _hoisted_3 = { class: "charrue-layout-header-right" };
+const _hoisted_3$1 = { class: "charrue-layout-header-right" };
 function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_hamburger = resolveComponent("hamburger");
   return openBlock(), createElementBlock("div", {
@@ -501,10 +491,12 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   }, [
     createElementVNode("div", _hoisted_1$1, [
       createElementVNode("div", _hoisted_2$1, [
-        createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"]),
+        renderSlot(_ctx.$slots, "header-trigger", {}, () => [
+          createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"])
+        ]),
         renderSlot(_ctx.$slots, "header-left")
       ]),
-      createElementVNode("div", _hoisted_3, [
+      createElementVNode("div", _hoisted_3$1, [
         renderSlot(_ctx.$slots, "header-right")
       ])
     ])
@@ -517,12 +509,6 @@ script$2.__file = "layout-internal/libs/LayoutHeader.vue";
 var script$1 = {
   name: "LayoutContent",
   props: {
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     animation: {
       type: Boolean,
       default: true
@@ -532,15 +518,14 @@ var script$1 = {
 
 const _hoisted_1 = { class: "charrue-layout-content-container" };
 const _hoisted_2 = { class: "charrue-layout-content-header" };
+const _hoisted_3 = { class: "charrue-layout-content-main" };
+const _hoisted_4 = { class: "charrue-layout-content-footer" };
 function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("section", _hoisted_1, [
     createElementVNode("div", _hoisted_2, [
       renderSlot(_ctx.$slots, "content-header")
     ]),
-    createElementVNode("div", {
-      class: "charrue-layout-content-main",
-      style: normalizeStyle($props.contentStyle)
-    }, [
+    createElementVNode("div", _hoisted_3, [
       $props.animation ? (openBlock(), createBlock(Transition, {
         key: 0,
         name: "fade-transform",
@@ -551,7 +536,10 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 3
       })) : renderSlot(_ctx.$slots, "content", { key: 1 })
-    ], 4)
+    ]),
+    createElementVNode("div", _hoisted_4, [
+      renderSlot(_ctx.$slots, "content-footer")
+    ])
   ]);
 }
 
@@ -590,13 +578,6 @@ var script = {
     },
     logo: String,
     title: String,
-    routeParams: [Function, Object],
-    contentStyle: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
     sidebarWidth: {
       type: Array,
       default() {
@@ -672,7 +653,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       data: $props.data,
       logo: $props.logo,
       title: $props.title,
-      "route-params": $props.routeParams,
       route: $props.route,
       absolute: $props.absolute,
       authorized: $props.authorized,
@@ -687,7 +667,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         renderSlot(_ctx.$slots, "sidebar-bottom")
       ]),
       _: 3
-    }, 8, ["collapsed", "data", "logo", "title", "route-params", "route", "absolute", "authorized", "sidebarWidth", "homeUrl", "subMenuComponent"]),
+    }, 8, ["collapsed", "data", "logo", "title", "route", "absolute", "authorized", "sidebarWidth", "homeUrl", "subMenuComponent"]),
     createElementVNode("div", {
       class: "charrue-layout-main",
       style: normalizeStyle($options.mainWidthStyle)
@@ -709,18 +689,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 3
       }, 8, ["collapse", "fixed", "style"]),
-      createVNode(_component_layout_content, {
-        "content-style": $props.contentStyle,
-        animation: $props.animation
-      }, {
+      createVNode(_component_layout_content, { animation: $props.animation }, {
         "content-header": withCtx(() => [
           renderSlot(_ctx.$slots, "content-header")
         ]),
         content: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
+        "content-footer": withCtx(() => [
+          renderSlot(_ctx.$slots, "content-footer")
+        ]),
         _: 3
-      }, 8, ["content-style", "animation"])
+      }, 8, ["animation"])
     ], 4)
   ], 2);
 }
