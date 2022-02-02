@@ -5,7 +5,9 @@
   >
     <div class="charrue-layout-header-main">
       <div class="charrue-layout-header-left">
-        <hamburger @toggle-click="toggleSideBar" />
+        <slot name="header-trigger">
+          <hamburger @toggle-click="toggleSideBar" />
+        </slot>
         <slot name="header-left"></slot>
       </div>
       <div class="charrue-layout-header-right">
