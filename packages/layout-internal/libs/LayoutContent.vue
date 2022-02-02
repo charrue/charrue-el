@@ -13,6 +13,9 @@
         <slot name="content"></slot>
       </template>
     </div>
+    <div class="charrue-layout-content-bottom">
+      <slot name="content-bottom"></slot>
+    </div>
   </section>
 </template>
 

@@ -49,6 +49,9 @@
         <template #content>
           <slot></slot>
         </template>
+        <template #content-bottom>
+          <slot name="content-bottom"></slot>
+        </template>
       </layout-content>
     </div>
   </div>

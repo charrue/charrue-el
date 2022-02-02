@@ -46,41 +46,42 @@ const TOTAL_MENUS = [
   {
     title: "page",
     path: "/page",
-    icon: "el-icon-document",
+    icon: "iconfont c-mobile",
     children: [
       {
         path: "page1",
         title: "page1",
-        icon: "el-icon-document",
+        icon: "iconfont c-desktop",
         redirect: "/page/page1/page5",
         children: [
           {
             path: "page4",
             title: "page4",
-            icon: "el-icon-document",
+            icon: "iconfont c-button",
           },
           {
             path: "page5",
             title: "page5",
-            icon: "el-icon-document",
+            icon: "iconfont c-cell",
           },
         ],
       },
       {
         path: "page2",
         title: "page3",
-        icon: "el-icon-document",
+        icon: "iconfont c-empty",
       },
     ],
   },
   {
     title: "element-ui-plus-extension",
     path: "/element-ui-plus-extension",
-    icon: "el-icon-document",
+    icon: "iconfont c-search",
     children: [
       {
         title: "form-field",
         path: "/element-ui-plus-extension/form-field",
+        icon: "iconfont c-countdown",
       }
     ]
   }
