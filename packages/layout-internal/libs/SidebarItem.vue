@@ -32,36 +32,20 @@
     <template v-else>
       <router-link v-if="route" :to="menuItem.path" class="menu-router-link">
         <el-menu-item :index="menuItem.path">
+          <i :class="['sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
           <template #title>
-            <div
-              :class="[
-                'submenu-title',
-                menuItem.icon ? 'submenu-title-with-icon' : '',
-              ]"
-            >
-              <i
-                :class="['sidebar-menu-icon', prefixIconClass, menuItem.icon]"
-              ></i>
-              <span :class="[menuTextClass, 'common-menu-text']">{{
-                menuItem.title
-              }}</span>
-            </div>
+            <span :class="[menuTextClass, 'common-menu-text']">{{
+              menuItem.title
+            }}</span>
           </template>
         </el-menu-item>
       </router-link>
       <el-menu-item v-else :index="menuItem.path">
+        <i :class="['sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
         <template #title>
-          <div
-            :class="[
-              'submenu-title',
-              menuItem.icon ? 'submenu-title-with-icon' : '',
-            ]"
-          >
-            <i :class="['sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
-            <span :class="[menuTextClass, 'common-menu-text']">{{
-              menuItem.title
-            }}</span>
-          </div>
+          <span :class="[menuTextClass, 'common-menu-text']">{{
+            menuItem.title
+          }}</span>
         </template>
       </el-menu-item>
     </template>

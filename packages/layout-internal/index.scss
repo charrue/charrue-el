@@ -138,7 +138,8 @@ $default-active-submenu-bg-color: #000c17;
     .charrue-layout-header-right {
       display: flex;
       align-items: center;
-      padding-left: 25px;
+      padding-left: 24px;
+      padding-right: 24px;
       height: 100%;
     }
   }
@@ -155,6 +156,10 @@ $default-active-submenu-bg-color: #000c17;
     box-sizing: border-box;
   }
   &-header {
+    flex: 0 0 auto;
+    background: var(--layout-main-header-bg-color);
+  }
+  &-bottom {
     flex: 0 0 auto;
     background: var(--layout-main-header-bg-color);
   }
