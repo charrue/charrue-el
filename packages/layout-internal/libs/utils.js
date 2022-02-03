@@ -35,7 +35,9 @@ export function urlToList(url) {
  */
 export function menuDataFormatter(data, parentPath = "") {
   return data.map((item) => {
-    let { path, redirect } = item;
+    let { path } = item;
+    parentPath = cleanPath(parentPath);
+
     if (path && !isUrl(path)) {
       const isRootPath = path[0] === "/";
       if (path) {
@@ -45,15 +47,10 @@ export function menuDataFormatter(data, parentPath = "") {
 
     path = cleanPath(path);
 
-    // 如果redirect以 '/' 开头，则表示是绝对路径，不用做路径拼接
-    if (redirect && redirect[0] !== "/") {
-      // 否则用父级的路径拼接上 redirect的值
-      redirect = cleanPath(`${path}/${redirect}`);
-    }
     const result = {
       ...item,
       path,
-      redirect,
+      parentPath
     };
     if (item.children) {
       result.children = menuDataFormatter(
@@ -68,20 +65,25 @@ export function menuDataFormatter(data, parentPath = "") {
 /**
  * @param { RegisterMenuData[] } processedMenuData
  */
-export function getMenuDataPathMapping(processedMenuData, _mapping = {}) {
-  if (!Array.isArray(processedMenuData)) return _mapping;
+export function getMenuDataPathMapping(menuList) {
+  let mapping = {}
 
-  let mapping = {
-    ..._mapping,
-  };
-  processedMenuData.forEach((item) => {
-    if (item.path) {
-      mapping[item.path] = item;
-    }
-    if (item.children) {
-      mapping = getMenuDataPathMapping(item.children, mapping);
-    }
-  });
+  const setMapping = (list) => {
+    const itemList = []
+    list.forEach(item => {
+      mapping[item.path] = item
+      if (item.children && Array.isArray(item.children) && item.children.length > 0) {
+        itemList.push(...item.children)
+      }
+    })
+    return itemList
+  }
+
+  let list = setMapping(menuList)
+  while(list && list.length > 0) {
+    list = setMapping(list)
+  }
+
   return mapping;
 }
 

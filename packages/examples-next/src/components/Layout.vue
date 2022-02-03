@@ -1,11 +1,12 @@
 <template>
   <div class="example-container" :class="['theme-' + theme]">
     <layout
-      ref="layoutRef"
-      v-model:collapsed="collapsed"
+      :collapsed="collapsed"
+      @update:collapsed="(val) => collapsed = val"
       :data="menuData"
       title="Vue3 Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
+      :regex-to-path="regexToPath"
     >
       <template #sidebar-top>
         <div class="side-top-title">主题切换</div>
@@ -41,7 +42,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref } from "vue";
 const TOTAL_MENUS = [
   {
     title: "page",
@@ -68,8 +69,13 @@ const TOTAL_MENUS = [
       },
       {
         path: "page2",
-        title: "page3",
+        title: "page2",
         icon: "iconfont c-empty",
+      },
+      {
+        path: "page3",
+        title: "page3",
+        icon: "el-icon-document",
       },
     ],
   },
@@ -112,9 +118,9 @@ export default defineComponent({
       document.body.className = cls.join(" ");
     };
 
-    console.log(getCurrentInstance());
-
-    const layoutRef = ref()
+    const regexToPath = ref({
+      '/page/page3(.*)': '/page/page3',
+    })
 
     return {
       collapsed,
@@ -122,7 +128,7 @@ export default defineComponent({
       menuData,
       theme,
       onThemeChange,
-      layoutRef
+      regexToPath
     };
   },
 });
