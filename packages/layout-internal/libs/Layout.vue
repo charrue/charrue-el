@@ -14,6 +14,7 @@
       :sidebarWidth="sidebarWidth"
       :homeUrl="homeUrl"
       :subMenuComponent="componentConfig.subMenu"
+      :regex-to-path="regexToPath"
     >
       <template #sidebar-top>
         <slot name="sidebar-top"></slot>
@@ -115,6 +116,10 @@ export default {
     homeUrl: {
       type: String,
       default: "/",
+    },
+    // 设置多路由对应一个菜单项，匹配模式参考 path-to-regexp
+    regexToPath: {
+      type: Object,
     },
   },
   data() {

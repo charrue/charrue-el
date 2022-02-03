@@ -5,8 +5,8 @@
       :data="menuData"
       title="Vue Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
-      :route-params="routeParams"
       :authorized="authority"
+      :regex-to-path="regexToPath"
     >
       <template slot="sidebar-top">
         <div class="side-top-title">主题切换</div>
@@ -70,6 +70,11 @@ const TOTAL_MENUS = [
       },
       {
         path: "page2",
+        title: "page2",
+        icon: "el-icon-document",
+      },
+      {
+        path: "page3",
         title: "page3",
         icon: "el-icon-document",
       },
@@ -94,14 +99,6 @@ export default defineComponent({
       console.log(val);
     });
 
-    const routeParams = (item) => {
-      return {
-        query: {
-          path: item.path,
-        },
-      };
-    };
-
     const theme = ref("normal");
     const onThemeChange = (value) => {
       const cls = Array.from(document.body.classList);
@@ -122,14 +119,18 @@ export default defineComponent({
       }
     };
 
+    const regexToPath = ref({
+      '/page/page3(.*)': '/page/page3',
+    })
+
     return {
       collapsed,
-      routeParams,
       menuData,
       theme,
       onThemeChange,
       authority,
       auth,
+      regexToPath
     };
   },
 });

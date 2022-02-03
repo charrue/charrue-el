@@ -39,68 +39,54 @@ import {
   getMenuDataPathMapping,
   isFunction,
 } from "./utils";
+import { pathToRegexp } from "path-to-regexp"
 import SidebarItem from "./SidebarItem.vue";
+
 export default {
   name: "GlobalAside",
   components: {
     SidebarItem,
   },
   props: {
-    /**
-     * 导航菜单数据
-     */
+    // 导航菜单数据源
     data: {
       type: Array,
       default() {
         return [];
       },
     },
-    /**
-     * 导航菜单是否处于折叠状态
-     */
+    // 控制菜单的收起和展开
     collapsed: {
       type: Boolean,
       default: false,
     },
-    /**
-     * 导航菜单标题区域的logo
-     */
+    // 侧边栏的左上角的logo的url
     logo: String,
-    /**
-     * 导航菜单标题区域的标题文字
-     */
+    // 导航菜单标题区域的标题文字
     title: String,
-    /**
-     * 是否启用路由模式，依赖vue-router
-     */
+    // 是否启用路由模式
     route: {
       type: Boolean,
       default: true,
     },
-    /**
-     * 是否将侧边栏设置为position: absolute, 使得可以相对于其他容器进行定位
-     */
+    // 是否将侧边栏设置为position: absolute, 使得可以相对于其他容器进行定位
     absolute: {
       type: Boolean,
       default: false,
     },
-    /**
-     * 控制导航菜单的展示
-     * ({ menu, index, deep, path, parent }) => AsideMenuData[]
-     */
+    // 控制导航菜单的展示
+    // ({ menu, index, deep, path, parent }) => AsideMenuData[]
     authorized: Function,
-    /**
-     * 控制菜单是否可用
-     */
-    checkMenuDisabled: Function,
-    /**
-     * 导航菜单折叠，展开时的宽度
-     */
+    // 设置导航菜单折叠、展开时的宽度
     sidebarWidth: {
       type: Array,
       default() {
         return [54, 200];
       },
+    },
+    // 设置多路由对应一个菜单项，匹配模式参考 path-to-regexp
+    regexToPath: {
+      type: Object,
     },
     homeUrl: {
       type: String,
@@ -108,7 +94,7 @@ export default {
     },
     subMenuComponent: {
       type: String
-    }
+    },
   },
   data() {
     return {
@@ -148,6 +134,29 @@ export default {
       immediate: true,
       deep: true,
     },
+  },
+  created() {
+    if (this.route) {
+      this.$watch(
+        "$route.path",
+        (currentRoute) => {
+          const matchedRegex = this.regexToPath ? Object.keys(this.regexToPath).find(reg => pathToRegexp(reg).test(currentRoute)) : null
+
+          if (matchedRegex) {
+            this.activeRoutePath = this.regexToPath[matchedRegex]
+          } else {
+            this.activeRoutePath = currentRoute;
+          }
+
+          // 菜单栏展开项包括当前url，以及由当前url所解析出来的父级url
+          let openKeys = urlToList(this.activeRoutePath);
+          this.openKeys = openKeys;
+        },
+        {
+          immediate: true,
+        }
+      );
+    }
   },
   methods: {
     filterAsideMenuData() {
@@ -227,28 +236,6 @@ export default {
       }
 
       return menuCopy;
-    }
-  },
-  created() {
-    if (this.route) {
-      this.$watch(
-        "$route.path",
-        (val) => {
-          if (
-            this.menuDataPathMapping[val] &&
-            this.menuDataPathMapping[val].redirect
-          ) {
-            this.activeRoutePath = this.menuDataPathMapping[val].redirect;
-          } else {
-            this.activeRoutePath = val;
-          }
-
-          this.openKeys = urlToList(val);
-        },
-        {
-          immediate: true,
-        }
-      );
     }
   },
 };
