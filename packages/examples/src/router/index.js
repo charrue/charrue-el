@@ -11,6 +11,17 @@ const routes = [
     redirect: "/page/page1",
   },
   {
+    path: '/extra',
+    component: PageLayout,
+    children: [
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('@/views/About.vue'),
+      }
+    ]
+  },
+  {
     path: "/page",
     component: PageLayout,
     children: [

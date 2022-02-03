@@ -36,6 +36,8 @@ export function urlToList(url) {
 export function menuDataFormatter(data, parentPath = "") {
   return data.map((item) => {
     let { path } = item;
+    parentPath = cleanPath(parentPath);
+
     if (path && !isUrl(path)) {
       const isRootPath = path[0] === "/";
       if (path) {

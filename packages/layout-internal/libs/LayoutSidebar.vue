@@ -150,6 +150,15 @@ export default {
 
           // 菜单栏展开项包括当前url，以及由当前url所解析出来的父级url
           let openKeys = urlToList(this.activeRoutePath);
+          const currentRouteMenuData = this.menuDataPathMapping[this.activeRoutePath];
+          if (currentRouteMenuData && currentRouteMenuData.parentPath) {
+            // 查找到当前菜单项的父级，将父级的path segments添加到openKeys中
+            urlToList(currentRouteMenuData.parentPath).forEach(path => {
+              if (!openKeys.includes(path)) {
+                openKeys.push(path);
+              }
+            });
+          }
           this.openKeys = openKeys;
         },
         {

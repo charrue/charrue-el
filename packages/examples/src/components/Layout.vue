@@ -78,6 +78,11 @@ const TOTAL_MENUS = [
         title: "page3",
         icon: "el-icon-document",
       },
+      {
+        path: "/extra/about",
+        title: "about",
+        icon: "el-icon-document",
+      },
     ],
   },
   {

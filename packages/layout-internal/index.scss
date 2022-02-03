@@ -226,8 +226,9 @@ $default-active-submenu-bg-color: #000c17;
 
     &--collapse {
       .el-submenu__title {
-        .common-menu-text {
+        .charrue-sidebar-menu-text {
           display: none;
+          margin-left: 0;
         }
       }
     }
@@ -237,13 +238,13 @@ $default-active-submenu-bg-color: #000c17;
     width: 100%;
     text-align: left;
     @include common-menu-text-color;
-    .sidebar-menu-icon, .el-submenu__icon-arrow  {
+    .charrue-sidebar-menu-icon, .el-submenu__icon-arrow  {
       @include common-menu-text-color;
     }
     &:hover {
       @include hover-menu-text-color;
       @include hover-menu-text-bg;
-      a, .sidebar-menu-icon, .el-submenu__icon-arrow  {
+      a, .charrue-sidebar-menu-icon, .el-submenu__icon-arrow  {
         @include hover-menu-text-color;
         // @include hover-menu-text-bg;
         text-decoration: none;
@@ -258,7 +259,7 @@ $default-active-submenu-bg-color: #000c17;
     &.is-active {
       @include active-menu-text-color;
       @include active-menu-text-bg;
-      a, .sidebar-menu-icon, .el-submenu__icon-arrow {
+      a, .charrue-sidebar-menu-icon, .el-submenu__icon-arrow {
         @include active-menu-text-color;
       }
     }
@@ -269,13 +270,13 @@ $default-active-submenu-bg-color: #000c17;
       text-align: left;
       @include common-menu-text-color;
 
-      .sidebar-menu-icon {
+      .charrue-sidebar-menu-icon {
         @include common-menu-text-color;
       }
       &:hover {
         @include hover-menu-text-color;
         @include hover-menu-text-bg;
-        .sidebar-menu-icon, .el-submenu__icon-arrow {
+        .charrue-sidebar-menu-icon, .el-submenu__icon-arrow {
           @include hover-menu-text-color;
         }
       }
@@ -303,6 +304,9 @@ $default-active-submenu-bg-color: #000c17;
     }
   }
 
+  .charrue-sidebar-menu-text {
+    margin-left: 8px;
+  }
 
   .menu-router-link {
     text-decoration: none;
