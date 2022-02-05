@@ -25,10 +25,9 @@
     </el-alert>
     <div class="content">
       <schema-form
-        class="form-content"
-        ref="schemaFormRef"
-        :schema="schema"
         v-model="formData"
+        class="form-content"
+        :schema="schema"
         v-bind="schemaFormProps"
         v-on="schemaFormEvents"
       ></schema-form>
@@ -36,6 +35,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import {
   basic,
@@ -83,6 +83,18 @@ export default {
     formDataValue() {
       return JSON.stringify(this.formData, null, 2).trim();
     },
+  },
+  watch: {
+    query(val) {
+      if (val.type) {
+        this.type = val.type;
+        this.onChange(val.type);
+      }
+    },
+  },
+  created() {
+    const query = getQueryVariable();
+    this.query = query;
   },
   methods: {
     onChange(val) {
@@ -153,18 +165,6 @@ export default {
         }
       }
     },
-  },
-  watch: {
-    query(val) {
-      if (val.type) {
-        this.type = val.type;
-        this.onChange(val.type);
-      }
-    },
-  },
-  created() {
-    const query = getQueryVariable();
-    this.query = query;
   },
 };
 </script>

@@ -10,7 +10,7 @@ const { camelize, upperCaseFirst } = require("./utils")
 
 const pwd = process.cwd()
 const esbuild = rollupEsBuildPlugin.default ? rollupEsBuildPlugin.default : rollupEsBuildPlugin
-const minify = rollupEsBuildPlugin.minify
+const {minify} = rollupEsBuildPlugin
 
 const VUE_DEMI_IIFE = fs.readFileSync(require.resolve('vue-demi/lib/index.iife.js'), 'utf-8')
 const injectVueDemi = {
@@ -22,9 +22,8 @@ const injectVueDemi = {
 
 const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {}) => {
   const isTs = input.endsWith('.ts')
-  const getPkgDir = (...args) => {
-    return path.resolve(pwd, ...args)
-  }
+  const getPkgDir = (...args) => path.resolve(pwd, ...args)
+  // eslint-disable-next-line global-require
   let deps = require(getPkgDir("package.json")).dependencies || {}
   deps = Object.keys(deps)
 
@@ -47,14 +46,12 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
     external(id) {
       const aboutVue = /^vue/.test(id)
       const aboutCharrue = ["all", "charrue"].indexOf(ignoreDependencies) > -1 ? false : /^@charrue/.test(id)
-      const aboutDep = ["all", "dependencies"].indexOf(ignoreDependencies) > -1 ? false : deps.some(k => new RegExp('^' + k).test(id))
+      const aboutDep = ["all", "dependencies"].indexOf(ignoreDependencies) > -1 ? false : deps.some(k => new RegExp(`^${  k}`).test(id))
       return aboutVue || aboutCharrue || aboutDep
     },
   }
 
-  const getOutFile = (name = "index.js") => {
-    return getPkgDir(`./dist/${name}`)
-  }
+  const getOutFile = (filename = "index.js") => getPkgDir(`./dist/${filename}`)
   const outOptions = [
     {
       format: 'cjs',
@@ -87,6 +84,7 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
 
   const bundle = await rollup.rollup(inputOptions)
   console.log(name, 'done')
+  // eslint-disable-next-line no-return-await
   await Promise.all(outOptions.map(async (t) => await bundle.write(t)))
 }
 
@@ -95,7 +93,7 @@ const resolveInput = () => {
   const {
     input,
     name,
-    ['ignore-dependencies']: ignoreDependencies
+    'ignore-dependencies': ignoreDependencies
   } = argv
 
   return {

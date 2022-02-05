@@ -2,8 +2,7 @@ import { Radio, RadioGroup, RadioButton } from "element-ui";
 import { createInstance } from '../src/common';
 import { createElRadioGroupTestUtils } from '../src/radio';
 
-const createRadioInstance = (options = {}) => {
-  return createInstance({
+const createRadioInstance = (options = {}) => createInstance({
     components: {
       'el-radio': Radio,
       'el-radio-group': RadioGroup,
@@ -11,7 +10,6 @@ const createRadioInstance = (options = {}) => {
     },
     ...options,
   })
-}
 
 describe('createElRadioGroupTestUtils', () => {
 

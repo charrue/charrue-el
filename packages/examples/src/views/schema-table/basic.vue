@@ -4,30 +4,31 @@
     index
     :columns="columns"
     selection
-    shouldCacheSelection
+    should-cache-selection
     :page.sync="page"
     :size="size"
     :pagination="paginationOptions"
     :total="total"
-    @page-change="onPageChange"
-    @size-change="onSizeChange"
     index-header="序号"
     :expand-props="{ width: '150px' }"
+    @page-change="onPageChange"
+    @size-change="onSizeChange"
   >
   <template slot="extra-header">
     <span>Expand</span>
   </template>
-    <template v-slot:expand="{ scope }">
+    <template #expand="{ scope }">
       <div>
         {{ scope.$index }}
       </div>
     </template>
   </schema-table>
 </template>
+
 <script>
 import { Data, Columns } from "./data";
 export default {
-  name: "basic",
+  name: "BasicSchemaTablePage",
   data() {
     return {
       data: Data.slice(0, 5),

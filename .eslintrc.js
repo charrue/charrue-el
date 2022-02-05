@@ -1,20 +1,19 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: "babel-eslint",
-  },
   env: {
     browser: true,
     node: true,
     jest: true,
   },
   extends: [
-    "plugin:vue/essential",
-    "eslint:recommended",
-    "plugin:prettier-vue/recommended",
+    "@charrue/base",
+    "@charrue/vue2",
     "prettier",
   ],
   rules: {
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
     "prettier-vue/prettier": "off",
     "vue/script-setup-uses-vars": "off",
     "vue/no-v-model-argument": "off",
@@ -23,7 +22,7 @@ module.exports = {
   overrides: [
     {
       files: ["*.js"],
-      parser: "babel-eslint",
+      parser: "@babel/eslint-parser",
     },
     {
       files: ["*.ts"],

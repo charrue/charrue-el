@@ -5,13 +5,15 @@
       :route="false"
       :fixed-header="false"
       :absolute="true"
-      :collapsed="collapsed"
-      :sidebar-width="[60, 300]"
+      :collapsed.sync="collapsed"
+      :aside-widths="[60, 300]"
     ></layout>
   </div>
 </template>
+
 <script>
 export default {
+  name: "PageFour",
   data() {
     return {
       collapsed: false,

@@ -1,3 +1,3 @@
-import SchemaTable from './schema-table.vue'
+import SchemaTable from "./schema-table.vue"
 
 export default SchemaTable

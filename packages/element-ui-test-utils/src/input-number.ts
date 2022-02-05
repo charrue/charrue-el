@@ -4,9 +4,7 @@ export const createElInputNumberTestUtils = (wrapper: ElWrapper) => {
   const compWrapper = wrapper.findComponent({ name: 'el-input-number' });
   const compVm = compWrapper.vm as ElVm
 
-  const getValue = (): number => {
-    return parseInt(compVm.value, 10)
-  }
+  const getValue = (): number => parseInt(compVm.value, 10)
   const listen = (eventName: string, cb: () => void) => compVm.$on(eventName, cb)
 
   return {

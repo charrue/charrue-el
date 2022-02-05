@@ -16,6 +16,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Hamburger from "./Hamburger.vue"
 export default {

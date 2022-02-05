@@ -21,8 +21,7 @@ const FormField  = (props, context) => {
     context.emit("update:modelValue", value)
   }
 
-  const createField = (componentName, componentProps = {}, componentEvents = {}) => {
-    return h(resolveComponent(componentName), {
+  const createField = (componentName, componentProps = {}, componentEvents = {}) => h(resolveComponent(componentName), {
         modelValue: props.modelValue,
         ...context.attrs,
         'onUpdate:modelValue': onInput,
@@ -30,7 +29,6 @@ const FormField  = (props, context) => {
         ...componentEvents,
       }, context.slots
     )
-  }
   if (type === "number" || type === "string") {
     return createField("el-input")
   }
@@ -92,6 +90,8 @@ const FormField  = (props, context) => {
     type: "dates",
     'value-format': "YYYY-MM-DD",
   })
+
+  return null
 }
 
 FormField.props = ['type', 'modelValue', 'trim']

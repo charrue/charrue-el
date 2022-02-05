@@ -9,16 +9,15 @@ const LayoutPackageStyleDistPath = [
 
 if (!fs.existsSync(STYLE_DIST_PATH)) {
   console.log(`[layout-internal] ${STYLE_DIST_PATH} not exists`)
-  return
+} else {
+  const cssContent = fs.readFileSync(STYLE_DIST_PATH, "utf-8")
+
+  LayoutPackageStyleDistPath.forEach((filePath) => {
+    try {
+      fs.writeFileSync(filePath, cssContent, "utf-8")
+    } catch(e) {
+      console.log(`[layout-internal] synchronize style file failed`)
+    }
+  })
+  console.log(`[layout-internal] synchronize style file success`)
 }
-
-const cssContent = fs.readFileSync(STYLE_DIST_PATH, "utf-8")
-
-LayoutPackageStyleDistPath.forEach((filePath) => {
-  try {
-    fs.writeFileSync(filePath, cssContent, "utf-8")
-  } catch(e) {
-    console.log(`[layout-internal] synchronize style file failed`)
-  }
-})
-console.log(`[layout-internal] synchronize style file success`)

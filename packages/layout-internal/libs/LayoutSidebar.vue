@@ -6,7 +6,7 @@
       :style="{ width, position: absolute ? 'absolute' : 'fixed' }"
     >
       <div v-if="logo || title" class="logo-container">
-        <router-link :to="homeUrl" :class="['menu-router-link']">
+        <router-link :to="homeUrl" class="menu-router-link">
           <img v-if="logo" :src="logo" alt="logo" />
           <h1 v-if="title">{{ title }}</h1>
         </router-link>
@@ -22,16 +22,17 @@
       >
         <sidebar-item
           v-for="item in computedMenuData"
-          :route="route"
           :key="item.path"
-          :subMenuComponent="subMenuComponent"
-          :menuItem="item"
+          :route="route"
+          :sub-menu-component="subMenuComponent"
+          :menu-item="item"
         ></sidebar-item>
       </el-menu>
       <slot name="sidebar-bottom"></slot>
     </div>
   </div>
 </template>
+
 <script>
 import {
   urlToList,
@@ -106,7 +107,7 @@ export default {
   },
   computed: {
     width() {
-      return this.collapsed ? this.sidebarWidth[0] + 'px' : this.sidebarWidth[1] + 'px';
+      return this.collapsed ? `${this.sidebarWidth[0]  }px` : `${this.sidebarWidth[1]  }px`;
     },
     computedMenuData() {
       const menuData = [];
@@ -149,7 +150,7 @@ export default {
           }
 
           // 菜单栏展开项包括当前url，以及由当前url所解析出来的父级url
-          let openKeys = urlToList(this.activeRoutePath);
+          const openKeys = urlToList(this.activeRoutePath);
           const currentRouteMenuData = this.menuDataPathMapping[this.activeRoutePath];
           if (currentRouteMenuData && currentRouteMenuData.parentPath) {
             // 查找到当前菜单项的父级，将父级的path segments添加到openKeys中
@@ -187,7 +188,7 @@ export default {
      * 对菜单数据进行格式化
      */
     _formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? { ...menu } : {};
+      const menuCopy = menu ? { ...menu } : {};
       if (!this.authorized) return menuCopy;
       if (
         isFunction(this.authorized) &&
@@ -217,7 +218,7 @@ export default {
       return menuCopy;
     },
     formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? { ...menu } : {};
+      const menuCopy = menu ? { ...menu } : {};
       if (!this.authorized) return menuCopy;
       if (
         isFunction(this.authorized) &&

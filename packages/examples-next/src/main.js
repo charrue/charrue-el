@@ -12,7 +12,7 @@ import { FormField } from "@charrue/element-ui-plus-extension"
 
 
 const app = createApp(App)
-app.component("form-field", FormField)
+app.component("FormField", FormField)
 
 app.use(Layout)
 app.use(ElementPlus, { locale })
