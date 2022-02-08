@@ -1,18 +1,18 @@
 <template>
-  <div class="example-container" :class="['theme-' + theme]">
-    <layout
+  <div class="example-container" :class="[`theme-${  theme}`]">
+    <charrue-layout
       :collapsed="collapsed"
-      @update:collapsed="(val) => collapsed = val"
       :data="menuData"
       title="Vue3 Admin"
       logo="https://seeklogo.com/images/E/element-ui-logo-A640D7E503-seeklogo.com.png"
       :regex-to-path="regexToPath"
+      @update:collapsed="(val) => collapsed = val"
     >
       <template #sidebar-top>
         <div class="side-top-title">主题切换</div>
         <el-radio-group
-          class="radio-container"
           v-model="theme"
+          class="radio-container"
           @change="onThemeChange"
         >
           <el-radio label="normal">normal</el-radio>
@@ -37,7 +37,7 @@
         </div>
       </template>
       <router-view></router-view>
-    </layout>
+    </charrue-layout>
   </div>
 </template>
 
@@ -133,6 +133,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="scss">
 .menu-header-extra {
   height: 20px;
@@ -204,6 +205,7 @@ export default defineComponent({
   }
 }
 </style>
+
 <style>
 .theme-light {
   --layout-aside-content-bg-color: #ebf1f6;

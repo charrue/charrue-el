@@ -13,8 +13,8 @@
         :element-loading-background="
           loadingOptions && loadingOptions.background
         "
-        @selection-change="onSelectionChange"
         v-bind="tableProps"
+        @selection-change="onSelectionChange"
         v-on="events"
       >
         <!-- 多选操作 -->
@@ -46,9 +46,9 @@
         <!-- 遍历columns，渲染行数据 -->
         <!-- key使用name,label,index的拼接，不使用index，防止column的个数没有变化，但是值发生变化后，表头不更新 -->
         <el-table-column
-          v-for="(item, index) in columns"
+          v-for="(item, idx) in columns"
           v-show="item.hidden !== true"
-          :key="`${item.prop}-${item.label}-${index}`"
+          :key="`${item.prop}-${item.label}-${idx}`"
           :label="item.label"
           :prop="item.prop"
           v-bind="item.attrs"
@@ -72,9 +72,9 @@
           </template>
           <!-- 多级表头 -->
           <template v-if="item.children">
-            <mutli-column
-              v-for="(child, idx) in item.children || []"
-              :key="idx"
+            <multi-column
+              v-for="(child, i) in item.children || []"
+              :key="i"
               :item-column="child"
             />
           </template>
@@ -99,15 +99,15 @@
       <!-- 分页 -->
       <div
         v-if="pagination"
-        :class="['charrue-pagination-wrapper', pagination.class]"
+        class="charrue-pagination-wrapper" :class="[pagination.class]"
         :style="pagination.style"
       >
         <el-pagination
           v-bind="typeof pagination === 'boolean' ? {} : pagination"
           :current-page="page"
-          @update:current-page="onCurrentPageChange"
           :total="computedTotal"
           :page-size="size"
+          @update:current-page="onCurrentPageChange"
           @size-change="handlePaginationSizeChange"
           @current-change="handlePaginationCurrentChange"
           @prev-click="handlePaginationPrevClick"
@@ -119,14 +119,15 @@
     </div>
   </div>
 </template>
+
 <script>
-import MutliColumn from "./mutli-column.vue";
+import MultiColumn from "./multi-column.vue";
 import cloneDeep from "lodash.clonedeep";
 
 export default {
   name: 'SchemaTable',
   components: {
-    MutliColumn,
+    MultiColumn,
   },
   props: {
     data: {
@@ -219,7 +220,9 @@ export default {
       prevPage: 0,
       prevSize: 0,
       startSelect: false,
-      selectionData: {}
+      selectionData: {},
+      cachedSelectionData: [],
+      prevCachedSelectionData: [],
     };
   },
   computed: {
@@ -231,9 +234,8 @@ export default {
             __key: (this.page - 1) * this.size + index + 1,
           };
         });
-      } else {
-        return cloneDeep(this.data);
       }
+      return cloneDeep(this.data);
     },
     computedIndex() {
       // 如果分页了，则索引序号从`size`开始计数
@@ -245,6 +247,15 @@ export default {
     computedTotal() {
       return Number(this.total);
     },
+  },
+  created() {
+    this.proxyElTableMethods();
+    this.proxyElTableEvents();
+    this.prevSize = this.size;
+    this.prevPage = this.page;
+    this.cachedSelectionData = [];
+    // 用于记录当前页之前的勾选总数据，不需要进行响应式转化
+    this.prevCachedSelectionData = [];
   },
   methods: {
     /**
@@ -362,15 +373,6 @@ export default {
         };
       });
     },
-  },
-  created() {
-    this.proxyElTableMethods();
-    this.proxyElTableEvents();
-    this.prevSize = this.size;
-    this.prevPage = this.page;
-    this.cachedSelectionData = [];
-    // 用于记录当前页之前的勾选总数据，不需要进行响应式转化
-    this.prevCachedSelectionData = [];
   },
 };
 </script>

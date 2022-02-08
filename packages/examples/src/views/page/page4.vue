@@ -10,8 +10,10 @@
     ></layout>
   </div>
 </template>
+
 <script>
 export default {
+  name: "PageFour",
   data() {
     return {
       collapsed: false,

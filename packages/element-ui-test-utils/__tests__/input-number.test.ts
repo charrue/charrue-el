@@ -2,14 +2,12 @@ import { InputNumber } from "element-ui";
 import { createInstance } from '../src/common';
 import { createElInputNumberTestUtils } from '../src/input-number';
 
-const createElInputInstance = (options = {}) => {
-  return createInstance({
+const createElInputInstance = (options = {}) => createInstance({
     components: {
       'el-input-number': InputNumber,
     },
     ...options,
   })
-}
 
 describe('createElInputNumberTestUtils', () => {
   it('getValue', () => {

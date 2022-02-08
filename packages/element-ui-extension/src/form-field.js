@@ -49,7 +49,7 @@ export default {
   render(h, context) {
     const { props, slots, listeners, data } = context
     const { type, trim } = props
-    const attrs = Object.assign({}, data.attrs)
+    const attrs = { ...data.attrs}
 
     const onInput = (val) => {
       if (listeners.input) {
@@ -58,8 +58,7 @@ export default {
       }
     }
 
-    const createField = (componentName, componentProps = {}, componentEvents = {}) => {
-      return h(componentName, {
+    const createField = (componentName, componentProps = {}, componentEvents = {}) => h(componentName, {
         props: {
           value: props.value,
           ...componentProps,
@@ -71,15 +70,12 @@ export default {
         },
         slots
       })
-    }
 
     if (type === "number" || type === "string") {
       return createField("el-input")
     }
 
-    const pickerOptions = Object.assign({
-      firstDayOfWeek: 1
-    }, attrs['picker-options'], attrs.pickerOptions)
+    const pickerOptions = {firstDayOfWeek: 1, ...attrs['picker-options'], ...attrs.pickerOptions}
 
     if (type === "date") return createField("el-date-picker", {
       type: "date",
@@ -144,5 +140,7 @@ export default {
       'value-format': "yyyy-MM-dd",
       'picker-options': pickerOptions
     })
+
+    return null
   }
 }

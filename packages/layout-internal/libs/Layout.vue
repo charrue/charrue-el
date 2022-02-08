@@ -11,9 +11,9 @@
       :route="route"
       :absolute="absolute"
       :authorized="authorized"
-      :sidebarWidth="sidebarWidth"
-      :homeUrl="homeUrl"
-      :subMenuComponent="componentConfig.subMenu"
+      :sidebar-width="sidebarWidth"
+      :home-url="homeUrl"
+      :sub-menu-component="componentConfig.subMenu"
       :regex-to-path="regexToPath"
     >
       <template #sidebar-top>
@@ -56,6 +56,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import LayoutSidebar from "./LayoutSidebar.vue";
 import LayoutHeader from "./LayoutHeader.vue";
@@ -63,7 +64,7 @@ import LayoutContent from "./LayoutContent.vue";
 import { getComponentConfig, PluginKey } from "./utils";
 
 export default {
-  name: "Layout",
+  name: "CharrueLayout",
   components: {
     LayoutSidebar,
     LayoutHeader,
@@ -122,10 +123,13 @@ export default {
       type: Object,
     },
   },
+  emits: ["update:collapsed"],
   data() {
     return {
       innerCollapse: false,
-      componentConfig: {},
+      componentConfig: {
+        subMenu: "",
+      },
     };
   },
   computed: {
@@ -159,6 +163,5 @@ export default {
   created() {
     this.componentConfig = getComponentConfig(this[PluginKey].version || 2);
   },
-  emits: ["update:collapsed"],
 };
 </script>

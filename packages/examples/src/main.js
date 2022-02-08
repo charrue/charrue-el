@@ -15,12 +15,13 @@ import { FormField } from "@charrue/element-ui-extension"
 Vue.use(CompositionApi);
 Vue.use(ElementUI);
 Vue.use(Layout);
-Vue.component('schema-table', SchemaTable)
-Vue.component('schema-form', SchemaForm)
-Vue.component('form-field', FormField)
+Vue.component('SchemaTable', SchemaTable)
+Vue.component('SchemaForm', SchemaForm)
+Vue.component('FormField', FormField)
 
 Vue.config.productionTip = false;
 
+// eslint-disable-next-line vue/require-name-property
 new Vue({
   router,
   store,

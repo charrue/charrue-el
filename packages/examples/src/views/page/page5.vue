@@ -6,8 +6,10 @@
     </el-radio-group>
   </div>
 </template>
+
 <script>
 export default {
+  name: "PageFive",
   data() {
     return {
       authValue: "user"

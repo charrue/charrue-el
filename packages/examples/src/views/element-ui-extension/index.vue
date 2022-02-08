@@ -47,9 +47,10 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
-  name: "element-ui-extension",
+  name: "ElementUiExtension",
   data() {
     return {
       formData: {
@@ -75,6 +76,7 @@ export default {
 
 }
 </script>
+
 <style lang="scss">
   .form-item {
     display: flex;

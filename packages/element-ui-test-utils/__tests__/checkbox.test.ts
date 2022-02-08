@@ -2,8 +2,7 @@ import { Checkbox, CheckboxButton, CheckboxGroup } from "element-ui";
 import { createInstance } from '../src/common';
 import { createElCheckboxGroupTestUtils } from '../src/checkbox';
 
-const createCheckboxInstance = (options = {}) => {
-  return createInstance({
+const createCheckboxInstance = (options = {}) => createInstance({
     components: {
       'el-checkbox': Checkbox,
       'el-checkbox-group': CheckboxGroup,
@@ -11,7 +10,6 @@ const createCheckboxInstance = (options = {}) => {
     },
     ...options,
   })
-}
 
 describe('createElCheckboxGroupTestUtils', () => {
 

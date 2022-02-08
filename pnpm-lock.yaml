@@ -5,7 +5,10 @@ importers:
   .:
     specifiers:
       '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.17.0
       '@babel/preset-env': ^7.16.4
+      '@charrue/eslint-config-base': ^0.1.3
+      '@charrue/eslint-config-vue2': ^0.1.2
       '@rollup/plugin-commonjs': ^19.0.0
       '@rollup/plugin-node-resolve': ^13.0.0
       '@rollup/plugin-typescript': ^8.2.1
@@ -13,14 +16,12 @@ importers:
       '@typescript-eslint/parser': ^4.33.0
       '@vue/test-utils': ^1.3.0
       '@vue/vue2-jest': ^27.0.0-alpha.4
-      babel-eslint: ^10.1.0
       babel-jest: ^27.4.4
       cz-conventional-changelog: ^3.3.0
       eslint: ^7.30.0
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^3.4.0
       eslint-plugin-prettier-vue: ^3.1.0
-      eslint-plugin-vue: ^7.12.1
       gulp: ^4.0.2
       gulp-autoprefixer: ^8.0.0
       gulp-clean-css: ^4.3.0
@@ -39,7 +40,10 @@ importers:
       vue-demi: ^0.12.1
     devDependencies:
       '@babel/core': 7.16.12
+      '@babel/eslint-parser': 7.17.0_63d7ce6f05e4f545045a1a196305e767
       '@babel/preset-env': 7.16.11_@babel+core@7.16.12
+      '@charrue/eslint-config-base': 0.1.3
+      '@charrue/eslint-config-vue2': 0.1.2_eslint@7.32.0
       '@rollup/plugin-commonjs': 19.0.2_rollup@2.66.1
       '@rollup/plugin-node-resolve': 13.1.3_rollup@2.66.1
       '@rollup/plugin-typescript': 8.3.0_a652e97aea7ea04fb4c9edbfa5b475e6
@@ -47,14 +51,12 @@ importers:
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.5
       '@vue/test-utils': 1.3.0
       '@vue/vue2-jest': 27.0.0-alpha.4_4488033cb636513a21ae94e7873bed39
-      babel-eslint: 10.1.0_eslint@7.32.0
       babel-jest: 27.4.6_@babel+core@7.16.12
       cz-conventional-changelog: 3.3.0
       eslint: 7.32.0
       eslint-config-prettier: 8.3.0_eslint@7.32.0
       eslint-plugin-prettier: 3.4.1_94254c01413ebaf1ad99cec97ec78f12
       eslint-plugin-prettier-vue: 3.1.0
-      eslint-plugin-vue: 7.20.0_eslint@7.32.0
       gulp: 4.0.2
       gulp-autoprefixer: 8.0.0_gulp@4.0.2
       gulp-clean-css: 4.3.0
@@ -486,6 +488,20 @@ packages:
       source-map: 0.5.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@babel/eslint-parser/7.17.0_63d7ce6f05e4f545045a1a196305e767:
+    resolution: {integrity: sha512-PUEJ7ZBXbRkbq3qqM/jZ2nIuakUBqCYc7Qf52Lj7dlZ6zERnqisdHioL0l4wwQZnmskMeasqUNzLBFKs3nylXA==}
+    engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
+    peerDependencies:
+      '@babel/core': '>=7.11.0'
+      eslint: ^7.5.0 || ^8.0.0
+    dependencies:
+      '@babel/core': 7.16.12
+      eslint: 7.32.0
+      eslint-scope: 5.1.1
+      eslint-visitor-keys: 2.1.0
+      semver: 6.3.0
     dev: true
 
   /@babel/generator/7.16.8:
@@ -1700,6 +1716,28 @@ packages:
 
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+    dev: true
+
+  /@charrue/eslint-config-base/0.1.3:
+    resolution: {integrity: sha512-rER5XcRIW1TTAmMJQ/CynzI+Zsm+5bNe8kqXvHDw8s0loR0SYoloyuB7MZ1SJNCsvsANNEvcTneYInJoj5LUng==}
+    dev: true
+
+  /@charrue/eslint-config-vue-base/0.1.7_eslint@7.32.0:
+    resolution: {integrity: sha512-K1OQIlXTp/UthmW8F4vvuNlnLxXIv1414X+1W47E4AVPS5yti0lygfP4SZKR/uLxmYUIeR6gZ9xix4YKuqN+aQ==}
+    dependencies:
+      eslint-plugin-vue: 8.4.1_eslint@7.32.0
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
+    dev: true
+
+  /@charrue/eslint-config-vue2/0.1.2_eslint@7.32.0:
+    resolution: {integrity: sha512-ugouhe6QWdMrMKux7/w1293AAt1kOWiyhy9b2db7fxEQrYqvwSF4sKJ7PiBdSeHWj9Wf/Q02BdLGUwT06BH/8A==}
+    dependencies:
+      '@charrue/eslint-config-vue-base': 0.1.7_eslint@7.32.0
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
     dev: true
 
   /@cnakazawa/watch/1.0.4:
@@ -4195,6 +4233,14 @@ packages:
       acorn: 7.4.1
     dev: true
 
+  /acorn-jsx/5.3.2_acorn@8.7.0:
+    resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
+    peerDependencies:
+      acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      acorn: 8.7.0
+    dev: true
+
   /acorn-walk/7.2.0:
     resolution: {integrity: sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==}
     engines: {node: '>=0.4.0'}
@@ -4821,24 +4867,6 @@ packages:
 
   /aws4/1.11.0:
     resolution: {integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==}
-
-  /babel-eslint/10.1.0_eslint@7.32.0:
-    resolution: {integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==}
-    engines: {node: '>=6'}
-    deprecated: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
-    peerDependencies:
-      eslint: '>= 4.12.1'
-    dependencies:
-      '@babel/code-frame': 7.16.7
-      '@babel/parser': 7.16.12
-      '@babel/traverse': 7.16.10
-      '@babel/types': 7.16.8
-      eslint: 7.32.0
-      eslint-visitor-keys: 1.3.0
-      resolve: 1.22.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /babel-helper-vue-jsx-merge-props/2.0.3:
     resolution: {integrity: sha512-gsLiKK7Qrb7zYJNgiXKpXblxbV5ffSwR0f5whkPAaBAR4fhi6bwRZxX9wBlIc5M/v8CCkXUbXZL4N/nSE97cqg==}
@@ -8033,6 +8061,21 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-vue/8.4.1_eslint@7.32.0:
+    resolution: {integrity: sha512-nmWOhNmDx9TZ+yP9ZhezTkZUupSHsYA2TocRm+efPSXMOyFrVczVlaIuQcLBjCtI8CbkBiUQ3VcyQsjlIhDrhA==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 7.32.0
+      eslint-utils: 3.0.0_eslint@7.32.0
+      natural-compare: 1.4.0
+      semver: 7.3.5
+      vue-eslint-parser: 8.2.0_eslint@7.32.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /eslint-scope/4.0.3:
     resolution: {integrity: sha512-p7VutNr1O/QrxysMo3E45FjYDTeXBy0iTltPFNSqKAIfjDSXC+4dj+qfyuD8bfAXrW/y6lW3O76VaYNPKfpKrg==}
     engines: {node: '>=4.0.0'}
@@ -8047,6 +8090,14 @@ packages:
     dependencies:
       esrecurse: 4.3.0
       estraverse: 4.3.0
+    dev: true
+
+  /eslint-scope/7.1.0:
+    resolution: {integrity: sha512-aWwkhnS0qAXqNOgKOK0dJ2nvzEbhEvpy8OlJ9kZ0FeZnA6zpjv1/Vei+puGFFX7zkPCkHHXb7IDX3A+7yPrRWg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dependencies:
+      esrecurse: 4.3.0
+      estraverse: 5.3.0
     dev: true
 
   /eslint-utils/2.1.0:
@@ -8074,6 +8125,11 @@ packages:
   /eslint-visitor-keys/2.1.0:
     resolution: {integrity: sha512-0rSmRBzXgDzIsD6mGdJgevzgezI534Cer5L/vyMX0kHzT/jiB43jRhd9YUlMGYLQy2zprNmoT8qasCGtY+QaKw==}
     engines: {node: '>=10'}
+    dev: true
+
+  /eslint-visitor-keys/3.2.0:
+    resolution: {integrity: sha512-IOzT0X126zn7ALX0dwFiUQEdsfzrm4+ISsQS8nukaJXwEyYKRSnEIIDULYg1mCtGp7UUXgfGl7BIolXREQK+XQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
   /eslint/7.32.0:
@@ -8141,6 +8197,15 @@ packages:
       acorn: 7.4.1
       acorn-jsx: 5.3.2_acorn@7.4.1
       eslint-visitor-keys: 1.3.0
+    dev: true
+
+  /espree/9.3.0:
+    resolution: {integrity: sha512-d/5nCsb0JcqsSEeQzFZ8DH1RmxPcglRWh24EFTlUEmCKoehXGdpsx0RkHDubqUI8LSAIKMQp4r9SzQ3n+sm4HQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dependencies:
+      acorn: 8.7.0
+      acorn-jsx: 5.3.2_acorn@8.7.0
+      eslint-visitor-keys: 3.2.0
     dev: true
 
   /esprima/4.0.1:
@@ -17916,6 +17981,24 @@ packages:
       esquery: 1.4.0
       lodash: 4.17.21
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /vue-eslint-parser/8.2.0_eslint@7.32.0:
+    resolution: {integrity: sha512-hvl8OVT8imlKk/lQyhkshqwQQChzHETcBd5abiO4ePw7ib7QUZLfW+2TUrJHKUvFOCFRJrDin5KJO9OHzB5bRQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: '>=6.0.0'
+    dependencies:
+      debug: 4.3.3
+      eslint: 7.32.0
+      eslint-scope: 7.1.0
+      eslint-visitor-keys: 3.2.0
+      espree: 9.3.0
+      esquery: 1.4.0
+      lodash: 4.17.21
+      semver: 7.3.5
     transitivePeerDependencies:
       - supports-color
     dev: true

@@ -3,6 +3,7 @@
     <router-view />
   </div>
 </template>
+
 <style>
 html,
 body,
@@ -10,11 +11,6 @@ body,
   margin: 0;
   padding: 0;
 }
-/* :root {
-  --layout-aside-content-bg-color: green;
-  --layout-aside-hover-text-color: #000;
-  --layout-aside-hover-bg-color: red;
-} */
 
 /* 滚动槽 */
 ::-webkit-scrollbar {

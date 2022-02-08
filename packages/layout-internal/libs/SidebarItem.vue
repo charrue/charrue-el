@@ -8,13 +8,12 @@
     >
       <template #title>
         <div
-          :class="[
-            'submenu-title',
+          class="submenu-title" :class="[
             menuItem.icon ? 'submenu-title-with-icon' : '',
           ]"
         >
-          <i :class="['charrue-sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
-          <span :class="[menuTextClass, 'charrue-sidebar-menu-text']">{{
+          <i class="charrue-sidebar-menu-icon" :class="[prefixIconClass, menuItem.icon]"></i>
+          <span class="charrue-sidebar-menu-text" :class="[menuTextClass]">{{
             menuItem.title
           }}</span>
         </div>
@@ -25,25 +24,25 @@
         :key="child.path"
         :route="route"
         :is-nest="true"
-        :menuItem="child"
-        :subMenuComponent="subMenuComponent"
+        :menu-item="child"
+        :sub-menu-component="subMenuComponent"
       />
     </component>
     <template v-else>
       <router-link v-if="route" :to="menuItem.path" class="menu-router-link">
         <el-menu-item :index="menuItem.path">
-          <i :class="['charrue-sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
+          <i class="charrue-sidebar-menu-icon" :class="[prefixIconClass, menuItem.icon]"></i>
           <template #title>
-            <span :class="[menuTextClass, 'charrue-sidebar-menu-text']">{{
+            <span class="charrue-sidebar-menu-text" :class="[menuTextClass]">{{
               menuItem.title
             }}</span>
           </template>
         </el-menu-item>
       </router-link>
       <el-menu-item v-else :index="menuItem.path">
-        <i :class="['charrue-sidebar-menu-icon', prefixIconClass, menuItem.icon]"></i>
+        <i class="charrue-sidebar-menu-icon" :class="[prefixIconClass, menuItem.icon]"></i>
         <template #title>
-          <span :class="[menuTextClass, 'charrue-sidebar-menu-text']">{{
+          <span class="charrue-sidebar-menu-text" :class="[menuTextClass]">{{
             menuItem.title
           }}</span>
         </template>

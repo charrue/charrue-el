@@ -3,16 +3,10 @@ import type { ElWrapper, ElVm, BaseValueType } from './common';
 export const createElCheckboxGroupTestUtils = (wrapper: ElWrapper) => {
   const checkboxGroupWrapper = wrapper.findComponent({ name: 'el-checkbox-group' });
   const checkboxGroupVm = checkboxGroupWrapper.vm as ElVm
-  const checkboxLabels = checkboxGroupVm.$children.map((item: ElVm) => {
-    return item.label
-  })
+  const checkboxLabels = checkboxGroupVm.$children.map((item: ElVm) => item.label)
 
-  const getValues = (): BaseValueType[] => {
-    return checkboxGroupVm.value
-  }
-  const getCheckboxVmByIndex = (index: number): ElVm => {
-    return checkboxGroupVm.$children[index]
-  }
+  const getValues = (): BaseValueType[] => checkboxGroupVm.value
+  const getCheckboxVmByIndex = (index: number): ElVm => checkboxGroupVm.$children[index]
   const getCheckboxWrapperByIndex = (index = 0): ElWrapper => {
     const elCheckboxWrappers = wrapper.findAllComponents({ name: 'el-checkbox' })
     return elCheckboxWrappers.at(index) as ElWrapper

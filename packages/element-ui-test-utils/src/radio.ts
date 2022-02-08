@@ -3,16 +3,10 @@ import type { ElWrapper, ElVm, BaseValueType } from './common';
 export const createElRadioGroupTestUtils = (wrapper: ElWrapper) => {
   const radioGroupWrapper = wrapper.findComponent({ name: 'el-radio-group' });
   const radioGroupVm: ElVm = radioGroupWrapper.vm as ElVm
-  const radioLabels = radioGroupVm.$children.map((item: ElVm) => {
-    return item.label
-  })
+  const radioLabels = radioGroupVm.$children.map((item: ElVm) => item.label)
 
-  const getValue = (): BaseValueType => {
-    return radioGroupVm.value
-  }
-  const getRadioVmByIndex = (index: number): ElVm => {
-    return radioGroupVm.$children[index] as ElVm
-  }
+  const getValue = (): BaseValueType => radioGroupVm.value
+  const getRadioVmByIndex = (index: number): ElVm => radioGroupVm.$children[index] as ElVm
   const getRadioVmByLabel = (label: BaseValueType): ElVm => {
     const index = radioLabels.indexOf(label)
     return getRadioVmByIndex(index)

@@ -5,6 +5,7 @@
     </el-config-provider>
   </div>
 </template>
+
 <script>
 import locale from "element-plus/lib/locale/lang/zh-cn"
 
@@ -17,6 +18,7 @@ export default {
   }
 }
 </script>
+
 <style>
 body {
   margin: 0;

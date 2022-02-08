@@ -1,10 +1,23 @@
+/* eslint-disable no-param-reassign */
+export function cleanPath(path) {
+  return path.replace(/\/\//g, "/");
+}
+
+export const inBrowser = window != null;
+
+export function isFunction(val) {
+  return typeof val === "function";
+}
+
+
 export const PluginKey = "$CharrueLayoutPluginOptions"
 
 export const getComponentConfig = (version) => {
   const config = {}
-  if (version == 2) {
+  version = Number(version)
+  if (version === 2) {
     config.subMenu = 'el-submenu'
-  } else if (version == 3) {
+  } else if (version === 3) {
     config.subMenu = 'el-sub-menu'
   } else {
     console.error(`[charrue layout] version ${version} is not supported`)
@@ -22,9 +35,7 @@ export function isUrl(path) {
 
 export function urlToList(url) {
   const segments = url.split("/").filter((i) => i);
-  return segments.map((_, index) => {
-    return `/${segments.slice(0, index + 1).join("/")}`;
-  });
+  return segments.map((_, index) => `/${segments.slice(0, index + 1).join("/")}`);
 }
 /**
  * 1. 补全path的路径
@@ -66,7 +77,7 @@ export function menuDataFormatter(data, parentPath = "") {
  * @param { RegisterMenuData[] } processedMenuData
  */
 export function getMenuDataPathMapping(menuList) {
-  let mapping = {}
+  const mapping = {}
 
   const setMapping = (list) => {
     const itemList = []
@@ -85,14 +96,4 @@ export function getMenuDataPathMapping(menuList) {
   }
 
   return mapping;
-}
-
-export function cleanPath(path) {
-  return path.replace(/\/\//g, "/");
-}
-
-export const inBrowser = typeof window !== undefined;
-
-export function isFunction(val) {
-  return typeof val === "function";
 }

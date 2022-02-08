@@ -4,16 +4,17 @@
       style="width: 50px"
       size="mini"
       :value="value"
-      @input="onInput"
       v-bind="props"
+      @input="onInput"
     >
     </el-input>
     <span>个</span>
   </div>
 </template>
+
 <script>
 export default {
-  name: "inner-custom-widget",
+  name: "InnerCustomWidget",
   props: {
     schema: Object,
     value: [Number, String, Array, Object, Boolean],
@@ -23,16 +24,17 @@ export default {
       props: {},
     };
   },
+  created() {
+    this.props = this.schema["ui-props"] || {};
+  },
   methods: {
     onInput(val) {
       this.$emit("input", val);
     },
   },
-  created() {
-    this.props = this.schema["ui-props"] || {};
-  },
 };
 </script>
+
 <style>
 .flex {
   display: flex;

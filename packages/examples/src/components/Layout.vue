@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <layout
+    <charrue-layout
       :collapsed.sync="collapsed"
       :data="menuData"
       title="Vue Admin"
@@ -11,8 +11,8 @@
       <template slot="sidebar-top">
         <div class="side-top-title">主题切换</div>
         <el-radio-group
-          class="radio-container"
           v-model="theme"
+          class="radio-container"
           @change="onThemeChange"
         >
           <el-radio label="normal">normal</el-radio>
@@ -37,7 +37,7 @@
         </div>
       </template>
       <router-view></router-view>
-    </layout>
+    </charrue-layout>
   </div>
 </template>
 
@@ -117,11 +117,10 @@ export default defineComponent({
 
     const authority = ({ menu } = {}) => {
       if (!menu) return true;
-      if (auth.value == "user") {
+      if (auth.value === "user") {
         return menu.title !== "page4";
-      } else {
-        return true;
       }
+      return true;
     };
 
     const regexToPath = ref({
@@ -140,6 +139,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="scss">
 .menu-header-extra {
   height: 20px;
@@ -205,6 +205,7 @@ export default defineComponent({
   }
 }
 </style>
+
 <style>
 .theme-light {
   --layout-aside-content-bg-color: #ebf1f6;
