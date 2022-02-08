@@ -46,9 +46,9 @@
         <!-- 遍历columns，渲染行数据 -->
         <!-- key使用name,label,index的拼接，不使用index，防止column的个数没有变化，但是值发生变化后，表头不更新 -->
         <el-table-column
-          v-for="(item, index) in columns"
+          v-for="(item, idx) in columns"
           v-show="item.hidden !== true"
-          :key="`${item.prop}-${item.label}-${index}`"
+          :key="`${item.prop}-${item.label}-${idx}`"
           :label="item.label"
           :prop="item.prop"
           v-bind="item.attrs"
@@ -73,8 +73,8 @@
           <!-- 多级表头 -->
           <template v-if="item.children">
             <multi-column
-              v-for="(child, idx) in item.children || []"
-              :key="idx"
+              v-for="(child, i) in item.children || []"
+              :key="i"
               :item-column="child"
             />
           </template>
