@@ -17,12 +17,19 @@ var __spreadValues$1 = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+function cleanPath(path) {
+  return path.replace(/\/\//g, "/");
+}
+function isFunction(val) {
+  return typeof val === "function";
+}
 const PluginKey$1 = "$CharrueLayoutPluginOptions";
 const getComponentConfig = (version) => {
   const config = {};
-  if (version == 2) {
+  version = Number(version);
+  if (version === 2) {
     config.subMenu = "el-submenu";
-  } else if (version == 3) {
+  } else if (version === 3) {
     config.subMenu = "el-sub-menu";
   } else {
     console.error(`[charrue layout] version ${version} is not supported`);
@@ -35,9 +42,7 @@ function isUrl(path) {
 }
 function urlToList(url) {
   const segments = url.split("/").filter((i) => i);
-  return segments.map((_, index) => {
-    return `/${segments.slice(0, index + 1).join("/")}`;
-  });
+  return segments.map((_, index) => `/${segments.slice(0, index + 1).join("/")}`);
 }
 function menuDataFormatter(data, parentPath = "") {
   return data.map((item) => {
@@ -61,7 +66,7 @@ function menuDataFormatter(data, parentPath = "") {
   });
 }
 function getMenuDataPathMapping(menuList) {
-  let mapping = {};
+  const mapping = {};
   const setMapping = (list2) => {
     const itemList = [];
     list2.forEach((item) => {
@@ -77,12 +82,6 @@ function getMenuDataPathMapping(menuList) {
     list = setMapping(list);
   }
   return mapping;
-}
-function cleanPath(path) {
-  return path.replace(/\/\//g, "/");
-}
-function isFunction(val) {
-  return typeof val === "function";
 }
 
 /**
@@ -423,27 +422,22 @@ var __vue_render__$5 = function() {
                         _c(
                           "div",
                           {
+                            staticClass: "submenu-title",
                             class: [
-                              "submenu-title",
                               _vm.menuItem.icon ? "submenu-title-with-icon" : ""
                             ]
                           },
                           [
                             _c("i", {
-                              class: [
-                                "charrue-sidebar-menu-icon",
-                                _vm.prefixIconClass,
-                                _vm.menuItem.icon
-                              ]
+                              staticClass: "charrue-sidebar-menu-icon",
+                              class: [_vm.prefixIconClass, _vm.menuItem.icon]
                             }),
                             _vm._v(" "),
                             _c(
                               "span",
                               {
-                                class: [
-                                  _vm.menuTextClass,
-                                  "charrue-sidebar-menu-text"
-                                ]
+                                staticClass: "charrue-sidebar-menu-text",
+                                class: [_vm.menuTextClass]
                               },
                               [_vm._v(_vm._s(_vm.menuItem.title))]
                             )
@@ -456,7 +450,7 @@ var __vue_render__$5 = function() {
                 ],
                 null,
                 false,
-                3222147778
+                3709594052
               )
             },
             [
@@ -467,8 +461,8 @@ var __vue_render__$5 = function() {
                   attrs: {
                     route: _vm.route,
                     "is-nest": true,
-                    menuItem: child,
-                    subMenuComponent: _vm.subMenuComponent
+                    "menu-item": child,
+                    "sub-menu-component": _vm.subMenuComponent
                   }
                 })
               })
@@ -497,10 +491,8 @@ var __vue_render__$5 = function() {
                                   _c(
                                     "span",
                                     {
-                                      class: [
-                                        _vm.menuTextClass,
-                                        "charrue-sidebar-menu-text"
-                                      ]
+                                      staticClass: "charrue-sidebar-menu-text",
+                                      class: [_vm.menuTextClass]
                                     },
                                     [_vm._v(_vm._s(_vm.menuItem.title))]
                                   )
@@ -511,16 +503,13 @@ var __vue_render__$5 = function() {
                           ],
                           null,
                           false,
-                          3201579812
+                          3287638056
                         )
                       },
                       [
                         _c("i", {
-                          class: [
-                            "charrue-sidebar-menu-icon",
-                            _vm.prefixIconClass,
-                            _vm.menuItem.icon
-                          ]
+                          staticClass: "charrue-sidebar-menu-icon",
+                          class: [_vm.prefixIconClass, _vm.menuItem.icon]
                         })
                       ]
                     )
@@ -539,10 +528,8 @@ var __vue_render__$5 = function() {
                             _c(
                               "span",
                               {
-                                class: [
-                                  _vm.menuTextClass,
-                                  "charrue-sidebar-menu-text"
-                                ]
+                                staticClass: "charrue-sidebar-menu-text",
+                                class: [_vm.menuTextClass]
                               },
                               [_vm._v(_vm._s(_vm.menuItem.title))]
                             )
@@ -554,11 +541,8 @@ var __vue_render__$5 = function() {
                   },
                   [
                     _c("i", {
-                      class: [
-                        "charrue-sidebar-menu-icon",
-                        _vm.prefixIconClass,
-                        _vm.menuItem.icon
-                      ]
+                      staticClass: "charrue-sidebar-menu-icon",
+                      class: [_vm.prefixIconClass, _vm.menuItem.icon]
                     })
                   ]
                 )
@@ -682,7 +666,7 @@ var script$4 = {
   },
   computed: {
     width() {
-      return this.collapsed ? this.sidebarWidth[0] + "px" : this.sidebarWidth[1] + "px";
+      return this.collapsed ? `${this.sidebarWidth[0]}px` : `${this.sidebarWidth[1]}px`;
     },
     computedMenuData() {
       const menuData = [];
@@ -719,7 +703,7 @@ var script$4 = {
         } else {
           this.activeRoutePath = currentRoute;
         }
-        let openKeys = urlToList(this.activeRoutePath);
+        const openKeys = urlToList(this.activeRoutePath);
         const currentRouteMenuData = this.menuDataPathMapping[this.activeRoutePath];
         if (currentRouteMenuData && currentRouteMenuData.parentPath) {
           urlToList(currentRouteMenuData.parentPath).forEach((path) => {
@@ -746,7 +730,7 @@ var script$4 = {
       this.menuDataPathMapping = getMenuDataPathMapping(this.menuData);
     },
     _formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? __spreadValues({}, menu) : {};
+      const menuCopy = menu ? __spreadValues({}, menu) : {};
       if (!this.authorized)
         return menuCopy;
       if (isFunction(this.authorized) && !this.authorized({ menu: menuCopy, deep, index, path, parent })) {
@@ -768,7 +752,7 @@ var script$4 = {
       return menuCopy;
     },
     formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? __spreadValues({}, menu) : {};
+      const menuCopy = menu ? __spreadValues({}, menu) : {};
       if (!this.authorized)
         return menuCopy;
       if (isFunction(this.authorized) && !this.authorized({ menu: menuCopy, deep, index, path, parent })) {
@@ -824,7 +808,10 @@ var __vue_render__$4 = function() {
               [
                 _c(
                   "router-link",
-                  { class: ["menu-router-link"], attrs: { to: _vm.homeUrl } },
+                  {
+                    staticClass: "menu-router-link",
+                    attrs: { to: _vm.homeUrl }
+                  },
                   [
                     _vm.logo
                       ? _c("img", { attrs: { src: _vm.logo, alt: "logo" } })
@@ -857,8 +844,8 @@ var __vue_render__$4 = function() {
               key: item.path,
               attrs: {
                 route: _vm.route,
-                subMenuComponent: _vm.subMenuComponent,
-                menuItem: item
+                "sub-menu-component": _vm.subMenuComponent,
+                "menu-item": item
               }
             })
           }),
@@ -917,7 +904,7 @@ __vue_render__$4._withStripped = true;
     __vue_is_functional_template__$4);
 
 var script$3 = {
-  name: "Hamburger",
+  name: "HamburgerTrigger",
   props: {
     isActive: {
       type: Boolean,
@@ -1220,7 +1207,7 @@ __vue_render__$1._withStripped = true;
     __vue_is_functional_template__$1);
 
 var script = {
-  name: "Layout",
+  name: "CharrueLayout",
   components: {
     LayoutSidebar,
     LayoutHeader,
@@ -1278,10 +1265,13 @@ var script = {
       type: Object
     }
   },
+  emits: ["update:collapsed"],
   data() {
     return {
       innerCollapse: false,
-      componentConfig: {}
+      componentConfig: {
+        subMenu: ""
+      }
     };
   },
   computed: {
@@ -1313,8 +1303,7 @@ var script = {
   },
   created() {
     this.componentConfig = getComponentConfig(this[PluginKey$1].version || 2);
-  },
-  emits: ["update:collapsed"]
+  }
 };
 
 /* script */
@@ -1341,9 +1330,9 @@ var __vue_render__ = function() {
           route: _vm.route,
           absolute: _vm.absolute,
           authorized: _vm.authorized,
-          sidebarWidth: _vm.sidebarWidth,
-          homeUrl: _vm.homeUrl,
-          subMenuComponent: _vm.componentConfig.subMenu,
+          "sidebar-width": _vm.sidebarWidth,
+          "home-url": _vm.homeUrl,
+          "sub-menu-component": _vm.componentConfig.subMenu,
           "regex-to-path": _vm.regexToPath
         },
         scopedSlots: _vm._u(

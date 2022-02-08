@@ -19,12 +19,19 @@ var __spreadValues$1 = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+function cleanPath(path) {
+  return path.replace(/\/\//g, "/");
+}
+function isFunction(val) {
+  return typeof val === "function";
+}
 const PluginKey$1 = "$CharrueLayoutPluginOptions";
 const getComponentConfig = (version) => {
   const config = {};
-  if (version == 2) {
+  version = Number(version);
+  if (version === 2) {
     config.subMenu = "el-submenu";
-  } else if (version == 3) {
+  } else if (version === 3) {
     config.subMenu = "el-sub-menu";
   } else {
     console.error(`[charrue layout] version ${version} is not supported`);
@@ -37,9 +44,7 @@ function isUrl(path) {
 }
 function urlToList(url) {
   const segments = url.split("/").filter((i) => i);
-  return segments.map((_, index) => {
-    return `/${segments.slice(0, index + 1).join("/")}`;
-  });
+  return segments.map((_, index) => `/${segments.slice(0, index + 1).join("/")}`);
 }
 function menuDataFormatter(data, parentPath = "") {
   return data.map((item) => {
@@ -63,7 +68,7 @@ function menuDataFormatter(data, parentPath = "") {
   });
 }
 function getMenuDataPathMapping(menuList) {
-  let mapping = {};
+  const mapping = {};
   const setMapping = (list2) => {
     const itemList = [];
     list2.forEach((item) => {
@@ -79,12 +84,6 @@ function getMenuDataPathMapping(menuList) {
     list = setMapping(list);
   }
   return mapping;
-}
-function cleanPath(path) {
-  return path.replace(/\/\//g, "/");
-}
-function isFunction(val) {
-  return typeof val === "function";
 }
 
 /**
@@ -411,16 +410,15 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
     }, {
       title: withCtx(() => [
         createElementVNode("div", {
-          class: normalizeClass([
-            "submenu-title",
+          class: normalizeClass(["submenu-title", [
             $props.menuItem.icon ? "submenu-title-with-icon" : ""
-          ])
+          ]])
         }, [
           createElementVNode("i", {
-            class: normalizeClass(["charrue-sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+            class: normalizeClass(["charrue-sidebar-menu-icon", [$props.prefixIconClass, $props.menuItem.icon]])
           }, null, 2),
           createElementVNode("span", {
-            class: normalizeClass([$props.menuTextClass, "charrue-sidebar-menu-text"])
+            class: normalizeClass(["charrue-sidebar-menu-text", [$props.menuTextClass]])
           }, toDisplayString($props.menuItem.title), 3)
         ], 2)
       ]),
@@ -430,9 +428,9 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
             key: child.path,
             route: $props.route,
             "is-nest": true,
-            menuItem: child,
-            subMenuComponent: $props.subMenuComponent
-          }, null, 8, ["route", "menuItem", "subMenuComponent"]);
+            "menu-item": child,
+            "sub-menu-component": $props.subMenuComponent
+          }, null, 8, ["route", "menu-item", "sub-menu-component"]);
         }), 128))
       ]),
       _: 1
@@ -448,12 +446,12 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
           }, {
             title: withCtx(() => [
               createElementVNode("span", {
-                class: normalizeClass([$props.menuTextClass, "charrue-sidebar-menu-text"])
+                class: normalizeClass(["charrue-sidebar-menu-text", [$props.menuTextClass]])
               }, toDisplayString($props.menuItem.title), 3)
             ]),
             default: withCtx(() => [
               createElementVNode("i", {
-                class: normalizeClass(["charrue-sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+                class: normalizeClass(["charrue-sidebar-menu-icon", [$props.prefixIconClass, $props.menuItem.icon]])
               }, null, 2)
             ]),
             _: 1
@@ -466,12 +464,12 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         title: withCtx(() => [
           createElementVNode("span", {
-            class: normalizeClass([$props.menuTextClass, "charrue-sidebar-menu-text"])
+            class: normalizeClass(["charrue-sidebar-menu-text", [$props.menuTextClass]])
           }, toDisplayString($props.menuItem.title), 3)
         ]),
         default: withCtx(() => [
           createElementVNode("i", {
-            class: normalizeClass(["charrue-sidebar-menu-icon", $props.prefixIconClass, $props.menuItem.icon])
+            class: normalizeClass(["charrue-sidebar-menu-icon", [$props.prefixIconClass, $props.menuItem.icon]])
           }, null, 2)
         ]),
         _: 1
@@ -553,7 +551,7 @@ var script$4 = {
   },
   computed: {
     width() {
-      return this.collapsed ? this.sidebarWidth[0] + "px" : this.sidebarWidth[1] + "px";
+      return this.collapsed ? `${this.sidebarWidth[0]}px` : `${this.sidebarWidth[1]}px`;
     },
     computedMenuData() {
       const menuData = [];
@@ -590,7 +588,7 @@ var script$4 = {
         } else {
           this.activeRoutePath = currentRoute;
         }
-        let openKeys = urlToList(this.activeRoutePath);
+        const openKeys = urlToList(this.activeRoutePath);
         const currentRouteMenuData = this.menuDataPathMapping[this.activeRoutePath];
         if (currentRouteMenuData && currentRouteMenuData.parentPath) {
           urlToList(currentRouteMenuData.parentPath).forEach((path) => {
@@ -617,7 +615,7 @@ var script$4 = {
       this.menuDataPathMapping = getMenuDataPathMapping(this.menuData);
     },
     _formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? __spreadValues({}, menu) : {};
+      const menuCopy = menu ? __spreadValues({}, menu) : {};
       if (!this.authorized)
         return menuCopy;
       if (isFunction(this.authorized) && !this.authorized({ menu: menuCopy, deep, index, path, parent })) {
@@ -639,7 +637,7 @@ var script$4 = {
       return menuCopy;
     },
     formatMenuData({ menu, deep, index, path, parent } = {}) {
-      let menuCopy = menu ? __spreadValues({}, menu) : {};
+      const menuCopy = menu ? __spreadValues({}, menu) : {};
       if (!this.authorized)
         return menuCopy;
       if (isFunction(this.authorized) && !this.authorized({ menu: menuCopy, deep, index, path, parent })) {
@@ -686,7 +684,7 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
       $props.logo || $props.title ? (openBlock(), createElementBlock("div", _hoisted_2$3, [
         createVNode(_component_router_link, {
           to: $props.homeUrl,
-          class: normalizeClass(["menu-router-link"])
+          class: "menu-router-link"
         }, {
           default: withCtx(() => [
             $props.logo ? (openBlock(), createElementBlock("img", {
@@ -711,11 +709,11 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           (openBlock(true), createElementBlock(Fragment, null, renderList($options.computedMenuData, (item) => {
             return openBlock(), createBlock(_component_sidebar_item, {
-              route: $props.route,
               key: item.path,
-              subMenuComponent: $props.subMenuComponent,
-              menuItem: item
-            }, null, 8, ["route", "subMenuComponent", "menuItem"]);
+              route: $props.route,
+              "sub-menu-component": $props.subMenuComponent,
+              "menu-item": item
+            }, null, 8, ["route", "sub-menu-component", "menu-item"]);
           }), 128))
         ]),
         _: 1
@@ -729,7 +727,7 @@ script$4.render = render$4;
 script$4.__file = "layout-internal/libs/LayoutSidebar.vue";
 
 var script$3 = {
-  name: "Hamburger",
+  name: "HamburgerTrigger",
   props: {
     isActive: {
       type: Boolean,
@@ -855,7 +853,7 @@ script$1.render = render$1;
 script$1.__file = "layout-internal/libs/LayoutContent.vue";
 
 var script = {
-  name: "Layout",
+  name: "CharrueLayout",
   components: {
     LayoutSidebar: script$4,
     LayoutHeader: script$2,
@@ -913,10 +911,13 @@ var script = {
       type: Object
     }
   },
+  emits: ["update:collapsed"],
   data() {
     return {
       innerCollapse: false,
-      componentConfig: {}
+      componentConfig: {
+        subMenu: ""
+      }
     };
   },
   computed: {
@@ -948,8 +949,7 @@ var script = {
   },
   created() {
     this.componentConfig = getComponentConfig(this[PluginKey$1].version || 2);
-  },
-  emits: ["update:collapsed"]
+  }
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -967,9 +967,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       route: $props.route,
       absolute: $props.absolute,
       authorized: $props.authorized,
-      sidebarWidth: $props.sidebarWidth,
-      homeUrl: $props.homeUrl,
-      subMenuComponent: $data.componentConfig.subMenu,
+      "sidebar-width": $props.sidebarWidth,
+      "home-url": $props.homeUrl,
+      "sub-menu-component": $data.componentConfig.subMenu,
       "regex-to-path": $props.regexToPath
     }, {
       "sidebar-top": withCtx(() => [
@@ -979,7 +979,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         renderSlot(_ctx.$slots, "sidebar-bottom")
       ]),
       _: 3
-    }, 8, ["collapsed", "data", "logo", "title", "route", "absolute", "authorized", "sidebarWidth", "homeUrl", "subMenuComponent", "regex-to-path"]),
+    }, 8, ["collapsed", "data", "logo", "title", "route", "absolute", "authorized", "sidebar-width", "home-url", "sub-menu-component", "regex-to-path"]),
     createElementVNode("div", {
       class: "charrue-layout-main",
       style: normalizeStyle($options.mainWidthStyle)
