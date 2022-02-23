@@ -1,9 +1,9 @@
 <template>
-  <div class="charrue-crud">
-    <div v-if="$slots.header" class="charrue-crud__header">
+  <div class="charrue-schema-table">
+    <div v-if="slots.header" class="charrue-schema-table__header">
       <slot name="header" />
     </div>
-    <div class="charrue-crud__body">
+    <div class="charrue-schema-table__body">
       <el-table
         ref="elTableRef"
         v-loading="loading"
@@ -26,19 +26,19 @@
 
         <!-- 表格首列之前显示索引 -->
         <el-table-column v-if="index" type="index" :index="computedIndex" v-bind="indexProps">
-          <template slot="header">
+          <template #header>
             <span v-if="indexHeader">{{ indexHeader }}</span>
-            <slot v-if="!indexHeader && $slots['index-header']" name="index-header"></slot>
+            <slot v-if="!indexHeader && slots['index-header']" name="index-header"></slot>
           </template>
         </el-table-column>
 
         <!-- 行展开 -->
-        <el-table-column v-if="$scopedSlots['expand']" type="expand" v-bind="expandProps">
-          <template slot="header">
+        <el-table-column v-if="slots['expand']" type="expand" v-bind="expandProps">
+          <template #header>
             <span v-if="expandHeader">{{ expandHeader }}</span>
-            <slot v-if="!expandHeader && $slots['extra-header']" name="extra-header"></slot>
+            <slot v-if="!expandHeader && slots['extra-header']" name="extra-header"></slot>
           </template>
-          <template slot-scope="props">
+          <template #default="props">
             <slot name="expand" :scope="props" />
           </template>
         </el-table-column>
@@ -54,42 +54,44 @@
           v-bind="item.attrs"
         >
           <!-- 自定义表头 -->
-          <template slot="header" slot-scope="scope">
-            <template v-if="$scopedSlots.theader">
-              <slot name="theader" :scope="scope" />
+          <template #header="scope">
+            <!-- 多级表头 -->
+            <template v-if="item.children">
+              <multi-column
+                v-for="(child, i) in item.children || []"
+                :key="`${child.prop || ''}-${i}`"
+                :label="child.label"
+                :prop="child.prop"
+                :children="child.children"
+              />
+            </template>
+            <template v-else-if="slots.thead">
+              <slot name="thead" :scope="scope" />
             </template>
             <span v-else>{{ item.label }}</span>
           </template>
 
           <!-- 自定义单元格 -->
-          <template slot-scope="scope">
+          <template #default="scope">
             <div class="cell-wrapper">
-              <template v-if="$scopedSlots[item.prop]">
+              <template v-if="slots[item.prop]">
                 <slot :name="item.prop" :scope="scope" />
               </template>
               <span v-else>{{ scope.row[item.prop] }}</span>
             </div>
           </template>
-          <!-- 多级表头 -->
-          <template v-if="item.children">
-            <multi-column
-              v-for="(child, i) in item.children || []"
-              :key="i"
-              :item-column="child"
-            />
-          </template>
         </el-table-column>
 
         <!-- 操作列 -->
         <el-table-column v-if="showExtraColumn" v-bind="extraColumnProps">
-          <template slot="header">
-            <template v-if="$slots.extraColumnHeader">
+          <template #header>
+            <template v-if="slots.extraColumnHeader">
               <slot name="extraColumnHeader" />
             </template>
             <span v-else>{{ extraColumnTitle }}</span>
           </template>
           <!-- 删除操作 -->
-          <template slot-scope="scope">
+          <template #default="scope">
             <!-- 提供插槽，展示其他的内容 -->
             <slot name="actions" :scope="scope" />
           </template>
@@ -123,9 +125,10 @@
 <script>
 import MultiColumn from "./multi-column.vue";
 import cloneDeep from "lodash.clonedeep";
+import { PluginKey } from "./utils";
 
 export default {
-  name: 'SchemaTable',
+  name: 'CharrueSchemaTable',
   components: {
     MultiColumn,
   },
@@ -152,6 +155,18 @@ export default {
     loadingOptions: Object,
     /* 详细区域的props */
     expandOptions: Object,
+    /**
+     * 扩展列表头
+     */
+    expandHeader: {
+      type: String,
+    },
+    expandProps: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
     /* 额外的列的props */
     extraColumnProps: {
       type: Object,
@@ -165,6 +180,18 @@ export default {
      * 该属性传入数字时，将作为索引的起始值
      */
     index: [Function, Boolean, Number],
+    /**
+     * 索引列表头
+     */
+    indexHeader: {
+      type: String,
+    },
+    indexProps: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
     /**
      * 用于自定义渲染表头数据
      * 第一个参数为渲染函数
@@ -189,33 +216,10 @@ export default {
     page: Number,
     total: [Number, String],
     size: Number,
-    /**
-     * 索引列表头
-     */
-    indexHeader: {
-      type: String,
-    },
-    indexProps: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
-    /**
-     * 扩展列表头
-     */
-    expandHeader: {
-      type: String,
-    },
-    expandProps: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
   },
   data() {
     return {
+      version: 2,
       events: {},
       prevPage: 0,
       prevSize: 0,
@@ -247,8 +251,18 @@ export default {
     computedTotal() {
       return Number(this.total);
     },
+    slots() {
+      if (this.version === 2) {
+        return {
+          ...this.$slots,
+          ...this.$scopedSlots
+        }
+      }
+      return this.$slots
+    }
   },
   created() {
+    this.version = this[PluginKey].version || 2;
     this.proxyElTableMethods();
     this.proxyElTableEvents();
     this.prevSize = this.size;

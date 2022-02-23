@@ -145,8 +145,6 @@ importers:
       babel-jest: ^26.6.3
       conventional-changelog-cli: ^2.1.1
       cross-env: ^7.0.2
-      eslint: ^7.13.0
-      eslint-plugin-vue: ^7.1.0
       gh-pages: ^3.1.0
       husky: ^4.3.0
       jest: ^26.6.3
@@ -175,14 +173,12 @@ importers:
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.5
       '@vitejs/plugin-vue': 1.10.2_vite@2.7.13
       '@vitejs/plugin-vue-jsx': 1.3.3
-      '@vue/eslint-config-typescript': 7.0.0_f2c1c083ca9f8be5792c7dca889a98e3
+      '@vue/eslint-config-typescript': 7.0.0_2fa60429e55145328cd623d333a160fd
       '@vue/test-utils': 2.0.0-rc.18
       '@vuedx/typescript-plugin-vue': 0.6.3
       babel-jest: 26.6.3_@babel+core@7.16.12
       conventional-changelog-cli: 2.2.2
       cross-env: 7.0.3
-      eslint: 7.32.0
-      eslint-plugin-vue: 7.20.0_eslint@7.32.0
       gh-pages: 3.2.3
       husky: 4.3.8
       jest: 26.6.3
@@ -275,6 +271,7 @@ importers:
     specifiers:
       '@charrue/element-ui-plus-extension': workspace:*
       '@charrue/layout-next': workspace:*
+      '@charrue/schema-table-internal': workspace:*
       '@vitejs/plugin-vue': ^2.0.0
       dayjs: ^1.10.7
       element-plus: ^1.3.0-beta.1
@@ -284,6 +281,7 @@ importers:
     dependencies:
       '@charrue/element-ui-plus-extension': link:../element-ui-plus-extension
       '@charrue/layout-next': link:../layout-next
+      '@charrue/schema-table-internal': link:../schema-table-internal
       dayjs: 1.10.7
       element-plus: 1.3.0-beta.10_vue@3.2.29
       vue: 3.2.29
@@ -326,6 +324,14 @@ importers:
       vue: 2.6.14
 
   packages/schema-table:
+    specifiers:
+      '@charrue/build-v2': workspace:*
+      '@charrue/schema-table-internal': workspace:*
+    devDependencies:
+      '@charrue/build-v2': link:../build-v2
+      '@charrue/schema-table-internal': link:../schema-table-internal
+
+  packages/schema-table-internal:
     specifiers:
       lodash.clonedeep: ^4.5.0
     dependencies:
@@ -3646,7 +3652,7 @@ packages:
     resolution: {integrity: sha512-FqC4s3pm35qGVeXRGOjTsRzlkJjrBLriDS9YXbflHLsfA9FrcKzIyWnLXoNm+/7930E8rRakXuAc2QkC50swAw==}
     dev: false
 
-  /@vue/eslint-config-typescript/7.0.0_f2c1c083ca9f8be5792c7dca889a98e3:
+  /@vue/eslint-config-typescript/7.0.0_2fa60429e55145328cd623d333a160fd:
     resolution: {integrity: sha512-UxUlvpSrFOoF8aQ+zX1leYiEBEm7CZmXYn/ZEM1zwSadUzpamx56RB4+Htdjisv1mX2tOjBegNUqH3kz2OL+Aw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -3658,7 +3664,6 @@ packages:
       '@typescript-eslint/eslint-plugin': 4.33.0_959502c0ea240e86d4d2ba8b8c0fee45
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.5
       eslint: 7.32.0
-      eslint-plugin-vue: 7.20.0_eslint@7.32.0
       vue-eslint-parser: 7.11.0_eslint@7.32.0
     transitivePeerDependencies:
       - supports-color
@@ -8044,21 +8049,6 @@ packages:
       eslint: 7.32.0
       eslint-config-prettier: 8.3.0_eslint@7.32.0
       prettier-linter-helpers: 1.0.0
-    dev: true
-
-  /eslint-plugin-vue/7.20.0_eslint@7.32.0:
-    resolution: {integrity: sha512-oVNDqzBC9h3GO+NTgWeLMhhGigy6/bQaQbHS+0z7C4YEu/qK/yxHvca/2PTZtGNPsCrHwOTgKMrwu02A9iPBmw==}
-    engines: {node: '>=8.10'}
-    peerDependencies:
-      eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-    dependencies:
-      eslint: 7.32.0
-      eslint-utils: 2.1.0
-      natural-compare: 1.4.0
-      semver: 6.3.0
-      vue-eslint-parser: 7.11.0_eslint@7.32.0
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /eslint-plugin-vue/8.4.1_eslint@7.32.0:

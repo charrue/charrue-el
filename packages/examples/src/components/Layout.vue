@@ -86,6 +86,21 @@ const TOTAL_MENUS = [
     ],
   },
   {
+    title: "schema-table",
+    path: "/schema-table",
+    icon: "el-icon-document",
+    children: [
+      {
+        path: "basic",
+        title: "basic"
+      },
+      {
+        path: "grouping-head",
+        title: "Grouping table head"
+      },
+    ]
+  },
+  {
     title: "element-ui-extension",
     path: "/element-ui-extension/index",
     icon: "el-icon-document",

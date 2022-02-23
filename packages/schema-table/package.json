@@ -1,7 +1,7 @@
 {
   "name": "@charrue/schema-table",
-  "version": "0.0.14",
-  "description": "",
+  "version": "0.1.0",
+  "description": "基于vue2与element-ui,致力于简化中后台的table开发",
   "author": "ckangwen",
   "repository": {
     "type": "git",
@@ -9,18 +9,19 @@
   },
   "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/schema-table/README.md",
   "license": "MIT",
-  "main": "src/index.js",
-  "unpkg": "dist/umd/index.js",
-  "typings": "typings/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "unpkg": "dist/index.iife.js",
   "files": [
     "dist",
     "src",
     "typings"
   ],
   "scripts": {
-    "build": "cd .. && npm run build:style schema-table && npm run build:component schema-table"
+    "build": "build-v2 --input=./index.js --name=schema-table --ignore-dependencies=all"
   },
-  "dependencies": {
-    "lodash.clonedeep": "^4.5.0"
+  "devDependencies": {
+    "@charrue/schema-table-internal": "workspace:*",
+    "@charrue/build-v2": "workspace:*"
   }
 }

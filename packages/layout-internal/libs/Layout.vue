@@ -25,22 +25,22 @@
     </layout-sidebar>
 
     <div class="charrue-layout-main" :style="mainWidthStyle">
-      <layout-header
-        :collapse="innerCollapse"
-        :fixed="fixedHeader"
+      <div
+        class="charrue-layout-header-container"
+        :class="{ 'fixed-header': fixedHeader }"
         :style="headerWidthStyle"
-        @update:collapse="(val) => (innerCollapse = val)"
       >
-        <template #header-trigger>
-          <slot name="header-trigger"></slot>
-        </template>
-        <template #header-left>
-          <slot name="header-left"></slot>
-        </template>
-        <template #header-right>
-          <slot name="header-right"></slot>
-        </template>
-      </layout-header>
+        <div class="charrue-layout-header-main">
+          <div class="charrue-layout-header-left">
+            <slot name="header-left">
+              <hamburger @toggle-click="toggleSideBar" />
+            </slot>
+          </div>
+          <div class="charrue-layout-header-right">
+            <slot name="header-right"></slot>
+          </div>
+        </div>
+      </div>
 
       <layout-content :animation="animation">
         <template #content-header>
@@ -59,25 +59,18 @@
 
 <script>
 import LayoutSidebar from "./LayoutSidebar.vue";
-import LayoutHeader from "./LayoutHeader.vue";
 import LayoutContent from "./LayoutContent.vue";
+import Hamburger from "./Hamburger.vue"
 import { getComponentConfig, PluginKey } from "./utils";
 
 export default {
   name: "CharrueLayout",
   components: {
     LayoutSidebar,
-    LayoutHeader,
     LayoutContent,
+    Hamburger,
   },
   props: {
-    version: {
-      type: Number,
-      validator(value) {
-        return [2, 3].indexOf(value) > -1;
-      },
-      default: 2,
-    },
     collapsed: {
       type: Boolean,
       default: false,
@@ -126,13 +119,14 @@ export default {
   emits: ["update:collapsed"],
   data() {
     return {
+      version: 2,
       innerCollapse: false,
-      componentConfig: {
-        subMenu: "",
-      },
     };
   },
   computed: {
+    componentConfig() {
+      return getComponentConfig(this.version || 2)
+    },
     mainWidthStyle() {
       return {
         width: `calc(100% - ${ this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1] }px)`,
@@ -161,7 +155,13 @@ export default {
     },
   },
   created() {
-    this.componentConfig = getComponentConfig(this[PluginKey].version || 2);
+    this.version = this[PluginKey].version;
+    console.log(this);
+  },
+  methods: {
+    toggleSideBar() {
+      this.innerCollapse = !this.innerCollapse;
+    },
   },
 };
 </script>

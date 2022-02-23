@@ -9,10 +9,13 @@ import 'element-plus/dist/index.css'
 import "@charrue/layout-next/index.css";
 import "./styles/index.scss";
 import { FormField } from "@charrue/element-ui-plus-extension"
+import { SchemaTable } from "@charrue/schema-table-internal"
+
 
 
 const app = createApp(App)
 app.component("FormField", FormField)
+app.component("SchemaTable", SchemaTable)
 
 app.use(Layout)
 app.use(ElementPlus, { locale })
