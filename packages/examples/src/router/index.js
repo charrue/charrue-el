@@ -68,7 +68,12 @@ const routes = [
         path: "basic",
         name: 'basic',
         component: () => import("@/views/schema-table/basic.vue")
-      }
+      },
+      {
+        path: "grouping-head",
+        name: 'schema-form-grouping-head',
+        component: () => import("@/views/schema-table/grouping-head.vue")
+      },
     ]
   },
   {

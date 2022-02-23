@@ -9,6 +9,7 @@
   "dependencies": {
     "@charrue/element-ui-plus-extension": "workspace:*",
     "@charrue/layout-next": "workspace:*",
+    "@charrue/schema-table-internal": "workspace:*",
     "dayjs": "^1.10.7",
     "element-plus": "^1.3.0-beta.1",
     "vue": "^3.2.25",

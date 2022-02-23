@@ -1,0 +1,18 @@
+{
+  "name": "@charrue/schema-table-internal",
+  "version": "0.1.0",
+  "description": "",
+  "author": "ckangwen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charrue/charrue-el.git"
+  },
+  "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/schema-table-internal/README.md",
+  "license": "MIT",
+  "main": "libs/index.js",
+  "scripts": {
+  },
+  "dependencies": {
+    "lodash.clonedeep": "^4.5.0"
+  }
+}

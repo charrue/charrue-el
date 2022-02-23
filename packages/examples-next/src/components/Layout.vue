@@ -80,6 +80,21 @@ const TOTAL_MENUS = [
     ],
   },
   {
+    title: "schema-table",
+    path: "/schema-table",
+    icon: "iconfont c-mobile",
+    children: [
+      {
+        title: "basic",
+        path: "basic",
+      },
+      {
+        title: "pagination",
+        path: "pagination",
+      },
+    ]
+  },
+  {
     title: "element-ui-plus-extension",
     path: "/element-ui-plus-extension",
     icon: "iconfont c-search",

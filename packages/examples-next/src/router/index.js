@@ -55,7 +55,21 @@ const routes = [
         component: () => import("../views/element-ui-plus-extension/form-field.vue"),
       }
     ]
-  }
+  },
+  {
+    path: "/schema-table",
+    component: PageLayout,
+    children: [
+      {
+        path: "basic",
+        component: () => import("../views/schema-table/basic.vue"),
+      },
+      {
+        path: "pagination",
+        component: () => import("../views/schema-table/pagination.vue"),
+      },
+    ]
+  },
 ]
 
 const router = createRouter({
