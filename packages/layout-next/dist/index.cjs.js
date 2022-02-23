@@ -382,7 +382,7 @@ function pathToRegexp(path, keys, options) {
     return stringToRegexp(path, keys, options);
 }
 
-var script$5 = {
+var script$4 = {
   name: "SidebarItem",
   props: {
     subMenuComponent: {
@@ -400,7 +400,7 @@ var script$5 = {
 };
 
 const _hoisted_1$4 = { class: "charrue-layout-sidebar-el-menu-container" };
-function render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_sidebar_item = vue.resolveComponent("sidebar-item", true);
   const _component_el_menu_item = vue.resolveComponent("el-menu-item");
   const _component_router_link = vue.resolveComponent("router-link");
@@ -480,8 +480,8 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   ]);
 }
 
-script$5.render = render$5;
-script$5.__file = "layout-internal/libs/SidebarItem.vue";
+script$4.render = render$4;
+script$4.__file = "layout-internal/libs/SidebarItem.vue";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
@@ -499,10 +499,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var script$4 = {
+var script$3 = {
   name: "GlobalAside",
   components: {
-    SidebarItem: script$5
+    SidebarItem: script$4
   },
   props: {
     data: {
@@ -670,7 +670,7 @@ const _hoisted_2$3 = {
 };
 const _hoisted_3$2 = ["src"];
 const _hoisted_4$1 = { key: 1 };
-function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_link = vue.resolveComponent("router-link");
   const _component_sidebar_item = vue.resolveComponent("sidebar-item");
   const _component_el_menu = vue.resolveComponent("el-menu");
@@ -725,96 +725,10 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   ]);
 }
 
-script$4.render = render$4;
-script$4.__file = "layout-internal/libs/LayoutSidebar.vue";
-
-var script$3 = {
-  name: "HamburgerTrigger",
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false
-    }
-  },
-  emits: ["toggle-click"],
-  methods: {
-    toggleClick() {
-      this.$emit("toggle-click", this.isActive);
-    }
-  }
-};
-
-const _hoisted_1$2 = /* @__PURE__ */ vue.createElementVNode("path", { d: "M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 0 0 0-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0 0 14.4 7z" }, null, -1);
-const _hoisted_2$2 = [
-  _hoisted_1$2
-];
-function render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return vue.openBlock(), vue.createElementBlock("div", {
-    class: "hamburger-container",
-    onClick: _cache[0] || (_cache[0] = (...args) => $options.toggleClick && $options.toggleClick(...args))
-  }, [
-    (vue.openBlock(), vue.createElementBlock("svg", {
-      class: vue.normalizeClass([{ "is-active": $props.isActive }, "hamburger-svg"]),
-      viewBox: "0 0 1024 1024",
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "64",
-      height: "64"
-    }, _hoisted_2$2, 2))
-  ]);
-}
-
 script$3.render = render$3;
-script$3.__file = "layout-internal/libs/Hamburger.vue";
+script$3.__file = "layout-internal/libs/LayoutSidebar.vue";
 
 var script$2 = {
-  name: "LayoutHeader",
-  components: {
-    Hamburger: script$3
-  },
-  props: {
-    collapse: {
-      type: Boolean,
-      default: false
-    },
-    fixed: {
-      type: Boolean,
-      default: true
-    }
-  },
-  emits: ["update:collapse"],
-  methods: {
-    toggleSideBar() {
-      this.$emit("update:collapse", !this.collapse);
-    }
-  }
-};
-
-const _hoisted_1$1 = { class: "charrue-layout-header-main" };
-const _hoisted_2$1 = { class: "charrue-layout-header-left" };
-const _hoisted_3$1 = { class: "charrue-layout-header-right" };
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_hamburger = vue.resolveComponent("hamburger");
-  return vue.openBlock(), vue.createElementBlock("div", {
-    class: vue.normalizeClass(["charrue-layout-header-container", { "fixed-header": $props.fixed }])
-  }, [
-    vue.createElementVNode("div", _hoisted_1$1, [
-      vue.createElementVNode("div", _hoisted_2$1, [
-        vue.renderSlot(_ctx.$slots, "header-trigger", {}, () => [
-          vue.createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"])
-        ]),
-        vue.renderSlot(_ctx.$slots, "header-left")
-      ]),
-      vue.createElementVNode("div", _hoisted_3$1, [
-        vue.renderSlot(_ctx.$slots, "header-right")
-      ])
-    ])
-  ], 2);
-}
-
-script$2.render = render$2;
-script$2.__file = "layout-internal/libs/LayoutHeader.vue";
-
-var script$1 = {
   name: "LayoutContent",
   props: {
     animation: {
@@ -824,16 +738,16 @@ var script$1 = {
   }
 };
 
-const _hoisted_1 = { class: "charrue-layout-content-container" };
-const _hoisted_2 = { class: "charrue-layout-content-header" };
-const _hoisted_3 = { class: "charrue-layout-content-main" };
+const _hoisted_1$2 = { class: "charrue-layout-content-container" };
+const _hoisted_2$2 = { class: "charrue-layout-content-header" };
+const _hoisted_3$1 = { class: "charrue-layout-content-main" };
 const _hoisted_4 = { class: "charrue-layout-content-footer" };
-function render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return vue.openBlock(), vue.createElementBlock("section", _hoisted_1, [
-    vue.createElementVNode("div", _hoisted_2, [
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return vue.openBlock(), vue.createElementBlock("section", _hoisted_1$2, [
+    vue.createElementVNode("div", _hoisted_2$2, [
       vue.renderSlot(_ctx.$slots, "content-header")
     ]),
-    vue.createElementVNode("div", _hoisted_3, [
+    vue.createElementVNode("div", _hoisted_3$1, [
       $props.animation ? (vue.openBlock(), vue.createBlock(vue.Transition, {
         key: 0,
         name: "fade-transform",
@@ -851,24 +765,55 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   ]);
 }
 
+script$2.render = render$2;
+script$2.__file = "layout-internal/libs/LayoutContent.vue";
+
+var script$1 = {
+  name: "HamburgerTrigger",
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: ["toggle-click"],
+  methods: {
+    toggleClick() {
+      this.$emit("toggle-click", this.isActive);
+    }
+  }
+};
+
+const _hoisted_1$1 = /* @__PURE__ */ vue.createElementVNode("path", { d: "M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 0 0 0-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0 0 14.4 7z" }, null, -1);
+const _hoisted_2$1 = [
+  _hoisted_1$1
+];
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return vue.openBlock(), vue.createElementBlock("div", {
+    class: "hamburger-container",
+    onClick: _cache[0] || (_cache[0] = (...args) => $options.toggleClick && $options.toggleClick(...args))
+  }, [
+    (vue.openBlock(), vue.createElementBlock("svg", {
+      class: vue.normalizeClass([{ "is-active": $props.isActive }, "hamburger-svg"]),
+      viewBox: "0 0 1024 1024",
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "64",
+      height: "64"
+    }, _hoisted_2$1, 2))
+  ]);
+}
+
 script$1.render = render$1;
-script$1.__file = "layout-internal/libs/LayoutContent.vue";
+script$1.__file = "layout-internal/libs/Hamburger.vue";
 
 var script = {
   name: "CharrueLayout",
   components: {
-    LayoutSidebar: script$4,
-    LayoutHeader: script$2,
-    LayoutContent: script$1
+    LayoutSidebar: script$3,
+    LayoutContent: script$2,
+    Hamburger: script$1
   },
   props: {
-    version: {
-      type: Number,
-      validator(value) {
-        return [2, 3].indexOf(value) > -1;
-      },
-      default: 2
-    },
     collapsed: {
       type: Boolean,
       default: false
@@ -916,13 +861,14 @@ var script = {
   emits: ["update:collapsed"],
   data() {
     return {
-      innerCollapse: false,
-      componentConfig: {
-        subMenu: ""
-      }
+      version: 2,
+      innerCollapse: false
     };
   },
   computed: {
+    componentConfig() {
+      return getComponentConfig(this.version || 2);
+    },
     mainWidthStyle() {
       return {
         width: `calc(100% - ${this.collapsed ? this.sidebarWidth[0] : this.sidebarWidth[1]}px)`
@@ -950,13 +896,22 @@ var script = {
     }
   },
   created() {
-    this.componentConfig = getComponentConfig(this[PluginKey$1].version || 2);
+    this.version = this[PluginKey$1].version;
+    console.log(this);
+  },
+  methods: {
+    toggleSideBar() {
+      this.innerCollapse = !this.innerCollapse;
+    }
   }
 };
 
+const _hoisted_1 = { class: "charrue-layout-header-main" };
+const _hoisted_2 = { class: "charrue-layout-header-left" };
+const _hoisted_3 = { class: "charrue-layout-header-right" };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_layout_sidebar = vue.resolveComponent("layout-sidebar");
-  const _component_layout_header = vue.resolveComponent("layout-header");
+  const _component_hamburger = vue.resolveComponent("hamburger");
   const _component_layout_content = vue.resolveComponent("layout-content");
   return vue.openBlock(), vue.createElementBlock("div", {
     class: vue.normalizeClass(["charrue-layout", [$props.collapsed ? "hideSidebar" : "openSidebar"]])
@@ -971,7 +926,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       authorized: $props.authorized,
       "sidebar-width": $props.sidebarWidth,
       "home-url": $props.homeUrl,
-      "sub-menu-component": $data.componentConfig.subMenu,
+      "sub-menu-component": $options.componentConfig.subMenu,
       "regex-to-path": $props.regexToPath
     }, {
       "sidebar-top": vue.withCtx(() => [
@@ -986,23 +941,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       class: "charrue-layout-main",
       style: vue.normalizeStyle($options.mainWidthStyle)
     }, [
-      vue.createVNode(_component_layout_header, {
-        collapse: $data.innerCollapse,
-        fixed: $props.fixedHeader,
-        style: vue.normalizeStyle($options.headerWidthStyle),
-        "onUpdate:collapse": _cache[0] || (_cache[0] = (val) => $data.innerCollapse = val)
-      }, {
-        "header-trigger": vue.withCtx(() => [
-          vue.renderSlot(_ctx.$slots, "header-trigger")
-        ]),
-        "header-left": vue.withCtx(() => [
-          vue.renderSlot(_ctx.$slots, "header-left")
-        ]),
-        "header-right": vue.withCtx(() => [
-          vue.renderSlot(_ctx.$slots, "header-right")
-        ]),
-        _: 3
-      }, 8, ["collapse", "fixed", "style"]),
+      vue.createElementVNode("div", {
+        class: vue.normalizeClass(["charrue-layout-header-container", { "fixed-header": $props.fixedHeader }]),
+        style: vue.normalizeStyle($options.headerWidthStyle)
+      }, [
+        vue.createElementVNode("div", _hoisted_1, [
+          vue.createElementVNode("div", _hoisted_2, [
+            vue.renderSlot(_ctx.$slots, "header-left", {}, () => [
+              vue.createVNode(_component_hamburger, { onToggleClick: $options.toggleSideBar }, null, 8, ["onToggleClick"])
+            ])
+          ]),
+          vue.createElementVNode("div", _hoisted_3, [
+            vue.renderSlot(_ctx.$slots, "header-right")
+          ])
+        ])
+      ], 6),
       vue.createVNode(_component_layout_content, { animation: $props.animation }, {
         "content-header": vue.withCtx(() => [
           vue.renderSlot(_ctx.$slots, "content-header")
@@ -1028,7 +981,7 @@ const PluginKey = PluginKey$1;
 var index = {
   install(app) {
     app.config.globalProperties[PluginKey] = {
-      version: 2
+      version: 3
     };
     app.component(Layout.name, Layout);
   }
