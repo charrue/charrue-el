@@ -1,5 +1,5 @@
 name: 报告缺陷
-description: 使用中文 Bug 报告模板提交一个缺陷，当然你也可以用 https://new-issue.ant.design
+description: 提出charrue-el相关的缺陷
 title: "[Bug] 请替换成合适的标题"
 labels: ["bug"]
 body:
@@ -14,7 +14,7 @@ body:
     id: version
     attributes:
       label: 组件和版本
-      description: 你正在使用的 组件的 版本是多少？（注意不是 package.json 里的版本，而是 node_modules 里实际安装的版本）
+      description: 你正在使用的组件的版本是多少？（注意不是 package.json 里的版本，而是 node_modules 里实际安装的版本）
       placeholder: 如 @charrue/layout 4.16.13
     validations:
       required: true

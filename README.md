@@ -1,5 +1,6 @@
 # charrue el
 
+charrue el是在ElementUI和ElementPlus的基础上进行了自己的封装的模板组件，致力于简化功能开发。
 
 
 ## 组件看板
@@ -9,7 +10,4 @@
 | layout            | ![](https://img.shields.io/npm/dt/@charrue/layout.svg)       | ![](https://img.shields.io/npm/v/@charrue/layout.svg)        |
 | layout-next       | ![](https://img.shields.io/npm/dt/@charrue/layout-next.svg)  | ![](https://img.shields.io/npm/v/@charrue/layout-next.svg)   |
 | schema-table      | ![](https://img.shields.io/npm/dt/@charrue/schema-table.svg) | ![](https://img.shields.io/npm/v/@charrue/schema-table.svg)  |
-| schema-table-next | ![](https://img.shields.io/npm/dt/@charrue/schema-table-next.svg) | ![](https://img.shields.io/npm/v/@charrue/schema-table-next.svg) |
-
-
 
