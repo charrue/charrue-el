@@ -1,7 +1,7 @@
 name: 新功能提案
 description: 提出要添加到charrue-el的新功能
 title: "[Feature] 请替换成合适的标题"
-labels: ["feature"]
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
