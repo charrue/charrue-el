@@ -124,8 +124,9 @@
 
 <script>
 import MultiColumn from "./multi-column.vue";
-import cloneDeep from "lodash.clonedeep";
+import createCloneDeep from "rfdc";
 import { PluginKey } from "./utils";
+const cloneDeep = createCloneDeep();
 
 export default {
   name: 'CharrueSchemaTable',

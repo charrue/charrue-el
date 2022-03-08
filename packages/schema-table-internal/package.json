@@ -1,6 +1,6 @@
 {
   "name": "@charrue/schema-table-internal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "author": "ckangwen",
   "repository": {
@@ -10,9 +10,8 @@
   "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/schema-table-internal/README.md",
   "license": "MIT",
   "main": "libs/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "lodash.clonedeep": "^4.5.0"
+    "rfdc": "^1.3.0"
   }
 }
