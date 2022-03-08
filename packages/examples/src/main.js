@@ -10,6 +10,7 @@ import Layout from "@charrue/layout";
 import "@charrue/layout/index.css";
 import SchemaTable from '@charrue/schema-table'
 import SchemaForm from '@charrue/schema-form'
+import ImageCropper from '@charrue/image-cropper'
 import { FormField } from "@charrue/element-ui-extension"
 
 Vue.use(CompositionApi);
@@ -18,6 +19,7 @@ Vue.use(Layout);
 Vue.component('SchemaTable', SchemaTable)
 Vue.component('SchemaForm', SchemaForm)
 Vue.component('FormField', FormField)
+Vue.component('ImageCropper', ImageCropper)
 
 Vue.config.productionTip = false;
 

@@ -12,6 +12,7 @@
     "@charrue/layout": "workspace:*",
     "@charrue/schema-table": "workspace:*",
     "@charrue/schema-form": "workspace:*",
+      "@charrue/image-cropper": "workspace:*",
     "@charrue/element-ui-extension": "workspace:*",
     "@vue/composition-api": "^1.0.5",
     "core-js": "^3.6.5",

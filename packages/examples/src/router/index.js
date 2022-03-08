@@ -100,7 +100,19 @@ const routes = [
         component: () => import("@/views/element-ui-extension/index.vue"),
       }
     ]
-  }
+  },
+  {
+    path: "/image-cropper",
+    name: "image-cropper",
+    component: PageLayout,
+    children: [
+      {
+        path: "index",
+        name: 'image-cropper-index',
+        component: () => import("@/views/image-cropper/index.vue")
+      }
+    ]
+  },
 ];
 
 const router = new VueRouter({

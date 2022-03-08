@@ -1,0 +1,32 @@
+{
+  "name": "@charrue/image-cropper",
+  "version": "0.0.8",
+  "description": "",
+  "author": "ckangwen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charrue/charrue-el.git"
+  },
+  "homepage": "https://github.com/charrue/charrue-el/blob/master/packages/image-cropper/README.md",
+  "license": "MIT",
+  "main": "src/index.js",
+  "unpkg": "dist/umd/index.js",
+  "typings": "typings/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "typings"
+  ],
+  "scripts": {
+    "build": "cd .. && npm run build:style image-croppper && npm run build:component image-cropper"
+  },
+  "dependencies": {
+        "vue-cropper": "^0.5.8",
+        "image-conversion": "^2.1.1"
+  },
+  "devDependencies": {
+    "element-ui": "^2.15.3",
+    "vue": "^2.6.11"
+
+  }
+}

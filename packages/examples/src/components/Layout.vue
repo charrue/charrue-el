@@ -104,6 +104,11 @@ const TOTAL_MENUS = [
     title: "element-ui-extension",
     path: "/element-ui-extension/index",
     icon: "el-icon-document",
+  },
+        {
+    title: "image-cropper",
+    path: "/image-cropper/index",
+    icon: "el-icon-document",
   }
 ];
 export default defineComponent({
