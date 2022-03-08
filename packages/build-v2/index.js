@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const rollup = require('rollup')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
+const commonJs = require("@rollup/plugin-commonjs");
 const rollupEsBuildPlugin = require("rollup-plugin-esbuild")
 const dts = require('rollup-plugin-dts').default
 const { camelize, upperCaseFirst } = require("./utils")
@@ -34,6 +35,7 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
     input: getPkgDir(input),
     plugins: [
       nodeResolve(),
+      commonJs(),
       rollupVuePlugin({
         target: 'browser',
         css: false,

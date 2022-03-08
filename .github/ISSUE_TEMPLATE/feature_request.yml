@@ -1,0 +1,21 @@
+name: 新功能提案
+description: 提出要添加到charrue-el的新功能
+title: "[Feature] 请替换成合适的标题"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您对该项目的兴趣并花时间填写此功能报告！
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 这个功能解决了什么问题？
+      description: 请尽可能详尽地说明这个需求的用例和场景。最重要的是：解释清楚是怎样的用户体验需求催生了这个功能上的需求。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你期望的 API 是怎样的？
+      description: 描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。
