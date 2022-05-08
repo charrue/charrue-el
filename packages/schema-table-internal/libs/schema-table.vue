@@ -1,6 +1,6 @@
 <template>
   <div class="charrue-schema-table">
-    <div v-if="slots.header" class="charrue-schema-table__header">
+    <div v-if="computedSlots.header" class="charrue-schema-table__header">
       <slot name="header" />
     </div>
     <div class="charrue-schema-table__body">
@@ -28,15 +28,15 @@
         <el-table-column v-if="index" type="index" :index="computedIndex" v-bind="indexProps">
           <template #header>
             <span v-if="indexHeader">{{ indexHeader }}</span>
-            <slot v-if="!indexHeader && slots['index-header']" name="index-header"></slot>
+            <slot v-if="!indexHeader && computedSlots['index-header']" name="index-header"></slot>
           </template>
         </el-table-column>
 
         <!-- 行展开 -->
-        <el-table-column v-if="slots['expand']" type="expand" v-bind="expandProps">
+        <el-table-column v-if="computedSlots['expand']" type="expand" v-bind="expandProps">
           <template #header>
             <span v-if="expandHeader">{{ expandHeader }}</span>
-            <slot v-if="!expandHeader && slots['extra-header']" name="extra-header"></slot>
+            <slot v-if="!expandHeader && computedSlots['extra-header']" name="extra-header"></slot>
           </template>
           <template #default="props">
             <slot name="expand" :scope="props" />
@@ -54,7 +54,7 @@
           v-bind="item.attrs"
         >
           <!-- 自定义表头 -->
-          <template #header="scope">
+          <template #header>
             <!-- 多级表头 -->
             <template v-if="item.children">
               <multi-column
@@ -65,8 +65,8 @@
                 :children="child.children"
               />
             </template>
-            <template v-else-if="slots.thead">
-              <slot name="thead" :scope="scope" />
+            <template v-else-if="computedSlots[`${item.prop}-header`]">
+              <slot :name="`${item.prop}-header`" :scope="item" />
             </template>
             <span v-else>{{ item.label }}</span>
           </template>
@@ -74,7 +74,7 @@
           <!-- 自定义单元格 -->
           <template #default="scope">
             <div class="cell-wrapper">
-              <template v-if="slots[item.prop]">
+              <template v-if="computedSlots[item.prop]">
                 <slot :name="item.prop" :scope="scope" />
               </template>
               <span v-else>{{ scope.row[item.prop] }}</span>
@@ -85,7 +85,7 @@
         <!-- 操作列 -->
         <el-table-column v-if="showExtraColumn" v-bind="extraColumnProps">
           <template #header>
-            <template v-if="slots.extraColumnHeader">
+            <template v-if="computedSlots.extraColumnHeader">
               <slot name="extraColumnHeader" />
             </template>
             <span v-else>{{ extraColumnTitle }}</span>
@@ -252,7 +252,7 @@ export default {
     computedTotal() {
       return Number(this.total);
     },
-    slots() {
+    computedSlots() {
       if (this.version === 2) {
         return {
           ...this.$slots,

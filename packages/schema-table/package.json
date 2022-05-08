@@ -1,6 +1,6 @@
 {
   "name": "@charrue/schema-table",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "基于vue2与element-ui,致力于简化中后台的table开发",
   "author": "ckangwen",
   "repository": {

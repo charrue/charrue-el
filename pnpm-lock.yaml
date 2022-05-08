@@ -277,6 +277,14 @@ importers:
     dependencies:
       rfdc: 1.3.0
 
+  packages/schema-table-next:
+    specifiers:
+      '@charrue/build-v3': workspace:*
+      '@charrue/schema-table-internal': workspace:*
+    devDependencies:
+      '@charrue/build-v3': link:../build-v3
+      '@charrue/schema-table-internal': link:../schema-table-internal
+
 packages:
 
   /@algolia/cache-browser-local-storage/4.12.1:

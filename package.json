@@ -13,6 +13,7 @@
     "start:examples-next": "cd packages/examples-next && npm run dev",
     "start:docs": "cd packages/docs && npm run start",
     "build:layout": "pnpm run build --filter @charrue/layout*...",
+    "build:schema-table": "pnpm run build --filter @charrue/schema-table*...",
     "build:style": "gulp --gulpfile ./build/build.style.js",
     "build:docs": "cd packages/docs && npm run build",
     "deploy:docs": "cd packages/docs && npm run deploy"
