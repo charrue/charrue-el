@@ -100,11 +100,6 @@ const TOTAL_MENUS = [
       },
     ]
   },
-  {
-    title: "element-ui-extension",
-    path: "/element-ui-extension/index",
-    icon: "el-icon-document",
-  }
 ];
 export default defineComponent({
   name: "PageLayout",

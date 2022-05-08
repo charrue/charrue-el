@@ -10,7 +10,6 @@ import Layout from "@charrue/layout";
 import "@charrue/layout/index.css";
 import SchemaTable from '@charrue/schema-table'
 import SchemaForm from '@charrue/schema-form'
-import { FormField } from "@charrue/element-ui-extension"
 
 Vue.use(CompositionApi);
 Vue.use(ElementUI);

@@ -8,7 +8,6 @@ import Layout from "@charrue/layout-next"
 import 'element-plus/dist/index.css'
 import "@charrue/layout-next/index.css";
 import "./styles/index.scss";
-import { FormField } from "@charrue/element-ui-plus-extension"
 import { SchemaTable } from "@charrue/schema-table-internal"
 
 

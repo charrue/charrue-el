@@ -94,18 +94,6 @@ const TOTAL_MENUS = [
       },
     ]
   },
-  {
-    title: "element-ui-plus-extension",
-    path: "/element-ui-plus-extension",
-    icon: "iconfont c-search",
-    children: [
-      {
-        title: "form-field",
-        path: "/element-ui-plus-extension/form-field",
-        icon: "iconfont c-countdown",
-      }
-    ]
-  }
 ];
 export default defineComponent({
   name: "PageLayout",

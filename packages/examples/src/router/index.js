@@ -88,19 +88,6 @@ const routes = [
       }
     ]
   },
-  {
-    path: "/element-ui-extension",
-    name: "element-ui-extension",
-    component: PageLayout,
-    redirect: "/element-ui-extension/index",
-    children: [
-      {
-        path: "index",
-        name: "element-ui-extension-index",
-        component: () => import("@/views/element-ui-extension/index.vue"),
-      }
-    ]
-  }
 ];
 
 const router = new VueRouter({
