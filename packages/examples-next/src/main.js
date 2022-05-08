@@ -10,10 +10,7 @@ import "@charrue/layout-next/index.css";
 import "./styles/index.scss";
 import { SchemaTable } from "@charrue/schema-table-internal"
 
-
-
 const app = createApp(App)
-app.component("FormField", FormField)
 app.component("SchemaTable", SchemaTable)
 
 app.use(Layout)

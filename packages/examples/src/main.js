@@ -16,7 +16,6 @@ Vue.use(ElementUI);
 Vue.use(Layout);
 Vue.component('SchemaTable', SchemaTable)
 Vue.component('SchemaForm', SchemaForm)
-Vue.component('FormField', FormField)
 
 Vue.config.productionTip = false;
 
