@@ -34,12 +34,12 @@ const runBuild = async ({ name, input, rollupVuePlugin, ignoreDependencies } = {
   const inputOptions = {
     input: getPkgDir(input),
     plugins: [
-      nodeResolve(),
-      commonJs(),
       rollupVuePlugin({
         target: 'browser',
         css: false,
       }),
+      nodeResolve(),
+      commonJs(),
       esbuild({
         target: "es2015",
       }),
